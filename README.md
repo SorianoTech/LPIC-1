@@ -2,11 +2,11 @@
 
 Guia de estudio de preparacion para la certificación LPIC-1.
 
-LPIC son las siglas de **Linux Professional Institute Certification**. 
+LPIC son las siglas de **Linux Professional Institute Certification**.
 
 A fecha de 03/04/2019 esta certificación se encuentra en la versión 5.0 y los códigos de examen son 101-500 y 102-500. El examen no esta disponible en idioma español, aunque la version 4.0 esta disponible hasta Julio de 2019.
 
-[Acceder a la tabla de contenido de los examenes][1]
+[Acceder a la tabla de contenido de los examenes](contenido.md)
 
 Al obtener esta certificación se obtiene los conocimientos necesarios para:
 
@@ -20,10 +20,13 @@ Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos
 
 ## FAQ
 
+### Preguntas para resolver sobre la certificación
+
 ¿El examen se puede realizar en español?
 
-## Enlaces
+¿Dónde se hace el examen?¿Presencial o online?
 
+## Enlaces
 Wiki con los objetivos de la version 5.0
 [https://wiki.lpi.org/wiki/LPIC-1_Objectives_V5.0(ES)]
 
@@ -43,4 +46,4 @@ Lista de reproducción de youtube
 [https://www.youtube.com/watch?v=Fov9nM-AbSw&list=PLD_mb6U5Xp95cX_CDO3Cg-p8370lPwRR2]
 
 [1]: contenido.md
-[2]
+
