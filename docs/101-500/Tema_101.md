@@ -141,6 +141,11 @@ En GNU/Linux, el hardware lo administran los drivers del kernel, algunos de los 
 
 El comando **modprobe** sirve para añadir o eliminar modulos del kernel de linux.
 
+Para eliminar manualmente un drive podemos utilizar `modprobe -a` y para eliminar podemos utilizar `modprobe -c`. Con la opcion -v podemos ver lo que se ejecutado y con -n las opciones completadas con exito.
+
+Añadir un modulo:
+
+
 ### lsmod
 
 Con el comando **lsmod** podemos ver los modulos que hay actualmente cargados en el Kernel.
