@@ -2,8 +2,8 @@
 
 - [Tema 101: Arquitectura del Sistema](#tema-101-arquitectura-del-sistema)
   - [101.1 Determinar y configurar los ajustes de hardware](#1011-determinar-y-configurar-los-ajustes-de-hardware)
-  - [BIOS y UEFI](#bios-y-uefi)
-  - [Sys y proc](#sys-y-proc)
+    - [BIOS y UEFI](#bios-y-uefi)
+    - [Sys y proc](#sys-y-proc)
     - [/dev y el comando **lsdev**](#dev-y-el-comando-lsdev)
     - [Modulos del Kernel](#modulos-del-kernel)
     - [modprobe](#modprobe)
@@ -42,14 +42,14 @@ lsusb
 
 Página de guia -> [https://developer.ibm.com/tutorials/l-lpic1-101-1/]
 
-## BIOS y UEFI
+### BIOS y UEFI
 
 (BIOS): basic input/output system.
 (UEFI): Unified Extensible Firmware Interface.
 
 El **Fimeware** de un dispositivo es el *software* de solo lectura que sirve para comunicar los diferentes componentes de harware que componen los equipos informáticos entre si.
 
-## Sys y proc
+### Sys y proc
 
 **sysfs** y **procfs** son sistemas de ficheros virtuales que se montan sobre /sys y /proc y que son usados por el kernel del sistema Linux. Procfs es el antiguo y sysfs es el moderno, aunque se siguen estando presente ambos en el sistema. Sysfs fue añadido en el *Kernel 2.6*.
 
@@ -131,7 +131,7 @@ El directorio [**/dev**][4] contiene los archivos especiales de dispositivos.
 - IRQ
 - I/O Port
 
->Es necesario tener instalado el paquete[procinfo][1]
+>Es necesario tener instalado el paquete [procinfo][1]
 
 ### Modulos del Kernel
 
@@ -194,7 +194,6 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 [3]: http://manpages.ubuntu.com/manpages/xenial/man8/lspci.8.html
 [4]: https://linux.die.net/sag/dev-fs.html
 [5]: https://www.kernel.org/doc/html/latest/filesystems/index.html?highlight=filesystem
-
 
 ## 101.2 Arranque del sistema
 
