@@ -27,6 +27,7 @@ Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos
 ¿Dónde se hace el examen?¿Presencial o online?
 
 ## Enlaces
+
 Wiki con los objetivos de la version 5.0
 [https://wiki.lpi.org/wiki/LPIC-1_Objectives_V5.0(ES)]
 
