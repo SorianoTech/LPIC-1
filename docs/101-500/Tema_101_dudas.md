@@ -6,3 +6,12 @@
 
 Ejercicio 1.
 Eliminar un dispositivo integrado del sistema
+
+
+Diferencias entre UEFI y BIOS, EFI MRB
+
+UEFI predecesor de BIOS
+EFI y luego aparecion UEFI
+BIOS tiene MBR
+
+

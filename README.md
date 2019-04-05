@@ -28,23 +28,36 @@ Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos
 
 ## Enlaces
 
-Wiki con los objetivos de la version 5.0
-[https://wiki.lpi.org/wiki/LPIC-1_Objectives_V5.0(ES)]
+[Wiki con los objetivos de la version 5.0](https://wiki.lpi.org/wiki/LPIC-1_Objectives_V5.0(ES))
 
-Wiki del contenido en github
-[https://github.com/appijumbo/Linux-LPIC-1/wiki]
+[Wiki del contenido en github](https://github.com/appijumbo/Linux-LPIC-1/wiki)
 
-Materiales de estudio en español
-[http://www.lpifit.com/course/]
+[Materiales de estudio en español]([http://www.lpifit.com/course/)
 
-Curos Udemy
-[https://www.udemy.com/linux-lpic-1-certification-complete-course/learn/v4/content]
+[Consola de linux Online]([https://www.tutorialspoint.com/unix_terminal_online.php)
 
-Consola de linux Online
-[https://www.tutorialspoint.com/unix_terminal_online.php]
+Documentacion oficial Linux
 
-Lista de reproducción de youtube
-[https://www.youtube.com/watch?v=Fov9nM-AbSw&list=PLD_mb6U5Xp95cX_CDO3Cg-p8370lPwRR2]
+http://www.tldp.org/
+http://www.gnu.org/doc/
+
+[Free Software Directory](https://directory.fsf.org/wiki/Main_Page)
+
+### Blog's
+
+[Blog de contenido Linux](http://www.linuxlinks.com)
+
+### Videos
+
+[Lista de reproducción de youtube LPIC-1]([https://www.youtube.com/watch?v=Fov9nM-AbSw&list=PLD_mb6U5Xp95cX_CDO3Cg-p8370lPwRR2)
+
+### Canales de ayuda
+
+[Freenode](https://webchat.freenode.net)
+
+[Buscador de canales IRC](http://irc.netsplit.de/channels/)
+
+[Canal Freenode para principiantes](http://irc2go.com/webchat/?net=freenode&room=%23linux-beginners)
 
 [1]: contenido.md
 

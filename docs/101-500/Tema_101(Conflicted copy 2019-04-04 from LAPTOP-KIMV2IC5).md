@@ -10,10 +10,6 @@
     - [lsmod](#lsmod)
     - [lspci y lsusb](#lspci-y-lsusb)
   - [101.2 Arranque del sistema](#1012-arranque-del-sistema)
-    - [Secuencia de arranque](#secuencia-de-arranque)
-      - [Cargadores de arranque (boot loader)](#cargadores-de-arranque-boot-loader)
-    - [DMESG](#dmesg)
-  - [[6]:https://help.ubuntu.com/community/Grub2#File_Structure](#6httpshelpubuntucomcommunitygrub2filestructure)
   - [101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema](#1013-cambiar-los-niveles-de-ejecuci%C3%B3n--objetivos-de-arranque-y-apagar-o-reiniciar-el-sistema)
 
 ## 101.1 Determinar y configurar los ajustes de hardware
@@ -230,29 +226,5 @@ init
 SysVinit
 systemd
 ```
-
------
-
-### Secuencia de arranque
-
-La secuencia de arranque (Boot loader) es la que se encarga de realizar los procesos iniciales cuando el sistema es arrancado o reiniciado.
-
-El programa de arranque reside en la particion del sistema y es invocado antes de iniciar el SO.
-
-#### Cargadores de arranque (boot loader)
-
-[GRUB2][6] (GRand Unified Bootloader, Cargador de arranque unificado
-
-Son particiones que continen ficheros de configuracion para indicar donde se arranca el sistema.
-
-Cuando GRUB2 lee el archivo de configuración, muestra un menu para seleccionar el sistema que se quiere arrancar.
-
-### DMESG
-
-Se utiliza para mostrar o controlar el buffer del anillo del kernel
-
-------
-[6]:https://help.ubuntu.com/community/Grub2#File_Structure
-------
 
 ## 101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema
