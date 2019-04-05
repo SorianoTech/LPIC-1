@@ -2,14 +2,18 @@
 
 - [Tema 101: Arquitectura del Sistema](#tema-101-arquitectura-del-sistema)
   - [101.1 Determinar y configurar los ajustes de hardware](#1011-determinar-y-configurar-los-ajustes-de-hardware)
-  - [BIOS y UEFI](#bios-y-uefi)
-  - [Sys y proc](#sys-y-proc)
+    - [BIOS y UEFI](#bios-y-uefi)
+    - [Sys y proc](#sys-y-proc)
     - [/dev y el comando **lsdev**](#dev-y-el-comando-lsdev)
     - [Modulos del Kernel](#modulos-del-kernel)
     - [modprobe](#modprobe)
     - [lsmod](#lsmod)
     - [lspci y lsusb](#lspci-y-lsusb)
   - [101.2 Arranque del sistema](#1012-arranque-del-sistema)
+    - [Secuencia de arranque](#secuencia-de-arranque)
+      - [Cargadores de arranque (boot loader)](#cargadores-de-arranque-boot-loader)
+    - [DMESG](#dmesg)
+  - [[6]:https://help.ubuntu.com/community/Grub2#File_Structure](#6httpshelpubuntucomcommunitygrub2filestructure)
   - [101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema](#1013-cambiar-los-niveles-de-ejecuci%C3%B3n--objetivos-de-arranque-y-apagar-o-reiniciar-el-sistema)
 
 ## 101.1 Determinar y configurar los ajustes de hardware
@@ -42,14 +46,14 @@ lsusb
 
 Página de guia -> [https://developer.ibm.com/tutorials/l-lpic1-101-1/]
 
-## BIOS y UEFI
+### BIOS y UEFI
 
 (BIOS): basic input/output system.
 (UEFI): Unified Extensible Firmware Interface.
 
 El **Fimeware** de un dispositivo es el *software* de solo lectura que sirve para comunicar los diferentes componentes de harware que componen los equipos informáticos entre si.
 
-## Sys y proc
+### Sys y proc
 
 **sysfs** y **procfs** son sistemas de ficheros virtuales que se montan sobre /sys y /proc y que son usados por el kernel del sistema Linux. Procfs es el antiguo y sysfs es el moderno, aunque se siguen estando presente ambos en el sistema. Sysfs fue añadido en el *Kernel 2.6*.
 
@@ -131,7 +135,7 @@ El directorio [**/dev**][4] contiene los archivos especiales de dispositivos.
 - IRQ
 - I/O Port
 
->Es necesario tener instalado el paquete[procinfo][1]
+>Es necesario tener instalado el paquete [procinfo][1]
 
 ### Modulos del Kernel
 
@@ -140,6 +144,11 @@ En GNU/Linux, el hardware lo administran los drivers del kernel, algunos de los 
 ### modprobe
 
 El comando **modprobe** sirve para añadir o eliminar modulos del kernel de linux.
+
+Para eliminar manualmente un drive podemos utilizar `modprobe -a` y para eliminar podemos utilizar `modprobe -c`. Con la opcion -v podemos ver lo que se ejecutado y con -n las opciones completadas con exito.
+
+Añadir un modulo:
+
 
 ### lsmod
 
@@ -195,7 +204,6 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 [4]: https://linux.die.net/sag/dev-fs.html
 [5]: https://www.kernel.org/doc/html/latest/filesystems/index.html?highlight=filesystem
 
-
 ## 101.2 Arranque del sistema
 
 Importancia: 3
@@ -222,5 +230,28 @@ init
 SysVinit
 systemd
 ```
+
+-----
+
+### Secuencia de arranque
+
+La secuencia de arranque (Boot loader) es la que se encarga de realizar los procesos iniciales cuando el sistema es arrancado o reiniciado.
+
+El programa de arranque reside en la particion del sistema y es invocado antes de iniciar el SO.
+
+#### Cargadores de arranque (boot loader)
+
+[GRUB2][6] (GRand Unified Bootloader, Cargador de arranque unificado
+
+Son particiones que continen ficheros de configuracion para indicar donde se arranca el sistema.
+
+Cuando GRUB2 lee el archivo de configuración, muestra un menu para seleccionar el sistema que se quiere arrancar.
+
+### DMESG
+
+
+------
+[6]:https://help.ubuntu.com/community/Grub2#File_Structure
+------
 
 ## 101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema
