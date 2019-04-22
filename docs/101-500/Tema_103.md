@@ -4,12 +4,12 @@
 
 Comandos básicos para trabajar con ficheros.
 
-`ls` - se utiliza para listar los archivos y directorios
-`touch` - es utilizado para modificar el sello de tiempo de un fichero, pero es mas comunmente utilizado para crear nuevos archivos.
-`cp` - comando para copiar ficheros
-`rm` - comando para borrar ficheros o carpetas.
-`mv` - comando usado para mover.
-`file` - se utiliza para para probar y determinar el tipo de un fichero.
+- `ls` - se utiliza para listar los archivos y directorios.
+- `touch` - es utilizado para modificar el sello de tiempo de un fichero, pero es mas comunmente utilizado para crear nuevos archivos.
+- `cp` - comando para copiar ficheros
+- `rm` - comando para borrar ficheros o carpetas.
+- `mv` - comando usado para mover.
+- `file` - se utiliza para para probar y determinar el tipo de un fichero.
 
 ### ls
 
