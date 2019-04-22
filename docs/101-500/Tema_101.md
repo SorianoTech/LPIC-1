@@ -13,7 +13,6 @@
     - [Secuencia de arranque](#secuencia-de-arranque)
       - [Cargadores de arranque (boot loader)](#cargadores-de-arranque-boot-loader)
     - [DMESG](#dmesg)
-  - [[6]:https://help.ubuntu.com/community/Grub2#File_Structure](#6httpshelpubuntucomcommunitygrub2filestructure)
   - [101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema](#1013-cambiar-los-niveles-de-ejecuci%C3%B3n--objetivos-de-arranque-y-apagar-o-reiniciar-el-sistema)
 
 ## 101.1 Determinar y configurar los ajustes de hardware
@@ -198,11 +197,7 @@ Bus 001 Device 002: ID 0627:0001 Adomax Technology Co., Ltd
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
-[1]: https://linux.die.net/man/8/procinfo
-[2]: https://www.maketecheasier.com/differences-between-uefi-and-bios/
-[3]: http://manpages.ubuntu.com/manpages/xenial/man8/lspci.8.html
-[4]: https://linux.die.net/sag/dev-fs.html
-[5]: https://www.kernel.org/doc/html/latest/filesystems/index.html?highlight=filesystem
+
 
 ## 101.2 Arranque del sistema
 
@@ -251,8 +246,15 @@ Cuando GRUB2 lee el archivo de configuración, muestra un menu para seleccionar 
 
 Se utiliza para mostrar o controlar el buffer del anillo del kernel
 
-------
-[6]:https://help.ubuntu.com/community/Grub2#File_Structure
-------
+
 
 ## 101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema
+
+
+
+[1]: https://linux.die.net/man/8/procinfo
+[2]: https://www.maketecheasier.com/differences-between-uefi-and-bios/
+[3]: http://manpages.ubuntu.com/manpages/xenial/man8/lspci.8.html
+[4]: https://linux.die.net/sag/dev-fs.html
+[5]: https://www.kernel.org/doc/html/latest/filesystems/index.html?highlight=filesystem
+[6]:https://help.ubuntu.com/community/Grub2#File_Structure
