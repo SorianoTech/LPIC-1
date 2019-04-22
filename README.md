@@ -49,7 +49,9 @@ http://www.gnu.org/doc/
 
 ### Videos
 
-[Lista de reproducción de youtube LPIC-1]([https://www.youtube.com/watch?v=Fov9nM-AbSw&list=PLD_mb6U5Xp95cX_CDO3Cg-p8370lPwRR2)
+[Lista de reproducción de youtube LPIC-1](https://www.youtube.com/watch?v=Fov9nM-AbSw&list=PLD_mb6U5Xp95cX_CDO3Cg-p8370lPwRR2)
+
+[The Linux man](https://www.youtube.com/channel/UCVQ7kPpJJ2FA_iYl8Wtx0SA)
 
 ### Canales de ayuda
 
@@ -60,4 +62,3 @@ http://www.gnu.org/doc/
 [Canal Freenode para principiantes](http://irc2go.com/webchat/?net=freenode&room=%23linux-beginners)
 
 [1]: contenido.md
-
