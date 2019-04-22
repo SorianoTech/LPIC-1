@@ -130,7 +130,7 @@ El directorio [**/dev**][4] contiene los archivos especiales de dispositivos.
 
 `lsdev` nos muestra la información de `/proc` presentandolo de una forma ordenada. Las columnas que podemos ver son:
 
-- Device: el dispositivo
+- Device
 - DMA
 - IRQ
 - I/O Port
