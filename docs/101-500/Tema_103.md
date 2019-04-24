@@ -89,19 +89,17 @@ sergio@ubuntu:~$ echo $PATH
 
 `tar` - combina ficheros y directorios en un archivo. Este comando no proporciona compresión.
 
-`gzip` -
+`gzip` - comprime ficheros en formato gz.
 
-`gunzip` - 
+`gunzip` - descomprime ficheros en formato gz
 
-`bzip2` -
+`bzip2` - comprime ficheros en formato bz2.
 
-`bunzip2`
+`bunzip2` - descomprime ficheros en bz2.
 
-`xz`
+`xz` - comprime ficheros en formato xz.
 
-`unxz`
-
-
+`unxz` - descomprime ficheros formato xz.
 
 ### dd
 
@@ -113,4 +111,40 @@ sergio@ubuntu:~$ sudo dd if=/dev/vda of=/tmp/mbr.img bs=512 count=1
 1+0 registros escritos
 512 bytes copied, 0,0012344 s, 415 kB/s
 sergio@ubuntu:~$ ls /tmp/
+```
+
+## Buscar ficheros
+
+`find`
+ 
+ *-name*: para buscar por nombre de fichero.
+
+ *-ctime*: encuentr ficheros basados en el momento que fueron modificados.
+ 
+ *-atime*: encuentra ficheros basados en el momento que fueron modificados.
+
+ *-empty*:
+ -exec[command]{}\;
+
+```console
+sergio@ubuntu:~$ sudo find / -name passwd
+/usr/bin/passwd
+/usr/share/lintian/overrides/passwd
+/usr/share/doc/passwd
+/usr/share/bash-completion/completions/passwd
+/etc/cron.daily/passwd
+/etc/passwd
+/etc/pam.d/passwd
+```
+
+Buscar los ficheros del directorio home modificados en el ultimo día
+
+```console
+sergio@ubuntu:~$ find . -ctime 1
+.
+./a_file
+./.bash_history
+./Projects
+./Documents
+./Documents/notes
 ```
