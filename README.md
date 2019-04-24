@@ -13,7 +13,7 @@ Al obtener esta certificación se obtiene los conocimientos necesarios para:
 - Comprender la arquitectura de un sistema Linux.
 - Instalar y mantener una estación de trabajo Linux, incluyendo X11 y  su configuración como un cliente de red.
 - Trabajar en la línea de comandos de Linux, incluidos los comandos comunes de GNU y Unix.
-- Manejar archivos y permisos de acceso, así como la seguridad del sistem.
+- Manejar archivos y permisos de acceso, así como la seguridad del sistema.
 - Realizar tareas de mantenimiento sencillas: ayudar a los usuarios, agregar usuarios a un sistema más grande, realizar copias de seguridad y restaurar, apagar y reiniciar.
 
 Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos suficientes para resolver los problemas más comunes con los que te puedes encontrar cuando trabajas con sistemas UNIX.
@@ -41,7 +41,7 @@ Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos
 ### Documentacion oficial Linux
 
 [The Linux Document Proyect](http://www.tldp.org/)
-[GNU Proyect] (http://www.gnu.org/doc/)
+[GNU Proyect](http://www.gnu.org/doc/)
 
 [Free Software Directory](https://directory.fsf.org/wiki/Main_Page)
 
