@@ -41,7 +41,7 @@ Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos
 ### Documentacion oficial Linux
 
 [The Linux Document Proyect](http://www.tldp.org/)
-[GNU Proyect] (http://www.gnu.org/doc/)
+[GNU Proyect](http://www.gnu.org/doc/)
 
 [Free Software Directory](https://directory.fsf.org/wiki/Main_Page)
 
