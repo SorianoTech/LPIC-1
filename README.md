@@ -26,20 +26,22 @@ Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos
 
 ¿Dónde se hace el examen?¿Presencial o online?
 
+¿Qué precio tiene el examen?
+
 ## Enlaces
 
 [Wiki con los objetivos de la version 5.0](https://wiki.lpi.org/wiki/LPIC-1_Objectives_V5.0(ES))
 
 [Wiki del contenido en github](https://github.com/appijumbo/Linux-LPIC-1/wiki)
 
-[Materiales de estudio en español]([http://www.lpifit.com/course/)
+[Materiales de estudio en español](http://www.lpifit.com/course/)
 
-[Consola de linux Online]([https://www.tutorialspoint.com/unix_terminal_online.php)
+[Consola de linux Online](https://www.tutorialspoint.com/unix_terminal_online.php)
 
-Documentacion oficial Linux
+### Documentacion oficial Linux
 
-http://www.tldp.org/
-http://www.gnu.org/doc/
+[The Linux Document Proyect](http://www.tldp.org/)
+[GNU Proyect] (http://www.gnu.org/doc/)
 
 [Free Software Directory](https://directory.fsf.org/wiki/Main_Page)
 
