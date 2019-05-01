@@ -116,15 +116,17 @@ sergio@ubuntu:~$ ls /tmp/
 ## Buscar ficheros
 
 `find`
- 
+
  *-name*: para buscar por nombre de fichero.
 
  *-ctime*: encuentr ficheros basados en el momento que fueron modificados.
- 
- *-atime*: encuentra ficheros basados en el momento que fueron modificados.
+
+ *-atime*: encuentra ficheros basados en el momento que se accedio a ellos.
 
  *-empty*:
- -exec[command]{}\;
+ -exec[command]{}\; ejecutamos un comando despues de realizar una busqueda, utili por ejemplo para eliminar todos los ficheros que encontremos vacios
+
+>El comando find busca recursivamente en la carpetas que esten jerarquicamente por debajo.
 
 ```console
 sergio@ubuntu:~$ sudo find / -name passwd
@@ -140,7 +142,7 @@ sergio@ubuntu:~$ sudo find / -name passwd
 Buscar los ficheros del directorio home modificados en el ultimo día
 
 ```console
-sergio@ubuntu:~$ find . -ctime 1
+sergio@ubuntu:~$ find . -ctime -1
 .
 ./a_file
 ./.bash_history
@@ -148,3 +150,172 @@ sergio@ubuntu:~$ find . -ctime 1
 ./Documents
 ./Documents/notes
 ```
+
+Ficheros modificados en los últimos dos días
+
+```console
+sergio@ubuntu:~$ find . -atime -2
+```
+
+Buscar los ficheros vacios (con `-f` buscamos los ficheros con `-d` los directorios)
+
+```console
+sergio@ubuntu:~$find . -empty -type -f
+```
+
+Borrar todos los ficheros vacios
+
+```console
+find . -empty -type f -exec rm -fv {} \;
+```
+
+Buscar en el home del usuario todos los archivos comprimidos y copiarlos a la carpeta test
+
+```console
+find ~ -name "*.tar.*" -exec cp -v {} /home/sergio/test \;
+```
+
+
+## File Globing
+
+`*`: localiza cero o mas caracteres
+
+`?`: localiza cualquier caracter exacto. 
+
+`[abc]`: localiza cualquier de los caracteres de la lista, es sensible a mayusculas.
+
+`[^abc]`: localiza cualquier caracter menos los de la lista.
+
+`[0-9]`: licaliza un rango de numeros.
+
+muestra los ficheros que empiezan por B o b y tienen extension js.
+```console
+sergio@ubuntu:~/blockchain/curso-bitcoin-blockchain-piloto$ ls [Bb]*.js
+BasicCoin.js  BasicPoWCoin.js
+```
+
+Creamos varios directorios en una misma orden
+
+```console
+sergio@ubuntu:~$ mkdir -p Projects/{A,B,C,D}
+sergio@ubuntu:~$ ls Projects/
+A  B  C  D
+sergio@ubuntu:~$
+```
+
+Ver el contenido de un archivo comprimido
+
+```console
+catxz archivo.xz
+```
+
+
+mostrar la columna 6 del archivo de usuarios passwd
+
+```console
+sergio@ubuntu:~/$ cut -f 6 -d ':' /etc/passwd
+```
+
+combinar el contenido de dos ficheros
+
+```console
+sergio@ubuntu:~$ paste file1 file2
+```
+
+## 103.4 Use Streams, Pipes and Redirects
+
+Redirigiendo las salidas con los caracteres >,>>
+
+input y output
+
+input <, |
+abreviatura 'stdin'
+
+```console
+wc test.sh (input proviene del teclado)
+wc < test.sh (input proviene de un arhivo)
+cat /etc/passwod  | less (input proviene de stdout del comando cat)
+```
+
+standar error -> 'stdeer'
+
+`tee`: concatenado con el comando find nos devuelve la salida de find en un fichero.
+
+```console
+find / -iname "*.sh" | tee result.txt
+```
+
+`xargs` : toma la entrada (el resultado de otro comando) normalmente `find`  y lo pasa a otro comando
+
+Buscar todos los fichero con la extension sh e imprimir los resultados con el comando ls en un fichero.
+
+```console
+find / -name "*.sh" | xargs ls -al > myresult.txt
+```
+
+Buscar todos lo ficheros dentro de carpeta test que tengan la palabra junk y moverlos a la carpeta bak
+
+```console
+grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/
+```
+
+## 103.5 Crear monitorizar y matar procesos
+
+### Revisar el estado del sistema
+
+**Procesos**: son set de intrucciones que estan cargados en la memoria.
+
+`PID`: es el identificador del proceso
+
+`ps`: nos muestra los procesos
+
+>ps -a muestra todos los procesos.
+>ps -eH | less - muestra todos los procesos ordenados por jerarquia.
+>ps -u username - muestro los procesos de un usuario
+>ps -e --forest - muestra todos los procesos en arbol
+
+
+`top`: sirve para ver los proceso que hay activos
+
+Si pulsamos la tecla `k` y escribimos el PID del procesos lo matamos.
+
+### Monitorizar procesos
+
+`uptime` para conocer el tiempo que lleva arrancado el sistem.
+
+```console
+[sergio@hostingsoriano ~]$ uptime
+ 21:48:41 up  2:06,  1 user,  load average: 0,00, 0,01, 0,05
+```
+
+`free`: sirve para conocer la memoria ram libre
+
+```console
+[sergio@hostingsoriano ~]$ free -m
+              total        used        free      shared  buff/cache   available
+Mem:           3685         137        3053           8         494        3283
+Swap:          5723           0        5723
+```
+
+`pgrep`: busca informacion del proceso basado en el nombre del proceso
+
+```console
+[root@hostingsoriano sergio]# pgrep nginx
+14686
+14711
+[root@hostingsoriano sergio]# pgrep -a nginx
+14686 nginx: master process nginx -g daemon off;
+14711 nginx: worker process
+[root@hostingsoriano sergio]# pgrep -u sergio
+13666
+13667
+```
+
+`kill`: mata el proceso con PID introducido, en caso de que el proceso tenga otros elementos depentiendes de el tambien matarar los procesos hijos. Envia una señal  (normalmente SIGTERM) a un proceso basado en su PID
+
+`pstree`
+
+
+
+
+
