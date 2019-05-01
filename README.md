@@ -6,9 +6,26 @@ LPIC son las siglas de **Linux Professional Institute Certification**.
 
 A fecha de 03/04/2019 esta certificación se encuentra en la versión 5.0 y los códigos de examen son 101-500 y 102-500. El examen no esta disponible en idioma español, aunque la version 4.0 esta disponible hasta Julio de 2019.
 
-[Tabla de contenido de los examenes](contenido.md)
+Se divide en dos examanes:
 
-[![Tabla de contenido](docs/101-500/img/tableofcontent.png)](contenido.md)
+- Examen 101
+- Examen 102
+
+## Objetivos del examen 101
+
+- [ ] [Tema 101: Arquitectura del Sistema](docs/101-500/Tema_101.md)
+- [ ] [Tema 102: Instalación de Linux y gestión de paquetes](docs/101-500/Tema_102.md)
+- [ ] [Tema 103: Comandos GNU y Unix](docs/101-500/Tema_103.md)
+- [ ] [Tema 104: Dispositivos, sistemas de archivos Linux y el estándar de jerarquía de archivos](docs/101-500/Tema_103.md)
+
+## Objetivos del examen 102
+
+- [ ] [Tema 105: Shells y scripts](docs/102-500/Tema_105.md)
+- [ ] [Tema 106: Interfaces de usuario y escritorios](docs/102-500/Tema_106.md)
+- [ ] [Tema 107: Tareas administrativas](docs/102-500/Tema_106.md)
+- [ ] [Tema 108: Servicios esenciales del sistema](docs/102-500/Tema_107.md)
+- [ ] [Tema 109: Fundamentos de redes](docs/102-500/Tema_108.md)
+- [ ] [Tema 110: Seguridad](docs/102-500/Tema_109.md)
 
 Al obtener esta certificación se obtiene los conocimientos necesarios para:
 
