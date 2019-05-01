@@ -8,7 +8,7 @@ A fecha de 03/04/2019 esta certificación se encuentra en la versión 5.0 y los 
 
 [Tabla de contenido de los examenes](contenido.md)
 
-[![Tabla de contenido](docs\101-500\img\tableofcontent.png)](contenido.md)
+[![Tabla de contenido](docs/101-500/img/tableofcontent.png)](contenido.md)
 
 Al obtener esta certificación se obtiene los conocimientos necesarios para:
 
