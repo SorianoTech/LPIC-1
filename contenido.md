@@ -5,7 +5,7 @@
 - [ ] [Tema 101: Arquitectura del Sistema](docs/101-500/Tema_101.md)
 - [ ] [Tema 102: Instalación de Linux y gestión de paquetes](docs/101-500/Tema_102.md)
 - [ ] [Tema 103: Comandos GNU y Unix](docs/101-500/Tema_103.md)
-- [ ] [Tema 104: Dispositivos, sistemas de archivos Linux y el estándar de jerarquía de archivos](docs/101-500/Tema_103.md)
+- [ ] [Tema 104: Dispositivos, sistemas de archivos Linux y el estándar de jerarquía de archivos](docs/101-500/Tema_104.md)
 
 ## Objetivos del examen 102
 
