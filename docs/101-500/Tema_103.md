@@ -1,6 +1,26 @@
-# Tema 103: Comandos GNU y Unix
+- [1. Tema 103: Comandos GNU y Unix](#1-tema-103-comandos-gnu-y-unix)
+  - [1.1. Comandos básicos de ficheros](#11-comandos-b%C3%A1sicos-de-ficheros)
+    - [1.1.1. ls](#111-ls)
+    - [1.1.2. cp](#112-cp)
+    - [1.1.3. rm](#113-rm)
+    - [1.1.4. file](#114-file)
+  - [1.2. Trabajando con directorios](#12-trabajando-con-directorios)
+    - [1.2.1. mkdir](#121-mkdir)
+    - [1.2.2. $PATH](#122-path)
+  - [1.3. Archivos y compresión de carpetas](#13-archivos-y-compresi%C3%B3n-de-carpetas)
+    - [1.3.1. dd](#131-dd)
+  - [1.4. Buscar ficheros](#14-buscar-ficheros)
+    - [1.4.1. find](#141-find)
+    - [1.4.2. which](#142-which)
+  - [1.5. File Globing](#15-file-globing)
+  - [1.6. Use Streams, Pipes and Redirects](#16-use-streams-pipes-and-redirects)
+  - [1.7. Crear monitorizar y matar procesos](#17-crear-monitorizar-y-matar-procesos)
+    - [1.7.1. Revisar el estado del sistema](#171-revisar-el-estado-del-sistema)
+    - [1.7.2. Monitorizar procesos](#172-monitorizar-procesos)
 
-## Comandos básicos de ficheros
+# 1. Tema 103: Comandos GNU y Unix
+
+## 1.1. Comandos básicos de ficheros
 
 Comandos básicos para trabajar con ficheros.
 
@@ -11,12 +31,12 @@ Comandos básicos para trabajar con ficheros.
 - `mv` - comando usado para mover.
 - `file` - se utiliza para para probar y determinar el tipo de un fichero.
 
-### ls
+### 1.1.1. ls
 
 `ls -la` - **l** para listar y **a** para mostrar todos los archivo incluidos los ocultos
 `ls -lR` /etc/ - Lista recursivamente todas las capetas que hay en **/etc/**
 
-### cp
+### 1.1.2. cp
 
 Copiar un directorio
 
@@ -26,7 +46,7 @@ cp -vR /etc etc_bak
 
 Con el parametro -i nos pide confirmació.
 
-### rm
+### 1.1.3. rm
 
 Eliminamos un directorio utilizando `-rf`
 
@@ -34,14 +54,14 @@ Eliminamos un directorio utilizando `-rf`
 sergio@ubuntu:~$ rm -rf etc_bak/
 ```
 
-### file
+### 1.1.4. file
 
 ```console
 sergio@ubuntu:~$ file .gitconfig
 .gitconfig: ASCII text
 ```
 
-## Trabajando con directorios
+## 1.2. Trabajando con directorios
 
 `cd` - comando para cambiar de directorio
 `mkdir` - para crear un directorio
@@ -66,7 +86,7 @@ sergio@ubuntu:/etc/systemd/system$ cd ../..
 sergio@ubuntu:/etc$
 ```
 
-### mkdir
+### 1.2.1. mkdir
 
 Para crear un directorio anidado dentro de otro utilizamos el parametro `-p`
 
@@ -74,7 +94,7 @@ Para crear un directorio anidado dentro de otro utilizamos el parametro `-p`
 mkdir -p Documents/notes
 ```
 
-### $PATH
+### 1.2.2. $PATH
 
 Todos los comandos que esten en la variable $PATH, podran ser ejecutados desde cualquier ruta del sistema.
 
@@ -83,7 +103,7 @@ sergio@ubuntu:~$ echo $PATH
 /home/sergio/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 ```
 
-## Archivos y compresion de carpetas
+## 1.3. Archivos y compresión de carpetas
 
 `dd` - copia y convierte archivos. Se utiliza para crear fichero de un determinado tamaño y realizar copias de seguridad de unidades de disco.
 
@@ -101,7 +121,7 @@ sergio@ubuntu:~$ echo $PATH
 
 `unxz` - descomprime ficheros formato xz.
 
-### dd
+### 1.3.1. dd
 
 Creamos una copiar de seguridad del sistema de arranque
 
@@ -113,7 +133,9 @@ sergio@ubuntu:~$ sudo dd if=/dev/vda of=/tmp/mbr.img bs=512 count=1
 sergio@ubuntu:~$ ls /tmp/
 ```
 
-## Buscar ficheros
+## 1.4. Buscar ficheros
+
+### 1.4.1. find 
 
 `find`
 
@@ -123,8 +145,7 @@ sergio@ubuntu:~$ ls /tmp/
 
  *-atime*: encuentra ficheros basados en el momento que se accedio a ellos.
 
- *-empty*:
- -exec[command]{}\; ejecutamos un comando despues de realizar una busqueda, utili por ejemplo para eliminar todos los ficheros que encontremos vacios
+ *-empty*: -exec[command]{}\; ejecutamos un comando despues de realizar una busqueda, utili por ejemplo para eliminar todos los ficheros que encontremos vacios
 
 >El comando find busca recursivamente en la carpetas que esten jerarquicamente por debajo.
 
@@ -175,8 +196,17 @@ Buscar en el home del usuario todos los archivos comprimidos y copiarlos a la ca
 find ~ -name "*.tar.*" -exec cp -v {} /home/sergio/test \;
 ```
 
+### 1.4.2. which
 
-## File Globing
+`which` sirver para localizar donde esta instalado un paquete.
+
+```console
+[sergio@hostingsoriano ~]$ which nginx
+/usr/sbin/nginx
+```
+
+
+## 1.5. File Globing
 
 `*`: localiza cero o mas caracteres
 
@@ -222,7 +252,7 @@ combinar el contenido de dos ficheros
 sergio@ubuntu:~$ paste file1 file2
 ```
 
-## 103.4 Use Streams, Pipes and Redirects
+## 1.6. Use Streams, Pipes and Redirects
 
 Redirigiendo las salidas con los caracteres >,>>
 
@@ -259,9 +289,9 @@ Buscar todos lo ficheros dentro de carpeta test que tengan la palabra junk y mov
 grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/
 ```
 
-## 103.5 Crear monitorizar y matar procesos
+## 1.7. Crear monitorizar y matar procesos
 
-### Revisar el estado del sistema
+### 1.7.1. Revisar el estado del sistema
 
 **Procesos**: son set de intrucciones que estan cargados en la memoria.
 
@@ -279,7 +309,7 @@ grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/
 
 Si pulsamos la tecla `k` y escribimos el PID del procesos lo matamos.
 
-### Monitorizar procesos
+### 1.7.2. Monitorizar procesos
 
 `uptime` para conocer el tiempo que lleva arrancado el sistem.
 

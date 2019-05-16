@@ -91,16 +91,16 @@ lrwxrwxrwx 1 root root 0 abr  3 13:59 vda -> ../devices/pci0000:00/0000:00:06.0/
 **procfs** y /proc
 Contienen informacion sobre el sistema, como informacion de la memoria, cpu etc. Algunas configuracionenes es posible cambiarlas 'on the fly' de forma que cuenta con el cambio despues de un reinicio.
 
-Tambien contiene información sobre las peticiones de interrución los Aceesos Directos a Memoria (DMA) y los puertos de entradas y salidas los interfaces usados por el sistema (I/O port interface)
+También contiene información sobre las peticiones de interrupción los Accesos Directos a Memoria (DMA) y los puertos de entradas y salidas los interfaces usados por el sistema (I/O port interface)
 
-Podemos ver la informacion del sistema operativo con:
+Podemos ver la información del sistema operativo con:
 
 ```bash
 cat /proc/version
 Linux version 4.4.0-143-generic (buildd@lgw01-amd64-037) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) ) #169-Ubuntu SMP Thu Feb 7 07:56:51 UTC 2019
 ```
 
-Tambien se puede mostrar la informacion de las variables del con el comando `sysctl -a`.
+También se puede mostrar la información de las variables del con el comando `sysctl -a`.
 
 Por ejemplo podemos mostrar las entradas del proceso activo. `$$` es el PID del la consola que esta activa.
 
@@ -127,7 +127,7 @@ dr-x------ 2 sergio sergio 0 abr  3 15:13 fdinfo
 
 El directorio [**/dev**][4] contiene los archivos especiales de dispositivos.
 
-`lsdev` nos muestra la información de `/proc` presentandolo de una forma ordenada. Las columnas que podemos ver son:
+`lsdev` nos muestra la información de `/proc` presentándolo de una forma ordenada. Las columnas que podemos ver son:
 
 - Device
 - DMA
@@ -136,7 +136,7 @@ El directorio [**/dev**][4] contiene los archivos especiales de dispositivos.
 
 >Es necesario tener instalado el paquete [procinfo][1]
 
-### Modulos del Kernel
+### Módulos del Kernel
 
 En GNU/Linux, el hardware lo administran los drivers del kernel, algunos de los cuales se encuentran integrados (compilados) en el kernel, y otros, en su mayor parte, son módulos independientes. Estos módulos son ficheros que suelen almacenarse en el árbol de directorios `/lib/modules`, y se pueden cargar o descargar para proporcionar acceso al hardware. Normalmente, GNU/Linux carga los módulos que necesita cuando se inicia, pero puede que en ocasiones se necesite cargar módulos manualmente.
 
@@ -147,7 +147,6 @@ El comando **modprobe** sirve para añadir o eliminar modulos del kernel de linu
 Para eliminar manualmente un drive podemos utilizar `modprobe -a` y para eliminar podemos utilizar `modprobe -c`. Con la opcion -v podemos ver lo que se ejecutado y con -n las opciones completadas con exito.
 
 Añadir un modulo:
-
 
 ### lsmod
 
@@ -196,8 +195,6 @@ Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 002: ID 0627:0001 Adomax Technology Co., Ltd
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
-
-
 
 ## 101.2 Arranque del sistema
 

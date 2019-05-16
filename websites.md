@@ -15,3 +15,4 @@ https://www.youtube.com/watch?v=g7OkSvioFlU
 
 https://www.youtube.com/watch?v=HIXzJ3Rz9po
 
+https://quizlet.com/306700585/linux-academy-practice-test-lpic-1-flash-cards/
