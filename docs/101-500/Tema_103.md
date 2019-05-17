@@ -1,26 +1,26 @@
-- [1. Tema 103: Comandos GNU y Unix](#1-tema-103-comandos-gnu-y-unix)
-  - [1.1. Comandos básicos de ficheros](#11-comandos-b%C3%A1sicos-de-ficheros)
-    - [1.1.1. ls](#111-ls)
-    - [1.1.2. cp](#112-cp)
-    - [1.1.3. rm](#113-rm)
-    - [1.1.4. file](#114-file)
-  - [1.2. Trabajando con directorios](#12-trabajando-con-directorios)
-    - [1.2.1. mkdir](#121-mkdir)
-    - [1.2.2. $PATH](#122-path)
-  - [1.3. Archivos y compresión de carpetas](#13-archivos-y-compresi%C3%B3n-de-carpetas)
-    - [1.3.1. dd](#131-dd)
-  - [1.4. Buscar ficheros](#14-buscar-ficheros)
-    - [1.4.1. find](#141-find)
-    - [1.4.2. which](#142-which)
-  - [1.5. File Globing](#15-file-globing)
-  - [1.6. Use Streams, Pipes and Redirects](#16-use-streams-pipes-and-redirects)
-  - [1.7. Crear monitorizar y matar procesos](#17-crear-monitorizar-y-matar-procesos)
-    - [1.7.1. Revisar el estado del sistema](#171-revisar-el-estado-del-sistema)
-    - [1.7.2. Monitorizar procesos](#172-monitorizar-procesos)
+- [Tema 103: Comandos GNU y Unix](#tema-103-comandos-gnu-y-unix)
+  - [103.1 Trabajar desde la linea de comandos](#1031-trabajar-desde-la-linea-de-comandos)
+    - [ls](#ls)
+    - [cp](#cp)
+    - [rm](#rm)
+    - [file](#file)
+  - [Trabajando con directorios](#trabajando-con-directorios)
+    - [mkdir](#mkdir)
+    - [$PATH](#path)
+  - [103.2 Procesar secuencias de texto usando filtros](#1032-procesar-secuencias-de-texto-usando-filtros)
+    - [dd](#dd)
+  - [103.3 Administración básica de archivos](#1033-administraci%C3%B3n-b%C3%A1sica-de-archivos)
+    - [find](#find)
+    - [which](#which)
+    - [File Globing](#file-globing)
+  - [103.4 Uso de secuencias de texto, tuberías y redireccionamientos](#1034-uso-de-secuencias-de-texto-tuber%C3%ADas-y-redireccionamientos)
+  - [103.5 Crear, supervisar y matar procesos](#1035-crear-supervisar-y-matar-procesos)
+    - [Revisar el estado del sistema](#revisar-el-estado-del-sistema)
+    - [Monitorizar procesos](#monitorizar-procesos)
 
-# 1. Tema 103: Comandos GNU y Unix
+# Tema 103: Comandos GNU y Unix
 
-## 1.1. Comandos básicos de ficheros
+## 103.1 Trabajar desde la linea de comandos
 
 Comandos básicos para trabajar con ficheros.
 
@@ -31,12 +31,12 @@ Comandos básicos para trabajar con ficheros.
 - `mv` - comando usado para mover.
 - `file` - se utiliza para para probar y determinar el tipo de un fichero.
 
-### 1.1.1. ls
+### ls
 
 `ls -la` - **l** para listar y **a** para mostrar todos los archivo incluidos los ocultos
 `ls -lR` /etc/ - Lista recursivamente todas las capetas que hay en **/etc/**
 
-### 1.1.2. cp
+### cp
 
 Copiar un directorio
 
@@ -46,7 +46,7 @@ cp -vR /etc etc_bak
 
 Con el parametro -i nos pide confirmació.
 
-### 1.1.3. rm
+### rm
 
 Eliminamos un directorio utilizando `-rf`
 
@@ -54,14 +54,14 @@ Eliminamos un directorio utilizando `-rf`
 sergio@ubuntu:~$ rm -rf etc_bak/
 ```
 
-### 1.1.4. file
+### file
 
 ```console
 sergio@ubuntu:~$ file .gitconfig
 .gitconfig: ASCII text
 ```
 
-## 1.2. Trabajando con directorios
+## Trabajando con directorios
 
 `cd` - comando para cambiar de directorio
 `mkdir` - para crear un directorio
@@ -86,7 +86,7 @@ sergio@ubuntu:/etc/systemd/system$ cd ../..
 sergio@ubuntu:/etc$
 ```
 
-### 1.2.1. mkdir
+### mkdir
 
 Para crear un directorio anidado dentro de otro utilizamos el parametro `-p`
 
@@ -94,7 +94,7 @@ Para crear un directorio anidado dentro de otro utilizamos el parametro `-p`
 mkdir -p Documents/notes
 ```
 
-### 1.2.2. $PATH
+### $PATH
 
 Todos los comandos que esten en la variable $PATH, podran ser ejecutados desde cualquier ruta del sistema.
 
@@ -103,7 +103,9 @@ sergio@ubuntu:~$ echo $PATH
 /home/sergio/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 ```
 
-## 1.3. Archivos y compresión de carpetas
+## 103.2 Procesar secuencias de texto usando filtros
+
+Archivos y compresión de carpetas
 
 `dd` - copia y convierte archivos. Se utiliza para crear fichero de un determinado tamaño y realizar copias de seguridad de unidades de disco.
 
@@ -121,7 +123,7 @@ sergio@ubuntu:~$ echo $PATH
 
 `unxz` - descomprime ficheros formato xz.
 
-### 1.3.1. dd
+### dd
 
 Creamos una copiar de seguridad del sistema de arranque
 
@@ -132,10 +134,11 @@ sergio@ubuntu:~$ sudo dd if=/dev/vda of=/tmp/mbr.img bs=512 count=1
 512 bytes copied, 0,0012344 s, 415 kB/s
 sergio@ubuntu:~$ ls /tmp/
 ```
+## 103.3 Administración básica de archivos
 
-## 1.4. Buscar ficheros
+Buscar ficheros
 
-### 1.4.1. find 
+### find 
 
 `find`
 
@@ -196,7 +199,7 @@ Buscar en el home del usuario todos los archivos comprimidos y copiarlos a la ca
 find ~ -name "*.tar.*" -exec cp -v {} /home/sergio/test \;
 ```
 
-### 1.4.2. which
+### which
 
 `which` sirver para localizar donde esta instalado un paquete.
 
@@ -206,7 +209,7 @@ find ~ -name "*.tar.*" -exec cp -v {} /home/sergio/test \;
 ```
 
 
-## 1.5. File Globing
+### File Globing
 
 `*`: localiza cero o mas caracteres
 
@@ -252,7 +255,7 @@ combinar el contenido de dos ficheros
 sergio@ubuntu:~$ paste file1 file2
 ```
 
-## 1.6. Use Streams, Pipes and Redirects
+## 103.4 Uso de secuencias de texto, tuberías y redireccionamientos
 
 Redirigiendo las salidas con los caracteres >,>>
 
@@ -289,9 +292,9 @@ Buscar todos lo ficheros dentro de carpeta test que tengan la palabra junk y mov
 grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/
 ```
 
-## 1.7. Crear monitorizar y matar procesos
+## 103.5 Crear, supervisar y matar procesos
 
-### 1.7.1. Revisar el estado del sistema
+### Revisar el estado del sistema
 
 **Procesos**: son set de intrucciones que estan cargados en la memoria.
 
@@ -309,7 +312,7 @@ grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/
 
 Si pulsamos la tecla `k` y escribimos el PID del procesos lo matamos.
 
-### 1.7.2. Monitorizar procesos
+### Monitorizar procesos
 
 `uptime` para conocer el tiempo que lleva arrancado el sistem.
 

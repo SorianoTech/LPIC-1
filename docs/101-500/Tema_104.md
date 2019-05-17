@@ -16,6 +16,8 @@
 
 ## 104.3 Controlar el montaje y desmontaje de los sistemas de archivos
 
+
+
 ## 104.4 Eliminado
 
 ## 104.5 Administración de los permisos y los propietarios de los archivos
@@ -112,6 +114,7 @@ Para localizar los hard symbolik links:
 ```
 
 ## 104.7 Encontrar archivos de sistema y ubicar archivos en el lugar correspondiente
+
 ![File System Hierarchy](img\FileSystemHierarchy.png)
 
 [Pathname](http://www.pathname.com/fhs/)
