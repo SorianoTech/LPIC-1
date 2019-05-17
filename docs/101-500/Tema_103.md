@@ -10,13 +10,16 @@
   - [103.2 Procesar secuencias de texto usando filtros](#1032-procesar-secuencias-de-texto-usando-filtros)
     - [dd](#dd)
   - [103.3 Administración básica de archivos](#1033-administraci%C3%B3n-b%C3%A1sica-de-archivos)
-    - [find](#find)
+    - [103.3.1 find](#10331-find)
     - [which](#which)
     - [File Globing](#file-globing)
   - [103.4 Uso de secuencias de texto, tuberías y redireccionamientos](#1034-uso-de-secuencias-de-texto-tuber%C3%ADas-y-redireccionamientos)
   - [103.5 Crear, supervisar y matar procesos](#1035-crear-supervisar-y-matar-procesos)
     - [Revisar el estado del sistema](#revisar-el-estado-del-sistema)
     - [Monitorizar procesos](#monitorizar-procesos)
+  - [103.6 Modificar la prioridad de ejecución de los procesos](#1036-modificar-la-prioridad-de-ejecuci%C3%B3n-de-los-procesos)
+  - [103.7 Realizar búsquedas en archivos de texto usando expresiones regulares](#1037-realizar-b%C3%BAsquedas-en-archivos-de-texto-usando-expresiones-regulares)
+  - [103.8 Edición básica de archivos](#1038-edici%C3%B3n-b%C3%A1sica-de-archivos)
 
 # Tema 103: Comandos GNU y Unix
 
@@ -105,6 +108,27 @@ sergio@ubuntu:~$ echo $PATH
 
 ## 103.2 Procesar secuencias de texto usando filtros
 
+
+`less` - sirve para mostrar el texto de un fichero linea por linea
+
+`uniq` - omite las lineas repetidas
+
+### dd
+
+Creamos una copiar de seguridad del sistema de arranque
+
+```console
+sergio@ubuntu:~$ sudo dd if=/dev/vda of=/tmp/mbr.img bs=512 count=1
+1+0 registros leídos
+1+0 registros escritos
+512 bytes copied, 0,0012344 s, 415 kB/s
+sergio@ubuntu:~$ ls /tmp/
+```
+
+
+## 103.3 Administración básica de archivos
+
+
 Archivos y compresión de carpetas
 
 `dd` - copia y convierte archivos. Se utiliza para crear fichero de un determinado tamaño y realizar copias de seguridad de unidades de disco.
@@ -123,22 +147,9 @@ Archivos y compresión de carpetas
 
 `unxz` - descomprime ficheros formato xz.
 
-### dd
-
-Creamos una copiar de seguridad del sistema de arranque
-
-```console
-sergio@ubuntu:~$ sudo dd if=/dev/vda of=/tmp/mbr.img bs=512 count=1
-1+0 registros leídos
-1+0 registros escritos
-512 bytes copied, 0,0012344 s, 415 kB/s
-sergio@ubuntu:~$ ls /tmp/
-```
-## 103.3 Administración básica de archivos
-
 Buscar ficheros
 
-### find 
+### 103.3.1 find 
 
 `find`
 
@@ -294,6 +305,10 @@ grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/
 
 ## 103.5 Crear, supervisar y matar procesos
 
+
+`man proc` - manual del del pseudo directorio del sistema de ficheros
+`man 7 signal` - manual del los diferentes estados de las señales de procesos.
+
 ### Revisar el estado del sistema
 
 **Procesos**: son set de intrucciones que estan cargados en la memoria.
@@ -303,8 +318,11 @@ grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/
 `ps`: nos muestra los procesos
 
 >ps -a muestra todos los procesos.
+
 >ps -eH | less - muestra todos los procesos ordenados por jerarquia.
+
 >ps -u username - muestro los procesos de un usuario
+
 >ps -e --forest - muestra todos los procesos en arbol
 
 
@@ -321,13 +339,14 @@ Si pulsamos la tecla `k` y escribimos el PID del procesos lo matamos.
  21:48:41 up  2:06,  1 user,  load average: 0,00, 0,01, 0,05
 ```
 
-`free`: sirve para conocer la memoria ram libre
+`free`: sirve para conocer la memoria ram y de la particion de swap. 
 
 ```console
-[sergio@hostingsoriano ~]$ free -m
+sergio@Lenovo:~/GITHUB/LPIC-1$ free -h
               total        used        free      shared  buff/cache   available
-Mem:           3685         137        3053           8         494        3283
-Swap:          5723           0        5723
+Mem:           7,5G        4,8G        609M        542M        2,1G        2,1G
+Swap:          2,0G        111M        1,9G
+
 ```
 
 `pgrep`: busca informacion del proceso basado en el nombre del proceso
@@ -348,7 +367,11 @@ Swap:          5723           0        5723
 
 `pstree`
 
+`pkill` - envia una señal (normalmente SIGTERM) a un proceso basado en su nombre(mata el proceso indicando el nombre).
+
+## 103.6 Modificar la prioridad de ejecución de los procesos
 
 
+## 103.7 Realizar búsquedas en archivos de texto usando expresiones regulares
 
-
+## 103.8 Edición básica de archivos

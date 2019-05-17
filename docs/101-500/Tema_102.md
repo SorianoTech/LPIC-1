@@ -37,10 +37,19 @@ Volumenes Físicos (PV) - /dev/sda - /dev/sdb - /dev/sdc
 
 `lvs`: Lista los volumenes *logicos* que hay en un grupo LVM.
 
+
+## 102.2 Instalar un gestor de arranque
+
+## 102.3 Gestión de librerías compartidas
+
+## 102.4 Gestión de paquetes Debian
+
+## 102.6 Linux como sistema virtualizado
+
 ## 102.5 Gestión de paquetes RPM y YUM
 
 
-Por ejemplo al instalar un paquete RPM, tenemos el problema de que requiere de dependencias que no tenemos instaladas.
+Por ejemplo, imaginemos que al instalar un paquete RPM, nos encontramos con el problema de que requiere de dependencias que no tenemos instaladas.
 
 Para saber la dependencia de un paquete. Por ejemplo: 
 
