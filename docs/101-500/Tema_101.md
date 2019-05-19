@@ -12,7 +12,6 @@
   - [101.2 Arranque del sistema](#1012-arranque-del-sistema)
     - [Secuencia de arranque](#secuencia-de-arranque)
       - [Cargadores de arranque (boot loader)](#cargadores-de-arranque-boot-loader)
-    - [DMESG](#dmesg)
     - [Tipos de arranque](#tipos-de-arranque)
   - [101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema](#1013-cambiar-los-niveles-de-ejecuci%C3%B3n--objetivos-de-arranque-y-apagar-o-reiniciar-el-sistema)
 
@@ -236,26 +235,69 @@ El programa de arranque reside en la particion del sistema y es invocado antes d
 
 [GRUB2][6] (GRand Unified Bootloader, Cargador de arranque unificado
 
-Son particiones que continen ficheros de configuracion para indicar donde se arranca el sistema.
+Son particiones que contienen ficheros de configuración para indicar donde se arranca el sistema.
 
 Cuando GRUB2 lee el archivo de configuración, muestra un menu para seleccionar el sistema que se quiere arrancar.
 
-### DMESG
+`DMESG`: Se utiliza para mostrar o controlar el buffer del anillo del kernel.(es el antiguo comando, ahora se utiliza journalctl)
 
-Se utiliza para mostrar o controlar el buffer del anillo del kernel
+`journalctl`: utilidad para mostrar el buffer del anillo del kernel, podemos ver todos los elementos que han sido cargados en la memoria. Con `journalctl -k` mostramos toda la información
+
 
 ### Tipos de arranque
 
-`systemVinit`:
+`init`: es el sistema de inicialización.
 
-`upstart`:
+kernel -> /sbin/init -> /etc/inittab
 
-EL fichero  /etc/inittab  era el el antiguo fichero utilizado por el demonio System V init(8
+/etc/inittab
+<identificador>:<runlevel>:<accion>:<proceso>
 
-   The Upstart init(8) daemon does not use this file,  and  instead  reads
-   its  configuration  from  files  in  /etc/init.   See  init(5) for more
-   details.
+`sysVinit`:
 
+
+El fichero  /etc/inittab  era el el antiguo fichero utilizado por el demonio System V init(8).
+El demonio Upstart init(8) no usa este fichero,  sin embargo lee la configuracion de los ficheros alojados el el directorio /etc/init. 
+
+`śystemd`: es el gestor de systema y de servicios, es el primer proceso en arrancar y tiene el PID (1)
+
+
+Ejemplo del proceso del sistema de arranque:
+
+1. La particion de arranque es encontrada
+2. Kernel y RAM incial son cargadas.
+3. El kernel carga los drivers iniciales y configura las herramientas desde la RAM
+4. El kernel toma el control del sistema a través de /sbin/init
+5. init realiza alguna tareas de mantenimiento dsede /etc/rc.d/rc.sysinit
+6. initi lee la linea por defecto de inidefault en /etc/inittab y entra en el runlevel 3
+
+Estos ficheros se encuentran en diferentes localizaciones dependiendo de la distribución
+
+Distribuciones basdas en Red Hat: /etc/rc.d/
+Distribuciones basadas en debian: /etc/init.d/
+
+rc = run commands, cada una de las carpetas equivale a los diferentes niveles de arranque.
+
+Mostramos los elmentos de arranque del nivel de arranque 3(todos son enlaces simbolicos a los ficheros) Se cargaran en el orden que aparecen.
+
+```console
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/test_command  ls /etc/rc3.d
+S01acpid             S01cups-browsed  S01rsyslog
+S01anacron           S01dbus          S01saned
+S01apport            S01docker        S01speech-dispatcher
+S01avahi-daemon      S01gdm3          S01spice-vdagent
+S01binfmt-support    S01grub-common   S01unattended-upgrades
+S01bluetooth         S01irqbalance    S01uuidd
+S01console-setup.sh  S01kerneloops    S01whoopsie
+S01cron              S01plymouth
+S01cups              S01rsync
+```
+
+`upstart`: es el demononio de arranque de ubunto desarrollado en 2006 y mas adelante utilizado en distribuciones Red Hat, debian y fedora. 
+
+Ha diferencia de init, upstart ofrece arranques de servicios asincronos, reduciendo el tiempo de arranque.
+
+init vs upstart
 
 
 
@@ -269,7 +311,7 @@ EL fichero  /etc/inittab  era el el antiguo fichero utilizado por el demonio Sys
 | 0       | halt                                       |
 | 1       | Single user mode                           |
 | 2       | multi-user mode (sin red)                  |
-| 3       | multi-user moder( con red)                 |
+| 3       | multi-user mode( con red)                  |
 | 4       | no utilizado(para entornos personalizados) |
 | 5       | multi-user, con red y entorno gráfico      |
 | 6       | reboot                                     |
