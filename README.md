@@ -63,7 +63,7 @@ Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos
 
 [The Linux Document Proyect](http://www.tldp.org/)
 [GNU Proyect](http://www.gnu.org/doc/)
-[Man pages] (https://linux.die.net/man/) 
+[Man pages](https://linux.die.net/man/) 
 [Free Software Directory](https://directory.fsf.org/wiki/Main_Page)
 
 ### Blog's
