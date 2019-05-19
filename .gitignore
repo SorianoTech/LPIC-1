@@ -11,3 +11,5 @@ docs/101-500/test.md
 .Trashes
 ehthumbs.db
 Thumbs.db
+settings.json
+.vscode

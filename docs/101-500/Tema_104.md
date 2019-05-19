@@ -12,9 +12,32 @@
 
 ## 104.1 Creación de particiones y sistemas de archivos
 
+swap file: es el fichero que se utiliza cuando esta la memoria ram llena.
+
+`fdisk` - se utiliza para modificar particiones basadas en MBR
+
+`gparted` - se utiliza para modificar particiones basadas tables de particiones GPT
+
+`parted` - 
+
+`mkswap` - comando para usado para formatear una partcion swap
+
+`swapoff` - deshabilita una particion de swap
+
+Para añadir una partción al arranque tenemos que modificar el fichero `/etc/fstab/`
+
+
+Añadir una nueva partición de SWAP, añadimos al fichero fstab la siguiente informacion:
+
+```
+LABEL=SWAP swap swap defaults 0 0
+```
+
 ## 104.2 Mantener la integridad de los sistemas de archivos
 
 ## 104.3 Controlar el montaje y desmontaje de los sistemas de archivos
+
+
 
 ## 104.4 Eliminado
 
@@ -112,6 +135,7 @@ Para localizar los hard symbolik links:
 ```
 
 ## 104.7 Encontrar archivos de sistema y ubicar archivos en el lugar correspondiente
+
 ![File System Hierarchy](img\FileSystemHierarchy.png)
 
 [Pathname](http://www.pathname.com/fhs/)
