@@ -22,12 +22,12 @@ swap file: es el fichero que se utiliza cuando esta la memoria ram llena.
 
 `mkswap` - comando para usado para formatear una partcion swap
 
-`swapoff` - deshabilita una particion de swap
+`swapoff` - deshabilita una partición de swap
 
 Para añadir una partción al arranque tenemos que modificar el fichero `/etc/fstab/`
 
 
-Añadir una nueva partición de SWAP, añadimos al fichero fstab la siguiente informacion:
+Añadir una nueva partición de SWAP, añadimos al fichero fstab la siguiente información:
 
 ```
 LABEL=SWAP swap swap defaults 0 0
@@ -116,7 +116,7 @@ La diferencia entre un enlace simbólico (soft) y uno hard, es que el hard no cr
 Los hard links son especialmente importantes para ficheros 'permanentes' que por ejemplo un fichero que tiene que ser solamente accesible por el administrador lincado a un fichero que nunca debe ser modificado.
 
 
-Los enlaces simbolicos `ln -s` permiten cruzar sistemas de ficheros, sin embargo los hard links no. Esto ocurre porque un enlace simbolico consiste en crear un nuevo fichero que apunta a otro, sin embar un enlace duro lo que hace es crear un puntero, y el espacio ocupado en el disco es el mismo.
+Los enlaces simbólicos `ln -s` permiten cruzar sistemas de ficheros, sin embargo los hard links no. Esto ocurre porque un enlace simbólico consiste en crear un nuevo fichero que apunta a otro, sin embar un enlace duro lo que hace es crear un puntero, y el espacio ocupado en el disco es el mismo.
 
 Para localizar los hard symbolik links:
 
@@ -152,7 +152,7 @@ Para localizar los hard symbolik links:
 /usr/share/man/man8/updatedb.8.gz
 ```
 
-`whereis`: este comando localiza los archivos binarios, codigo fuente y paginas del manual de un comando.
+`whereis`: este comando localiza los archivos binarios, código fuente y paginas del manual de un comando.
 
 ```console
 [sergio@hostingsoriano ~]$ whereis top

@@ -56,7 +56,7 @@ El **Firmware** de un dispositivo es el *software* de solo lectura que sirve par
 
 **sysfs** y **procfs** son sistemas de ficheros virtuales que se montan sobre /sys y /proc y que son usados por el kernel del sistema Linux. Procfs es el antiguo y sysfs es el moderno, aunque se siguen estando presente ambos en el sistema. Sysfs fue añadido en el *Kernel 2.6*.
 
-**Sysfs** o /sys es un sistema de ficheros simple con ficheros que representan atributos de objetos, estos los objetos tambien son representados como directorios(carpetas) y son utilizados para obtener informacion sobre el sistema.
+**Sysfs** o /sys es un sistema de ficheros simple con ficheros que representan atributos de objetos, estos los objetos también son representados como directorios(carpetas) y son utilizados para obtener información sobre el sistema.
 
 <https://github.com/torvalds/linux/blob/master/Documentation/filesystems/sysfs.txt>
 
@@ -67,7 +67,7 @@ sergio@ubuntu:~$ ls /sys
 block  bus  class  dev  devices  firmware  fs  hypervisor  kernel  module  power
 ```
 
-- **block**: encontramos enlaces simbolicos a dispositivos bloqueados
+- **block**: encontramos enlaces simbólicos a dispositivos bloqueados
 - **bus**: Contiene un diseño de directorio plano de los diferentes tipos de
 kernel(núcleo).
 - **dev**: contiene enlaces simbólicos para cada dispositivo descubierto en el sistema que apuntan al directorio del dispositivo bajo root /.
@@ -89,7 +89,7 @@ lrwxrwxrwx 1 root root 0 abr  3 13:59 vda -> ../devices/pci0000:00/0000:00:06.0/
 ```
 
 **procfs** y /proc
-Contienen informacion sobre el sistema, como informacion de la memoria, cpu etc. Algunas configuracionenes es posible cambiarlas 'on the fly' de forma que cuenta con el cambio despues de un reinicio.
+Contienen información sobre el sistema, como información de la memoria, cpu etc. Algunas configuracionenes es posible cambiarlas 'on the fly' de forma que cuenta con el cambio despues de un reinicio.
 
 También contiene información sobre las peticiones de interrupción los Accesos Directos a Memoria (DMA) y los puertos de entradas y salidas los interfaces usados por el sistema (I/O port interface)
 
@@ -150,11 +150,11 @@ Añadir un modulo:
 
 ### lsmod
 
-Con el comando **lsmod** podemos ver los modulos que hay actualmente cargados en el Kernel.
+Con el comando **lsmod** podemos ver los módulos que hay actualmente cargados en el Kernel.
 
 >Nos muestra la información formateada del archivo `/proc/modules`.
 
-Con el comando `modinfo` podemos ver la informacion de un modulo. Podemos localizar los ficheros de modulos en la ruta `cd /lib/modules/$(uname -r)`
+Con el comando `modinfo` podemos ver la información de un modulo. Podemos localizar los ficheros de modulos en la ruta `cd /lib/modules/$(uname -r)`
 
 >`$(uname)- r` nos devuelve la version del kernel de nuestro sistema
 
@@ -174,7 +174,7 @@ vermagic:       4.4.0-143-generic SMP mod_unload modversions 686 retpoline
 
 Son herramientas para obtener información sobre los dispositivos pci y usb.
 
-El comando lspci busca informacion en el fichero `/usr/share/misc/pci.ids`, que contiene la lista de los IDs conocidos (vendors, devices, classes, and subclasses) [info][3]
+El comando lspci busca información en el fichero `/usr/share/misc/pci.ids`, que contiene la lista de los IDs conocidos (vendors, devices, classes, and subclasses) [info][3]
 
 ```bash
 sergio@ubuntu:~$ lspci
@@ -229,7 +229,7 @@ systemd
 
 La secuencia de arranque (Boot loader) es la que se encarga de realizar los procesos iniciales cuando el sistema es arrancado o reiniciado.
 
-El programa de arranque reside en la particion del sistema y es invocado antes de iniciar el SO.
+El programa de arranque reside en la partición del sistema y es invocado antes de iniciar el SO.
 
 #### Cargadores de arranque (boot loader)
 
@@ -264,7 +264,7 @@ El demonio Upstart init(8) no usa este fichero,  sin embargo lee la configuracio
 
 Ejemplo del proceso del sistema de arranque:
 
-1. La particion de arranque es encontrada
+1. La partición de arranque es encontrada
 2. Kernel y RAM incial son cargadas.
 3. El kernel carga los drivers iniciales y configura las herramientas desde la RAM
 4. El kernel toma el control del sistema a través de /sbin/init

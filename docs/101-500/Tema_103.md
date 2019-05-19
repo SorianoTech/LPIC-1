@@ -91,7 +91,7 @@ sergio@ubuntu:/etc$
 
 ### mkdir
 
-Para crear un directorio anidado dentro de otro utilizamos el parametro `-p`
+Para crear un directorio anidado dentro de otro utilizamos el parámetro `-p`
 
 ```bash
 mkdir -p Documents/notes
@@ -99,7 +99,7 @@ mkdir -p Documents/notes
 
 ### $PATH
 
-Todos los comandos que esten en la variable $PATH, podran ser ejecutados desde cualquier ruta del sistema.
+Todos los comandos que estén en la variable $PATH, podrán ser ejecutados desde cualquier ruta del sistema.
 
 ```console
 sergio@ubuntu:~$ echo $PATH
@@ -155,11 +155,11 @@ Buscar ficheros
 
  *-name*: para buscar por nombre de fichero.
 
- *-ctime*: encuentr ficheros basados en el momento que fueron modificados.
+ *-ctime*: encuentra ficheros basados en el momento que fueron modificados.
 
- *-atime*: encuentra ficheros basados en el momento que se accedio a ellos.
+ *-atime*: encuentra ficheros basados en el momento que se accedió a ellos.
 
- *-empty*: -exec[command]{}\; ejecutamos un comando despues de realizar una busqueda, utili por ejemplo para eliminar todos los ficheros que encontremos vacios
+ *-empty*: -exec[command]{}\; ejecutamos un comando después de realizar una búsqueda, útil por ejemplo para eliminar todos los ficheros que encontremos vacios
 
 >El comando find busca recursivamente en la carpetas que esten jerarquicamente por debajo.
 
@@ -346,7 +346,7 @@ Si pulsamos la tecla `k` y escribimos el PID del procesos lo matamos.
  21:48:41 up  2:06,  1 user,  load average: 0,00, 0,01, 0,05
 ```
 
-`free`: sirve para conocer la memoria ram y de la particion de swap. 
+`free`: sirve para conocer la memoria ram y de la partición de swap. 
 
 ```console
 sergio@Lenovo:~/GITHUB/LPIC-1$ free -h
@@ -356,7 +356,7 @@ Swap:          2,0G        111M        1,9G
 
 ```
 
-`pgrep`: busca informacion del proceso basado en el nombre del proceso
+`pgrep`: busca información del proceso basado en el nombre del proceso
 
 ```console
 [root@hostingsoriano sergio]# pgrep nginx
