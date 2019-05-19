@@ -260,7 +260,7 @@ mostrar la columna 6 del archivo de usuarios passwd
 sergio@ubuntu:~/$ cut -f 6 -d ':' /etc/passwd
 ```
 
-combinar el contenido de dos ficheros
+Combinar el contenido de dos ficheros
 
 ```console
 sergio@ubuntu:~$ paste file1 file2
@@ -291,13 +291,20 @@ find / -iname "*.sh" | tee result.txt
 
 `xargs` : toma la entrada (el resultado de otro comando) normalmente `find`  y lo pasa a otro comando
 
+Listar todas las carpetas de librerías disponibles, pasar a un fichero y ordenar en otro fichero
+
+```console
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  ls -d /usr/share/doc/lib[Xx]* | tee lib.docs.txt | sort -r | tee lib-docs-rev.txt 
+```
+
+
 Buscar todos los fichero con la extension sh e imprimir los resultados con el comando ls en un fichero.
 
 ```console
 find / -name "*.sh" | xargs ls -al > myresult.txt
 ```
 
-Buscar todos lo ficheros dentro de carpeta test que tengan la palabra junk y moverlos a la carpeta bak
+Buscar todos lo ficheros dentro de carpeta test que tengan la palabra junk y moverlos a la carpeta bak. el parámetro -l obtendrá el nombre del fichero.
 
 ```console
 grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/

@@ -5,7 +5,7 @@
     - [BIOS y UEFI](#bios-y-uefi)
     - [Sys y proc](#sys-y-proc)
     - [/dev y el comando **lsdev**](#dev-y-el-comando-lsdev)
-    - [Modulos del Kernel](#modulos-del-kernel)
+    - [Módulos del Kernel](#m%C3%B3dulos-del-kernel)
     - [modprobe](#modprobe)
     - [lsmod](#lsmod)
     - [lspci y lsusb](#lspci-y-lsusb)
@@ -13,6 +13,7 @@
     - [Secuencia de arranque](#secuencia-de-arranque)
       - [Cargadores de arranque (boot loader)](#cargadores-de-arranque-boot-loader)
     - [DMESG](#dmesg)
+    - [Tipos de arranque](#tipos-de-arranque)
   - [101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema](#1013-cambiar-los-niveles-de-ejecuci%C3%B3n--objetivos-de-arranque-y-apagar-o-reiniciar-el-sistema)
 
 ## 101.1 Determinar y configurar los ajustes de hardware
@@ -50,7 +51,7 @@ Página de guia -> [https://developer.ibm.com/tutorials/l-lpic1-101-1/]
 (BIOS): basic input/output system.
 (UEFI): Unified Extensible Firmware Interface.
 
-El **Fimeware** de un dispositivo es el *software* de solo lectura que sirve para comunicar los diferentes componentes de harware que componen los equipos informáticos entre si.
+El **Firmware** de un dispositivo es el *software* de solo lectura que sirve para comunicar los diferentes componentes de harware que componen los equipos informáticos entre si.
 
 ### Sys y proc
 
@@ -243,11 +244,45 @@ Cuando GRUB2 lee el archivo de configuración, muestra un menu para seleccionar 
 
 Se utiliza para mostrar o controlar el buffer del anillo del kernel
 
+### Tipos de arranque
+
+`systemVinit`:
+
+`upstart`:
+
+EL fichero  /etc/inittab  era el el antiguo fichero utilizado por el demonio System V init(8
+
+   The Upstart init(8) daemon does not use this file,  and  instead  reads
+   its  configuration  from  files  in  /etc/init.   See  init(5) for more
+   details.
+
+
 
 
 ## 101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema
 
+**Runlevel**: son los diferentes estados que el sistema puede ejecutar
 
+
+| Runleve | Proposito                                  |
+| ------- | ------------------------------------------ |
+| 0       | halt                                       |
+| 1       | Single user mode                           |
+| 2       | multi-user mode (sin red)                  |
+| 3       | multi-user moder( con red)                 |
+| 4       | no utilizado(para entornos personalizados) |
+| 5       | multi-user, con red y entorno gráfico      |
+| 6       | reboot                                     |
+ 
+
+`systemd`: 
+
+`systemctl`:
+
+`telinit`: comando para cambiar el modo de arranque
+
+
+cat /etc/inittab
 
 [1]: https://linux.die.net/man/8/procinfo
 [2]: https://www.maketecheasier.com/differences-between-uefi-and-bios/
