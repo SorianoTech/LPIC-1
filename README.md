@@ -59,6 +59,8 @@ Al obtener esta certificación se garantiza que has adquirido unos conocimientos
 
 [Consola de linux Online](https://www.tutorialspoint.com/unix_terminal_online.php)
 
+[Cursos oficiales PUE](https://www.pue.es/cursos/lpi)
+
 ### Documentación oficial Linux
 
 [The Linux Document Project](http://www.tldp.org/)
