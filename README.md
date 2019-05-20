@@ -18,7 +18,7 @@ Se divide en dos exámenes: :+1:
 - [ ] [Tema 101: Arquitectura del Sistema](docs/101-500/Tema_101.md)
 - [ ] [Tema 102: Instalación de Linux y gestión de paquetes](docs/101-500/Tema_102.md)
 - [ ] [Tema 103: Comandos GNU y Unix](docs/101-500/Tema_103.md)
-- [ ] [Tema 104: Dispositivos, sistemas de archivos Linux y el estándar de jerarquía de archivos](docs/101-500/Tema_103.md)
+- [ ] [Tema 104: Dispositivos, sistemas de archivos Linux y el estándar de jerarquía de archivos](docs/101-500/Tema_104.md)
 
 ## Objetivos del examen 102
 
@@ -35,9 +35,9 @@ Al obtener esta certificación se obtiene los conocimientos necesarios para:
 - Instalar y mantener una estación de trabajo Linux, incluyendo X11 y  su configuración como un cliente de red.
 - Trabajar en la línea de comandos de Linux, incluidos los comandos comunes de GNU y Unix.
 - Manejar archivos y permisos de acceso, así como la seguridad del sistema.
-- Realizar tareas de mantenimiento sencillas: ayudar a los usuarios, agregar usuarios a un sistema más grande, realizar copias de seguridad y restaurar, apagar y reiniciar.
+- Realizar tareas de mantenimiento: ayudar a los usuarios, agregar usuarios a un sistema más grande, realizar copias de seguridad y restaurar, apagar y reiniciar.
 
-Al obtener esta cerfificación se garantiza que has adquirido unos conocimientos suficientes para resolver los problemas más comunes con los que te puedes encontrar cuando trabajas con sistemas UNIX.
+Al obtener esta certificación se garantiza que has adquirido unos conocimientos suficientes para resolver los problemas más comunes con los que te puedes encontrar cuando trabajas con sistemas UNIX.
 
 ## FAQ
 
