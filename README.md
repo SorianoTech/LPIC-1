@@ -1,6 +1,6 @@
 # LPIC-1
 
-Guia de estudio de preparacion para la certificación LPIC-1.
+Guía de estudio de preparación para la certificación LPIC-1.
 
 LPIC son las siglas de **Linux Professional Institute Certification**.
 
@@ -59,11 +59,11 @@ Al obtener esta certificación se garantiza que has adquirido unos conocimientos
 
 [Consola de linux Online](https://www.tutorialspoint.com/unix_terminal_online.php)
 
-### Documentacion oficial Linux
+### Documentación oficial Linux
 
-[The Linux Document Proyect](http://www.tldp.org/)
+[The Linux Document Project](http://www.tldp.org/)
 
-[GNU Proyect](http://www.gnu.org/doc/)
+[GNU Project](http://www.gnu.org/doc/)
 
 [Man pages](https://linux.die.net/man/) 
 
