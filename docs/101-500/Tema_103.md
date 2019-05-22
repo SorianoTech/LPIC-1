@@ -8,11 +8,11 @@
     - [mkdir](#mkdir)
     - [$PATH](#path)
   - [103.2 Procesar secuencias de texto usando filtros](#1032-procesar-secuencias-de-texto-usando-filtros)
-    - [dd](#dd)
   - [103.3 Administración básica de archivos](#1033-administraci%C3%B3n-b%C3%A1sica-de-archivos)
-    - [103.3.1 find](#10331-find)
+    - [find](#find)
     - [which](#which)
     - [File Globing](#file-globing)
+    - [dd](#dd)
   - [103.4 Uso de secuencias de texto, tuberías y redireccionamientos](#1034-uso-de-secuencias-de-texto-tuber%C3%ADas-y-redireccionamientos)
   - [103.5 Crear, supervisar y matar procesos](#1035-crear-supervisar-y-matar-procesos)
     - [Revisar el estado del sistema](#revisar-el-estado-del-sistema)
@@ -113,21 +113,7 @@ sergio@ubuntu:~$ echo $PATH
 
 `uniq` - omite las lineas repetidas
 
-### dd
-
-Creamos una copiar de seguridad del sistema de arranque
-
-```console
-sergio@ubuntu:~$ sudo dd if=/dev/vda of=/tmp/mbr.img bs=512 count=1
-1+0 registros leídos
-1+0 registros escritos
-512 bytes copied, 0,0012344 s, 415 kB/s
-sergio@ubuntu:~$ ls /tmp/
-```
-
-
 ## 103.3 Administración básica de archivos
-
 
 Archivos y compresión de carpetas
 
@@ -147,9 +133,23 @@ Archivos y compresión de carpetas
 
 `unxz` - descomprime ficheros formato xz.
 
+
+Los diferentes tipos de ficheros que podemos encontrar en linux son:
+
+- **Archivos regulares**(-) 
+
+- **Directory files(d)** 
+
+- **Archivos especiales**:
+  - Archivo bloqueado(b)
+  - Carácter de archivo de dispositivo(c)
+  - Named pipe file or just a pipe file(p)
+  - Archivo de enlace simbólico(l)
+  - Archivo de Socket (s)
+
 Buscar ficheros
 
-### 103.3.1 find 
+### find 
 
 `find`
 
@@ -192,7 +192,7 @@ Ficheros modificados en los últimos dos días
 sergio@ubuntu:~$ find . -atime -2
 ```
 
-Buscar los ficheros vacios (con `-f` buscamos los ficheros con `-d` los directorios)
+Buscar los ficheros vacíos (con `-f` buscamos los ficheros con `-d` los directorios)
 
 ```console
 sergio@ubuntu:~$find . -empty -type -f
@@ -212,7 +212,7 @@ find ~ -name "*.tar.*" -exec cp -v {} /home/sergio/test \;
 
 ### which
 
-`which` sirver para localizar donde esta instalado un paquete.
+`which` sirve para localizar donde esta instalado un paquete.
 
 ```console
 [sergio@hostingsoriano ~]$ which nginx
@@ -264,6 +264,29 @@ Combinar el contenido de dos ficheros
 
 ```console
 sergio@ubuntu:~$ paste file1 file2
+```
+
+### dd
+
+Nos sirve para crear una copia exacta de un dispositivo de almacenamiento, copiar una imagen a un pendrive, o cualquier tarea que requiere copiar o clonar información de un medio a otro.
+
+Podemos crear por ejemplo crear una copiar de seguridad del sistema de arranque:
+
+```console
+sergio@ubuntu:~$ sudo dd if=/dev/vda of=/tmp/mbr.img bs=512 count=1
+1+0 registros leídos
+1+0 registros escritos
+512 bytes copied, 0,0012344 s, 415 kB/s
+sergio@ubuntu:~$ ls /tmp/
+```
+
+Es necesario un **origen**(if) y un **destino** (of)
+
+la opcion `bs=512` sirve para indicar que tanto en la lectura como en la escritura se hagan bloques de  512 BYTES
+
+Para copiar el MBR:
+```console
+sudo dd if=/dev/hda |pv|dd of=mbr count=1 bs=512
 ```
 
 ## 103.4 Uso de secuencias de texto, tuberías y redireccionamientos

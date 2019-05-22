@@ -4,6 +4,7 @@
   - [104.3 Controlar el montaje y desmontaje de los sistemas de archivos](#1043-controlar-el-montaje-y-desmontaje-de-los-sistemas-de-archivos)
   - [104.4 Eliminado](#1044-eliminado)
   - [104.5 Administración de los permisos y los propietarios de los archivos](#1045-administraci%C3%B3n-de-los-permisos-y-los-propietarios-de-los-archivos)
+    - [Permisos especiales](#permisos-especiales)
   - [104.6 Crear y cambiar enlaces duros y simbólicos (Hard link and symbolic link)](#1046-crear-y-cambiar-enlaces-duros-y-simb%C3%B3licos-hard-link-and-symbolic-link)
   - [104.7 Encontrar archivos de sistema y ubicar archivos en el lugar correspondiente](#1047-encontrar-archivos-de-sistema-y-ubicar-archivos-en-el-lugar-correspondiente)
 
@@ -24,10 +25,10 @@ swap file: es el fichero que se utiliza cuando esta la memoria ram llena.
 
 `swapoff` - deshabilita una partición de swap
 
-Para añadir una partción al arranque tenemos que modificar el fichero `/etc/fstab/`
+Para añadir una partición al arranque tenemos que modificar el fichero `/etc/fstab/`
 
 
-Añadir una nueva partición de SWAP, añadimos al fichero fstab la siguiente información:
+Añadir una nueva partición de SWAP, añadimos al fichero `fstab` la siguiente información:
 
 ```
 LABEL=SWAP swap swap defaults 0 0
@@ -35,11 +36,19 @@ LABEL=SWAP swap swap defaults 0 0
 
 ## 104.2 Mantener la integridad de los sistemas de archivos
 
+`df` - (diskfree) nos muestra el espacio dispoible de un sistema de ficheros
+
+`du` - (diskusage) nos muestra la cantidad del disco utilizada.
+
+`inode` - indice de nodos, guarda información de los ficheros y carpetas, como permisos, propietarios, tipo de ficheros, casi todos los sitemas de ficheros tienen un limite de inodos.
+
 ## 104.3 Controlar el montaje y desmontaje de los sistemas de archivos
 
 
 
 ## 104.4 Eliminado
+
+
 
 ## 104.5 Administración de los permisos y los propietarios de los archivos
 
@@ -67,7 +76,7 @@ LABEL=SWAP swap swap defaults 0 0
     6: Lectura y escritura
     7: Lectura, escritura y ejecución
 
-Si queremos establecer un permiso de escritura usaremos el 6 (4 + 2= Lectura + Escritura)
+Si queremos establecer un permiso de escritura usaremos el 6 (4 + 2 = Lectura + Escritura)
 
 Si queremos que un usuario pueda ejecutar usaremos el 7 (4 + 2 + 1= Lectura + Escritura + Ejecución)
 
@@ -108,6 +117,46 @@ Ejercicio: Dar permisos de lectura y escritura recursivamente a una carpeta
 ```console
 sudo chmod 666 -R /opt/myapp/*
 ```
+
+### Permisos especiales
+
+Unix nos ofrece a parte una serie de permisos especiales, se trata de los bits de permanencia (1000), SGID (2000) y SUID (4000). 
+
+**Sticky bit**
+El bit sticky bit se activa sobre un fichero o directorio añadiendo 1000
+
+Se utiliza para permitir que cualquiera pueda escribir y modificar archivo o directorio, pero que solo su propietario pueda eliminarlo, por ejemplo /tmp puede ser utilizado por todos pero solo el propietario puede eliminarlo.
+
+Al directorio con el Sticky Bit aplicado se le agrega la `t` al final del descriptor de permisos.
+
+```console
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/test_command  chmod 1755 sticky.md 
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/test_command  la
+total 132K
+-rwxr-xr-t 1 sergio sergio    0 may 22 10:54 sticky.md
+```
+También se puede añadir este permiso de la siguiente forma;
+
+```console
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/test_command  chmod +t sticky.md 
+ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/test_command  la                
+total 132K
+-rwxr-xr-t 1 sergio sergio    0 may 22 10:54 sticky.md
+```
+
+**SUID** - Special User ID
+El bit de SUID o setuid se activa sobre un fichero añadiéndole 4000
+
+El bit SUID activado sobre un fichero indica que todo aquél que ejecute el archivo va a tener durante la ejecución los mismos privilegios que quién lo creó.
+
+
+**SGID** - Special Group ID
+Cuando un directorio tenga activado el bit de SGID(2) todos los permisos que se creen en el perteneceran al grupo del propietario sin importar cual sea el grupo del usuario que cree el directorio.
+
+
+El uso que mas se utiliza es para que un fichero o dictorio pueda ser utilizado por todos pero solo el administrador pueda eliminarlo. En este caso se indica al sistema operativo que, aunque los permisos `normales' digan que cualquier usuario pueda crear y eliminar ficheros (por ejemplo, un 777 octal), sólo el propietario de cierto archivo y el administrador pueden borrar un archivo guardado en un directorio con estas características. Se utiliza principalmente en directorios del sistema de ficheros en los que interesa que todos puedan escribir pero que no todos puedan borrar los datos escritos, como /tmp/ o /var/tmp/
+
+
 
 ## 104.6 Crear y cambiar enlaces duros y simbólicos (Hard link  and symbolic link)
 
