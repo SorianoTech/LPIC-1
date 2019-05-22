@@ -395,9 +395,24 @@ Swap:          2,0G        111M        1,9G
 
 `kill`: mata el proceso con PID introducido, en caso de que el proceso tenga otros elementos depentiendes de el tambien matarar los procesos hijos. Envia una señal  (normalmente SIGTERM) a un proceso basado en su PID
 
-`pstree`
+`pstree` -
 
-`pkill` - envia una señal (normalmente SIGTERM) a un proceso basado en su nombre(mata el proceso indicando el nombre).
+`pkill` - envía una señal (normalmente SIGTERM) a un proceso basado en su nombre(mata el proceso indicando el nombre).
+
+---
+
+`killall` - mata todos los procesos basados en el nombre
+
+`watch` - 
+
+`screen` - 
+ 
+`tmux` - 
+
+
+La diferencia entre SIGTERM y SIGKILL, es que el kill mata todos los procesos hijos, y SIGTERM solo el proceso en cuestión.
+
+>Se recomienda utilizar SIGTERM(15) antes de utilizar SIGKILL(9).
 
 ## 103.6 Modificar la prioridad de ejecución de los procesos
 
