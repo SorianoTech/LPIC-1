@@ -2,7 +2,14 @@
 - [Tema 102: Instalación de Linux y gestión de paquetes](#tema-102-instalaci%C3%B3n-de-linux-y-gesti%C3%B3n-de-paquetes)
   - [102.1 Diseño del esquema de particionado del disco](#1021-dise%C3%B1o-del-esquema-de-particionado-del-disco)
     - [LVM - Logical volumen manager](#lvm---logical-volumen-manager)
+  - [102.2 Instalar un gestor de arranque](#1022-instalar-un-gestor-de-arranque)
+  - [102.3 Gestión de librerías compartidas](#1023-gesti%C3%B3n-de-librer%C3%ADas-compartidas)
+  - [102.4 Gestión de paquetes Debian](#1024-gesti%C3%B3n-de-paquetes-debian)
+    - [Usando debian package tool(dpkg)](#usando-debian-package-tooldpkg)
   - [102.5 Gestión de paquetes RPM y YUM](#1025-gesti%C3%B3n-de-paquetes-rpm-y-yum)
+    - [YUM](#yum)
+    - [RPM](#rpm)
+  - [102.6 Linux como sistema virtualizado](#1026-linux-como-sistema-virtualizado)
 # Tema 102: Instalación de Linux y gestión de paquetes
 
 - [ ] 102.1 Diseño del esquema de particionado del disco duro duro
@@ -16,20 +23,15 @@
 
 ### LVM - Logical volumen manager
 
-Nos permite crear grupos de discos o particiones que pueden ser montadasen un o varios sistemas de ficheros(fylesystems).
+Nos permite crear grupos de discos o particiones que pueden ser montadas en un o varios sistemas de ficheros(fylesystems).
 
 - Se puede utilizar para montar cualquier punto EXCEPTO /boot.
 - Nos ofrece la flexibilidad de redimensionar los volúmenes ya creados.
-- Podemos crear Snapshoots de los volumenes logicos.
+- Podemos crear Snapshoots de los volúmenes lógicos.
 
 Ejemplo de las capas de un grupo LVM.
 
-file system         - / - /var - /swap - /home
-Logical Volume (LV) -  lv_root - lv_var - lv_swap - lv_home
-Grupos de Volumenes (VG) ------------- vg_base-----------
-Volumenes Físicos (PV) - /dev/sda - /dev/sdb - /dev/sdc
-
-![LVM](github\LPIC-1\docs\101-500\img\lvm.png)
+![LVM](img/lvm.png)
 
 `psv`: Lista los volumenes fisicos que existen en un gru po LVM.
 
@@ -40,15 +42,124 @@ Volumenes Físicos (PV) - /dev/sda - /dev/sdb - /dev/sdc
 
 ## 102.2 Instalar un gestor de arranque
 
+
+
 ## 102.3 Gestión de librerías compartidas
 
 ## 102.4 Gestión de paquetes Debian
 
-## 102.6 Linux como sistema virtualizado
+`apt` - instala aplicaciones y dependencias, desisntala y actualiza aplicaciones.
+
+Lee los repositorios del fichero `/etc/apt/source.list`.
+
+`sudo apt-get update` - Actualiza el cache de los paquetes que pueden ser actualizados(pero no los instala).
+
+`sudo apt-get upgrade` - Instala las actualizaciones de los paquetes disponibles que ha encontrado con el comando anterior.
+
+`sudo apt-get install` - Instala el paquete indicando el nombre.
+
+
+`sudo apt-get remove chromium-browser` - desinstala el paquete del sistema, pero no elimina los ficheros de configuración que pueda haber dejado.
+
+`sudo apt autoremove` - sirve para eliminar todas los paquetes que dependen del paquete que hemos desinstalado. 
+
+`sudo apt-get purge chromium-browser` - elimina todos los paquetes del sistema y los ficheros asociados a su configuración.
+
+`sudo apt-get dist-upgrade` - actualiza **todos** los paquetes del sistema a la siguiente release de la distribución. Incluido la instalacion de nuevos paquetes.(a diferencia de apt-get upgrade que solo instala las actualizaciones).
+
+`apt-get download` - descarga el paquete pero no lo instala.
+
+`sudo apt-cache search apache` - busca en el cache local si existe el paquete nombrado.
+
+`sudo apt-cache show libapache2-mod-bw` - muestra toda la información del paquete nombrado. 
+
+`sudo apt-cache showpkg libapache2-mod-bw` - muestra mas información sobre de donde viene el paquete.
+
+----
+
+### Usando debian package tool(dpkg)
+
+Paquetes .deb que contienen:
+- La aplicación o utilidad.
+- Archivos de configuración por defecto
+- Como y donde instalar los ficheros que vienen en el paquete.
+- Lista de las dependecias que el paquete requiere. (las dependencias necesitan estar instaladas, dpkg no las instala.)
+
+`dpkg --info` - nos muestra información sobre el paquete nombrado.
+
+`dpkg --status nano` - muestra información pero menos detallada.(**de un paquete ya instalado**). lo podemos usar para comprobar un paquete instalado
+
+```
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/Downloads  dpkg --info nginx_1.14.0-0ubuntu1.2_all.deb
+ new Debian package, version 2.0.
+ size 3596 bytes: control archive=764 bytes.
+     990 bytes,    17 lines      control              
+      64 bytes,     1 lines      md5sums              
+ Package: nginx
+ Version: 1.14.0-0ubuntu1.2
+ Architecture: all
+ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+ Installed-Size: 42
+ Depends: nginx-core (<< 1.14.0-0ubuntu1.2.1~) | nginx-full (<< 1.14.0-0ubuntu1.2.1~) | nginx-light (<< 1.14.0-0ubuntu1.2.1~) | nginx-extras (<< 1.14.0-0ubuntu1.2.1~), nginx-core (>= 1.14.0-0ubuntu1.2) | nginx-full (>= 1.14.0-0ubuntu1.2) | nginx-light (>= 1.14.0-0ubuntu1.2) | nginx-extras (>= 1.14.0-0ubuntu1.2)
+ Section: httpd
+ Priority: optional
+ Homepage: http://nginx.net
+ Description: small, powerful, scalable web/proxy server
+  Nginx ("engine X") is a high-performance web and reverse proxy server
+  created by Igor Sysoev. It can be used both as a standalone web server
+  and as a proxy to reduce the load on back-end HTTP or mail servers.
+  .
+  This is a dependency package to install either nginx-full (by default),
+  nginx-light or nginx-extras.
+ Original-Maintainer: Debian Nginx Maintainers <pkg-nginx-maintainers@lists.alioth.debian.org>
+```
+
+`dpkg -l vagrant` - muestra la información disponible del paquete instalado.
+
+```
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/Downloads  dpkg -l vagrant
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+||/ Name           Version      Architecture Description
++++-==============-============-============-=================================
+ii  vagrant        1:2.2.4      amd64        no description given
+```
+
+`sudo dpkg -i nginx_1.14.0-0ubuntu1.2_all.deb` - instala un paquete deb.
+
+`dpkg --contents nginx_1.14.0-0ubuntu1.2_all.deb` - Muestra el contenido de un paquete `deb`
+
+```
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/Downloads  dpkg --contents nginx_1.14.0-0ubuntu1.2_all.deb
+drwxr-xr-x root/root         0 2018-11-06 19:54 ./
+drwxr-xr-x root/root         0 2018-11-06 19:54 ./usr/
+drwxr-xr-x root/root         0 2018-11-06 19:54 ./usr/share/
+drwxr-xr-x root/root         0 2018-11-06 19:54 ./usr/share/doc/
+drwxr-xr-x root/root         0 2018-11-06 19:54 ./usr/share/doc/nginx/
+-rw-r--r-- root/root      8748 2018-04-06 07:31 ./usr/share/doc/nginx/copyright
+lrwxrwxrwx root/root         0 2018-11-06 19:54 ./usr/share/doc/nginx/changelog.Debian.gz -> ../nginx-core/changelog.Debian.gz
+```
+
+`dpkg -L vagrant` - nos muestra todos los ficheros que fueron instalados con el paquete.
+
+`sudo dpkg -r htop` - desinstala el paquete htop. (no elimina los ficheros de configuración).
+
+`sudo dpkg -P htop` - elimina el paquete y todos los ficheros de configuración.
+
+`dpkg -S nano` - busca en la base de datos de los paquetes y muestra cualquier mencion que incluya el nombre del paquete introducido.
+
+`sudo dpkg reconfigure` - sirve para re lanzar el proceso de configuración de una aplicación ya instalada, por ejemplo un servidor web o una base de datos.
+
+```
+sudo dpkg-reconfigure console-setup
+```
+
+----
 
 ## 102.5 Gestión de paquetes RPM y YUM
 
-
+### YUM
 Por ejemplo, imaginemos que al instalar un paquete RPM, nos encontramos con el problema de que requiere de dependencias que no tenemos instaladas.
 
 Para saber la dependencia de un paquete. Por ejemplo: 
@@ -85,3 +196,8 @@ Provides    : libmozjs185.so.1.0()(64bit)
 identificamos que el paquete principal es Javascript.
 
 >1:js-1.8.5-20.el7.x86_64 : JavaScript interpreter and libraries
+
+### RPM
+
+
+## 102.6 Linux como sistema virtualizado

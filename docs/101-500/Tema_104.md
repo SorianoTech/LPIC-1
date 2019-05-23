@@ -44,6 +44,63 @@ LABEL=SWAP swap swap defaults 0 0
 
 ## 104.3 Controlar el montaje y desmontaje de los sistemas de archivos
 
+mount /dev/sdb1 /opt
+
+Para hacer que un punto de montaje sea permanente tenemos que modificar el fichero `/etc/fstab`
+
+```console
+LABEL=opt /opt ext4 defaults 1 2
+```
+
+mount
+`man mount` -  para buscar el la ayuda utilizamos el caracter `/` o introducimos el número de la linea a la que queremos ir. Linea 412 para las opciones de montado.
+umount
+
+
+Mostrar unicamente un sistema de ficheros concreto, por ejemplo ext4.
+
+```console
+ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  mount -t ext4
+/dev/nvme0n1p2 on / type ext4 (rw,relatime,errors=remount-ro)
+```
+
+El contenido del comando mount es el mismo que el fichero:
+`cat /etc/mtab` que no es mas que un enlace simbólico a `/proc/self/mounts`
+
+Montar un sistema de ficheros especificando opciones concretas
+
+`-L` - para indicar la etiqueta
+`-t` para indicar el sistema de ficheros a utilizar
+`-o` para indicar las opciones de montado
+  `rw` - lectura y escritura
+  `noexec` - no permite la ejecución de archivos binarios en la unidad montada.
+
+
+```console
+mount -L OPT -t xfs -o rw,noexec /opt
+```
+
+Para que sea permanente
+
+Editamos el fichero `/etc/fstab`
+
+```console 
+LABEL=OPT /opt xfs rw,exec,suid,auto 1 2
+```
+
+Más información sobre fstab [aquí](https://wiki.archlinux.org/index.php/Fstab_(Espa%C3%B1ol))
+
+
+Una vez añadido en el fichero /etc/fstab podemos utilizar el comando `mount -a` para actualizar la lista que hayamos añadido.
+
+**Ejercicio**: Montar una imagen iso
+
+```console
+mount /root/install.iso -o ro,loop /media
+```
+
+`ro` - para especificar que es de solo lectura.
+`loop` - para emular que es un cdroom
 
 
 ## 104.4 Eliminado
@@ -185,7 +242,7 @@ Para localizar los hard symbolik links:
 
 ## 104.7 Encontrar archivos de sistema y ubicar archivos en el lugar correspondiente
 
-![File System Hierarchy](img\FileSystemHierarchy.png)
+![File System Hierarchy](img/FileSystemHierarchy.png)
 
 [Pathname](http://www.pathname.com/fhs/)
 
