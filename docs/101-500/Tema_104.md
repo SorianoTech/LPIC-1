@@ -40,7 +40,8 @@ LABEL=SWAP swap swap defaults 0 0
 
 `du` - (diskusage) nos muestra la cantidad del disco utilizada.
 
-`inode` - indice de nodos, guarda información de los ficheros y carpetas, como permisos, propietarios, tipo de ficheros, casi todos los sitemas de ficheros tienen un limite de inodos.
+`inode` - indice de nodos, guarda información de los ficheros y carpetas, como permisos, propietarios, tipo de ficheros, casi todos los sistemas de ficheros tienen un limite de inodos.
+
 
 ## 104.3 Controlar el montaje y desmontaje de los sistemas de archivos
 

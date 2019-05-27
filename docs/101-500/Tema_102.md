@@ -3,6 +3,10 @@
   - [102.1 Diseño del esquema de particionado del disco](#1021-dise%C3%B1o-del-esquema-de-particionado-del-disco)
     - [LVM - Logical volumen manager](#lvm---logical-volumen-manager)
   - [102.2 Instalar un gestor de arranque](#1022-instalar-un-gestor-de-arranque)
+    - [Como instalar grub](#como-instalar-grub)
+  - [GRUB2](#grub2)
+      - [Master Boot Record](#master-boot-record)
+      - [Guid Partition Table](#guid-partition-table)
   - [102.3 Gestión de librerías compartidas](#1023-gesti%C3%B3n-de-librer%C3%ADas-compartidas)
   - [102.4 Gestión de paquetes Debian](#1024-gesti%C3%B3n-de-paquetes-debian)
     - [Usando debian package tool(dpkg)](#usando-debian-package-tooldpkg)
@@ -41,6 +45,107 @@ Ejemplo de las capas de un grupo LVM.
 
 
 ## 102.2 Instalar un gestor de arranque
+
+Legacy Grub
+
+GRUB es el antiguo gestor de arranque y significa **Grand Unified Boot Loader**, esta instalado sobre el MBR. 
+
+En este tipo de gestor de arranque el funcionamiento es el siguiente:
+
+- Paso 1: La bios arranca y lee información de la `boot.img` (los primeros 512 bytes del MBR)
+- Paso 1.5: Se lee la información del fichero `core.img`.
+- Paso 2: El sistema lee el menu de GRUB del fichero `/boot/grub/grub.conf - menu.lst o device.map 
+
+Ejemplo del fichero grub.conf
+
+```
+default=0 # indica que 
+timeout=10 #los segundos que aparecera el menu de grub
+splashimage=(hd0,0)/grub/splash.xpm.gz #
+
+# section to load Linux
+title Red Hat Enterprise Linux (2.4.21-1.ent) #El kernel que va arrancar por defecto (default=0)
+        root (hd0,0) #el disco que va ha utlizar como boot [title 0]
+        kernel /vmlinuz-2.4.21-1 ro root=/dev/sda2
+        initrd /initrd-2.4.21-1.img #la imagen del disco de RAM
+
+# section to load Windows
+title Windows #default = 1 en caso de querer arrancar por defecto este disco
+        rootnoverify (hd0,0)
+        chainloader +1
+```
+
+
+### Como instalar grub
+
+Si queremos buscar en que dispositivo esta el fichero de arraque utilizamos `findmnt /boot`
+
+Para instalar grub en un disposito, por ejemplo un disco duro utiliamos el comando `grub-install [device]`
+
+Si estuviera en /dev/vda1 usamos `grub-install /dev/vda`
+
+>Normalmente este comando se ejecuta con un pendrive, nunca con el sistema arrancado.
+
+---
+
+## GRUB2
+
+Es la segunda generación para el arranque del sistema.
+
+Es importante entender la diferencia entre MBR y GPT.
+
+#### Master Boot Record
+
+- Soporta un máximo de 26 particiones (4 particiones, con una particion extendida hasta 23 particiones lógicas)
+- Las particiones solo soportan 2TB.
+  
+#### Guid Partition Table
+
+- Soporta 128 particiones
+- Las particiones soporta hasta un ZB.
+- Necesita una BIOS con UEFI.
+  - Previene que arranquen sistemas operativos no autorizados.
+  - Requiere sistemas de 64bits.
+  - Remplaza la tradicional BIOS aunque puede actuar en modo Legacy BIOS.
+
+**¿Cómo arranca un sistema con GRUP2 con GPT utilizando UEFI BIOS?**
+- Paso 1: Busca el MBT en los primeros 521 bytes usando la imagen `bios.img` 
+  - GTP header - Particion Entry Array.
+- Paso 1.5: Normalmente sectores vacios `boot.img`
+  - `/boot/efi`  con el sistema de ficheros **vfat** o **FAT32**
+- Paso 2: Lee el contenido de `/boot/grub2` grubenv y themes
+
+Ficheros que podemos encontrar en la caprta de arranque en un sistema ubuntu
+
+```
+ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  sudo ls /boot/efi/EFI/ubuntu
+BOOTX64.CSV  fw  fwupx64.efi  grub.cfg	grubx64.efi  mmx64.efi	shimx64.efi
+```
+
+>Distribuciones Red Hat = grub2-\<comando>
+
+>Distribuciones debian = grub-\<comando> 
+
+
+`grub2-editenv list` - Muestra la entrada por defecnto del fichero de configuración.
+
+`grub2-mkconfig` - crea o actualiza el fichero de configuracion basado en la entrada de `/etc/default/grub`.
+
+`update-grub` - comando que puede ser utilizado para actualizar la configuracion de GRUB2 despues de hacer cambios en `/etc/default/grub`
+.(En sistemas Debian)
+
+Cambiamos el fichero de grub
+
+>nano /etc/default/grub
+
+Actualzamos el fichero de grub
+
+>sudo update-grub
+
+---
+
+
+Interacting with the Boot Loader
 
 
 
