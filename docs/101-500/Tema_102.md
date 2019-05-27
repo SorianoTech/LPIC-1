@@ -46,6 +46,8 @@ Ejemplo de las capas de un grupo LVM.
 
 ## 102.3 Gestión de librerías compartidas
 
+
+
 ## 102.4 Gestión de paquetes Debian
 
 `apt` - instala aplicaciones y dependencias, desisntala y actualiza aplicaciones.

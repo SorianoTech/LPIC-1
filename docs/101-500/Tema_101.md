@@ -256,7 +256,7 @@ kernel -> /sbin/init -> /etc/inittab
 `sysVinit`:
 
 
-El fichero  /etc/inittab  era el el antiguo fichero utilizado por el demonio System V init(8).
+El fichero  `/etc/inittab`  era el el antiguo fichero utilizado por el demonio System V init(8).
 El demonio Upstart init(8) no usa este fichero,  sin embargo lee la configuracion de los ficheros alojados el el directorio /etc/init. 
 
 `śystemd`: es el gestor de systema y de servicios, es el primer proceso en arrancar y tiene el PID (1)
@@ -264,19 +264,19 @@ El demonio Upstart init(8) no usa este fichero,  sin embargo lee la configuracio
 
 Ejemplo del proceso del sistema de arranque:
 
-1. La partición de arranque es encontrada
+1. La partición de arranque es encontrada.
 2. Kernel y RAM incial son cargadas.
-3. El kernel carga los drivers iniciales y configura las herramientas desde la RAM
-4. El kernel toma el control del sistema a través de /sbin/init
-5. init realiza alguna tareas de mantenimiento dsede /etc/rc.d/rc.sysinit
+3. El kernel carga los drivers iniciales y configura las herramientas desde la RAM.
+4. El kernel toma el control del sistema a través de `/sbin/init`.
+5. init realiza alguna tareas de mantenimiento desde `/etc/rc.d/rc.sysinit`
 6. initi lee la linea por defecto de inidefault en /etc/inittab y entra en el runlevel 3
 
 Estos ficheros se encuentran en diferentes localizaciones dependiendo de la distribución
 
-Distribuciones basdas en Red Hat: /etc/rc.d/
-Distribuciones basadas en debian: /etc/init.d/
+- Distribuciones basdas en Red Hat: /etc/rc.d/
+- Distribuciones basadas en debian: /etc/init.d/
 
-rc = run commands, cada una de las carpetas equivale a los diferentes niveles de arranque.
+**rc** = run commands, cada una de las carpetas equivale a los diferentes niveles de arranque.
 
 Mostramos los elmentos de arranque del nivel de arranque 3(todos son enlaces simbolicos a los ficheros) Se cargaran en el orden que aparecen.
 
@@ -295,7 +295,7 @@ S01cups              S01rsync
 
 `upstart`: es el demononio de arranque de ubunto desarrollado en 2006 y mas adelante utilizado en distribuciones Red Hat, debian y fedora. 
 
-Ha diferencia de init, upstart ofrece arranques de servicios asincronos, reduciendo el tiempo de arranque.
+Ha diferencia de init, **upstart** ofrece arranques de servicios asincronos, reduciendo el tiempo de arranque.
 
 init vs upstart
 

@@ -43,12 +43,36 @@ Al obtener esta certificación se garantiza que has adquirido unos conocimientos
 
 ### Preguntas para resolver sobre la certificación
 
-¿El examen se puede realizar en español?
+**¿El examen se puede realizar en español?**
 
-¿Dónde se hace el examen?¿Presencial o online?
+**¿Cómo son los exámenes?** 
+Cada examen tiene 60 preguntas tipo test de selección múltiple o preguntas de rellenar.
 
-¿Qué precio tiene el examen?
+**¿Cuanto dura el examen?**
+Se dispone de 90 minutos
 
+**¿Qué nota tengo que sacar para superar cada examen?** 
+Cada examen tiene un peso de 800 puntos. Deberás obtener al menos 500 en cada examen.
+
+**¿Cuánto cuesta el examen?**
+170€ aprox.
+
+**¿Durante qué tiempo es válida la certificación?**
+Tu certificación LPIC-1 será válida durante 5 años.
+
+**¿Dónde se realizan los exámenes?¿Presencial o online?** 
+Los exámenes se realizan de forma presencial en centros asociados o centros PearsonVue. Puedes consultar tu centro más cercano [aquí](https://wsr.pearsonvue.com/testtaker/registration/SelectTestCenterProximity/LINUXPROFESSION?conversationId=1290514)
+
+El centro mas cercano en madrid esta en:
+
+```
+AZPE Centro de Estudios
+c/ Gran Via 40, 1ª (Metro Callao)
+28013 Madrid
+Spain 
+Phone:
+0034915323659
+```
 ## Enlaces
 
 [Wiki con los objetivos de la version 5.0](https://wiki.lpi.org/wiki/LPIC-1_Objectives_V5.0(ES))

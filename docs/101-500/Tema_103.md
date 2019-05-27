@@ -379,7 +379,7 @@ Swap:          2,0G        111M        1,9G
 
 ```
 
-`pgrep`: busca información del proceso basado en el nombre del proceso
+`pgrep`: nos devuelve el PID del proceso basado en el nombre.
 
 ```console
 [root@hostingsoriano sergio]# pgrep nginx
@@ -417,6 +417,8 @@ La diferencia entre SIGTERM y SIGKILL, es que el kill mata todos los procesos hi
 ## 103.6 Modificar la prioridad de ejecución de los procesos
 
 
+
 ## 103.7 Realizar búsquedas en archivos de texto usando expresiones regulares
+
 
 ## 103.8 Edición básica de archivos

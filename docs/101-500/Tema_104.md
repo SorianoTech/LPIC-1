@@ -80,7 +80,7 @@ Montar un sistema de ficheros especificando opciones concretas
 mount -L OPT -t xfs -o rw,noexec /opt
 ```
 
-Para que sea permanente
+Para que sea permanente:
 
 Editamos el fichero `/etc/fstab`
 
