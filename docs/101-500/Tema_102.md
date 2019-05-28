@@ -189,7 +189,7 @@ Lee los repositorios del fichero `/etc/apt/source.list`.
 Paquetes .deb que contienen:
 - La aplicación o utilidad.
 - Archivos de configuración por defecto
-- Como y donde instalar los ficheros que vienen en el paquete.
+- Cómo y donde instalar los ficheros que vienen en el paquete.
 - Lista de las dependecias que el paquete requiere. (las dependencias necesitan estar instaladas, dpkg no las instala.)
 
 `dpkg --info` - nos muestra información sobre el paquete nombrado.

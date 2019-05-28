@@ -17,6 +17,7 @@
   - [103.5 Crear, supervisar y matar procesos](#1035-crear-supervisar-y-matar-procesos)
     - [Revisar el estado del sistema](#revisar-el-estado-del-sistema)
     - [Monitorizar procesos](#monitorizar-procesos)
+    - [Mantener un proceso corriendo](#mantener-un-proceso-corriendo)
   - [103.6 Modificar la prioridad de ejecución de los procesos](#1036-modificar-la-prioridad-de-ejecuci%C3%B3n-de-los-procesos)
   - [103.7 Realizar búsquedas en archivos de texto usando expresiones regulares](#1037-realizar-b%C3%BAsquedas-en-archivos-de-texto-usando-expresiones-regulares)
   - [103.8 Edición básica de archivos](#1038-edici%C3%B3n-b%C3%A1sica-de-archivos)
@@ -333,6 +334,12 @@ Buscar todos lo ficheros dentro de carpeta test que tengan la palabra junk y mov
 grep -l "junk" test/file_* | xargs -I {} mv {} test/bak/
 ```
 
+Eliminar todos los ficheros que encontremos con locate
+
+```
+sudo locate whatever | xargs rm -f
+```
+
 ## 103.5 Crear, supervisar y matar procesos
 
 
@@ -381,6 +388,8 @@ Swap:          2,0G        111M        1,9G
 
 `pgrep`: nos devuelve el PID del proceso basado en el nombre.
 
+>Con pgrep -a nginx nos muestra el proceso con la ruta completa.
+
 ```console
 [root@hostingsoriano sergio]# pgrep nginx
 14686
@@ -400,12 +409,19 @@ Swap:          2,0G        111M        1,9G
 `pkill` - envía una señal (normalmente SIGTERM) a un proceso basado en su nombre(mata el proceso indicando el nombre).
 
 ---
+### Mantener  un proceso corriendo
 
 `killall` - mata todos los procesos basados en el nombre
 
-`watch` - 
+sudo killall nginx
 
-`screen` - 
+`watch` - ejecuta un comando en intervalos, por ejemplo df cada 5 segundos para saber si el disco se esta llenando.
+
+```
+watch -n 5 df
+```
+
+`screen` - permite ejecutar una consola en una nueva sesión, por ejemplo si nos conectamos a un servidor y queremos que se nos mantenga la consola abierta en caso de que perdamos la conexón.
  
 `tmux` - 
 
