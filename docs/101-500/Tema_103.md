@@ -408,6 +408,10 @@ Swap:          2,0G        111M        1,9G
 
 `pkill` - envía una señal (normalmente SIGTERM) a un proceso basado en su nombre(mata el proceso indicando el nombre).
 
+La diferencia entre SIGTERM y SIGKILL, es que el kill mata todos los procesos hijos, y SIGTERM solo el proceso en cuestión.
+
+>Se recomienda utilizar SIGTERM(15) antes de utilizar SIGKILL(9).
+
 ---
 ### Mantener  un proceso corriendo
 
@@ -422,13 +426,54 @@ watch -n 5 df
 ```
 
 `screen` - permite ejecutar una consola en una nueva sesión, por ejemplo si nos conectamos a un servidor y queremos que se nos mantenga la consola abierta en caso de que perdamos la conexón.
+
+>Ejecutamos screen -r para volver a la sesion que habiamos dejado abierta
  
-`tmux` - 
+ >Para dejar en segundo plano tenemos que pulsar Control+a y Control+d
 
+`tmux` - es como screen pero con mas funciones.
 
-La diferencia entre SIGTERM y SIGKILL, es que el kill mata todos los procesos hijos, y SIGTERM solo el proceso en cuestión.
+Por ejemplo para conectarnos a un servidor
 
->Se recomienda utilizar SIGTERM(15) antes de utilizar SIGKILL(9).
+1. tmux - nos abre una nueva terminal bajo tmux.
+2. Nos conectamos a un servidor remote (SSH).
+3. Presionamos Control+b+d para volver a nuestro equipo(dejando la sesion abierta).
+
+`tmux ls` - para ver las sesioes abiertas.
+
+Para volver a una sesion abierta.
+
+```
+tmux attach-session -t 0
+```
+
+`nohup` - un comando que lanzemos escribiendo previeamente nohup, se seguira ejecutando hasta que no se cierre la sesion con la que nos hemos logado. Nos crea un fichero **nohup.out** que podemos consultar con tail.
+
+```console
+
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/GITHUB/LPIC-1   master ●✚  nohup ping www.sergiosoriano.es &
+[1] 21518
+
+nohup: ignoring input and appending output to 'nohup.out'                                                            
+
+ ⚙ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/GITHUB/LPIC-1   master ●✚  jobs
+[1]  + running    nohup ping www.sergiosoriano.es
+```
+
+`tail -f nohup.out`
+
+Para conocer el PID del proceso ejecutamos
+
+```console
+
+⚙ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/GITHUB/LPIC-1   master ●✚  jobs -l
+
+[1]  + 21518 running    nohup ping www.sergiosoriano.es
+```
+
+`fg` - 
+
+`bg` -
 
 ## 103.6 Modificar la prioridad de ejecución de los procesos
 
