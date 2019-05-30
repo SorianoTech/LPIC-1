@@ -114,4 +114,8 @@ Phone:
 
 [Canal Freenode para principiantes](http://irc2go.com/webchat/?net=freenode&room=%23linux-beginners)
 
-[1]: contenido.md
+### Cursos de pago por suscripción online
+
+[Openwebminars LPIC-1 ](https://openwebinars.net/carreras/certificacion-lpic-1/)
+
+[Linux Academy](https://linuxacademy.com/cp/modules/view/id/214)
