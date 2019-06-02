@@ -37,3 +37,16 @@ sticky bitsticky bit
 
 
 ¿Para que sirve el comando tmux?
+
+
+¿Dónde podemos encontrar todos lo programas instalados?
+
+¿Dónde podemos ver todos los programas que arrancan al inicio del sistema?
+
+
+¿Para que sirve systemctl?
+
+¿Cómo podemos añadir un programa al arranque de inicio?
+
+
+
