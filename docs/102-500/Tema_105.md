@@ -63,7 +63,7 @@ man `xorg,conf` - para ver toda la documentación sobre la configuración del en
 
 `xdpyinfo` - muestra información sobre la sesión de ventanas. 
 
-### 106.1.4 Conexiones gráficas remotas
+#### 106.1.4 Conexiones gráficas remotas
 
 `xhost` - no usar para entornos de producción. (Se usaba antes) Con este comando podemos habilitar o deshabilitar el acceso remoto. 
 
@@ -85,6 +85,53 @@ Instalar el servidor de VNV:
 
 `yum install tigervnc-server`
 
+**Demo** de como configurar un servidor VNC y crear una redirección de puertos por ssh para conectarnos de forma segura.
+
+`ssh -C -L 5901:localhost:5901 192.168.122.241`
+
+5901:localhost - puerto y dirección local
+
+5901 192.168.122.241 - puerto y dirección remota
+
+Ahora podemos utilizar la ip local para conectarnos por VNC al escritorio remoto
+
 
 `SPICE` - Protocolo de conexion seguro encriptado con TLS, permite conexoines con sistemas Windows, linux y android.
+
+----
+
+### 106.2 Escritorios Gráficos
+
+GTK+ : desarrolladas en C
+- GNOME
+- XFCE
+
+QT : desarrolladas en C++
+ - KDE
+
+
+### 106.3 Accesibilidad
+
+Configuracion especifica de accesibildad, como zoom, punteros, lectura de ventanas por voz, etc. 
+Orca permite la configuración de accesibilidad, centrándonos en la configuración de screen reader.
+
+
+## 107: Tareas Administrativas
+
+### 107.1 Administrar cuentas de usuario y de grupo y los archivos de sistema relacionados con ellas
+ 
+#### Adding and Removing Users
+
+
+---
+
+#### Adding and Removing Groups
+
+---
+
+#### User and Group Configuration Files
+
+---
+
+#### User and Group Modifications
 
