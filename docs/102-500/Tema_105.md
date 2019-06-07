@@ -65,7 +65,7 @@ man `xorg,conf` - para ver toda la documentación sobre la configuración del en
 
 #### 106.1.4 Conexiones gráficas remotas
 
-`xhost` - no usar para entornos de producción. (Se usaba antes) Con este comando podemos habilitar o deshabilitar el acceso remoto. 
+`xhost` - no usar para entornos de producción. (Se usaba antes) con este comando podemos habilitar o deshabilitar el acceso remoto. 
 
 ```console
 sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  xhost             
@@ -96,7 +96,7 @@ Instalar el servidor de VNV:
 Ahora podemos utilizar la ip local para conectarnos por VNC al escritorio remoto
 
 
-`SPICE` - Protocolo de conexion seguro encriptado con TLS, permite conexoines con sistemas Windows, linux y android.
+`SPICE` - Protocolo de conexión seguro encriptado con TLS, permite conexiones con sistemas Windows, linux y android.
 
 ----
 
@@ -112,7 +112,7 @@ QT : desarrolladas en C++
 
 ### 106.3 Accesibilidad
 
-Configuracion especifica de accesibildad, como zoom, punteros, lectura de ventanas por voz, etc. 
+Configuración especifica de accesibildad, como zoom, punteros, lectura de ventanas por voz, etc. 
 Orca permite la configuración de accesibilidad, centrándonos en la configuración de screen reader.
 
 
@@ -120,18 +120,98 @@ Orca permite la configuración de accesibilidad, centrándonos en la configuraci
 
 ### 107.1 Administrar cuentas de usuario y de grupo y los archivos de sistema relacionados con ellas
  
-#### Adding and Removing Users
+#### Añadir y eliminar usuarios
+
+`useradd`
+
+```console
+sudo useradd -m name
+```
+
+Usamos `-m` para crear el home del usuario.
+En algunas distribuciones no es necesario utilizar -m, ya que crean automáticamente la carpeta.
+
+Creamos un usuario que utilice una shell diferente.
+
+```console
+sudo useradd -m -c "Juanjo Garcia" -s /bin/tcsh \ juanjo
+```
+
+Podemos comprobar la shell con `echo $SHELL` que nos devolverá el valor de la shell que el usuario esta utilizando.
+
+`passwd` - comando para asignar un password al usuario.
+
+Asignamos un password temporal con `-e` al usuario juanto
+
+```
+sudo passwd -e juanjo
+```
+
+`userdel` - comando para eliminar un usuario.
+
+Elimina el usuario y borra las carpetas de home.
+
+```
+userdel -r juanjo
+``` 
+---
+#### Añadir y eliminar grupos
+
+`groups` - comando para conocer los grupos primarios y secundarios de los que forma parte el usuario.
+
+Creamos un grupo legal y creamos un usuario y lo añadimos a ese grupo.
+```
+sudo groupadd legal
+sudo useradd -G legal -m -c "Mario Gonzalez" \ mgonzalez
+```
+
+`groupdel` - comando para borrar un grupo.
+---
+
+#### Usuarios y configuracion de ficheros de grupo
+
+`/etc/passwd` - fichero que contiene las cuentas de usuario del sistema.
+
+Las columnas se separan por el carácter `:` y cada una de las columnas significa:
+
+1. Nombre de usuario
+2. X password encriptado
+3. User id (las cuentas por encima de un id 1000 son cuentas de usuario "normales")
+4. Primary Group id
+5 .User id info
+6. Directorio del home de usuario
+7. bash que utiliza el usuario (si no ha iniciado sesion aparecera nologin)
+
+`/etc/shadow` - fichero que contiene las password encriptadas de los usuarios. justo después del nombre de usuario aparece el tipo de cifrado que utiliza la contraseña.
+
+```
+$1$ = MD5
+$2a$,$2y$ = Blowfish
+$5$ = SHA-256
+$6$ = SHA-512
+```
+
+1. Nombre usuario
+2. Algoritmo de cifrado, y hash.
+3. Tiempo desde 1 enero de 1970.
+4. Los días que han pasado desde que el usuario a cambiado el password.
+5. El tiempo de días que es valido el password.
+6. Los días que sera avisado antes de que expire el password. 
+7. empty
+8. empty.
+
+
+Si una cuenta tiene en la segunda columna  los caracteres de `!!` significa que esta bloqueada.
+
+`/etc/group`
+
+1. Nombre del grupo
+2. Password del grupo.
+3. ID del grupo.
+4. los usuarios que forman parte del grupo.
 
 
 ---
 
-#### Adding and Removing Groups
-
----
-
-#### User and Group Configuration Files
-
----
-
-#### User and Group Modifications
+#### Modificaciones de usuarios y grupos
 
