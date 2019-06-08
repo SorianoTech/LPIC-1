@@ -2,23 +2,23 @@
 
 ## 105.1 Personalizar y usar el entorno de shell
 
-Setting Up the Shell Environment
+### Setting Up the Shell Environment
 
 ---
 
-Customizing the Shell Environment
+### Customizing the Shell Environment
 
 ## 105.2 Personalización y escritura de scripts sencillos
 
- Basic Shell Scripts
+### Basic Shell Scripts
 
  ---
  
- Adding Logic to Your Shell Scripts
+### Adding Logic to Your Shell Scripts
  
  ----
 
-  Bash Loops and Sequences
+### Bash Loops and Sequences
 
 `for` -
 
@@ -116,11 +116,11 @@ Configuración especifica de accesibildad, como zoom, punteros, lectura de venta
 Orca permite la configuración de accesibilidad, centrándonos en la configuración de screen reader.
 
 
-## 107: Tareas Administrativas
+# 107: Tareas Administrativas
 
-### 107.1 Administrar cuentas de usuario y de grupo y los archivos de sistema relacionados con ellas
+## 107.1 Administrar cuentas de usuario y de grupo y los archivos de sistema relacionados con ellas
  
-#### Añadir y eliminar usuarios
+### Añadir y eliminar usuarios
 
 `useradd`
 
@@ -155,7 +155,7 @@ Elimina el usuario y borra las carpetas de home.
 userdel -r juanjo
 ``` 
 ---
-#### Añadir y eliminar grupos
+### Añadir y eliminar grupos
 
 `groups` - comando para conocer los grupos primarios y secundarios de los que forma parte el usuario.
 
@@ -171,7 +171,7 @@ sudo useradd -G legal -m -c "Mario Gonzalez" \ mgonzalez
 `groupdel` - comando para borrar un grupo.
 ---
 
-#### Usuarios y configuración de ficheros de grupo
+### Usuarios y configuración de ficheros de grupo
 
 `/etc/passwd` - fichero que contiene las cuentas de usuario del sistema.
 
@@ -216,7 +216,7 @@ Si una cuenta tiene en la segunda columna  los caracteres de `!!` significa que 
 
 ---
 
-#### Modificaciones de usuarios y grupos
+### Modificaciones de usuarios y grupos
 
 `usermod` - este comando se utiliza para modificar configuraciones de usuarios ya existentes.
 
@@ -227,7 +227,7 @@ Si una cuenta tiene en la segunda columna  los caracteres de `!!` significa que 
 `getent passwd sergio` - muestra información de las bases de datos del sistema. [Enlace](https://www.unixtutorial.org/commands/getent)
 
 ----
-##### Ejercicios
+#### Ejercicios
 
 Añadir un usuario a un grupo ya creado.
 
@@ -270,9 +270,9 @@ userdmod -d /opt/projectx projectx
  sudo chmod projext:projectx /opt/projectx
  ```
 
-### 107.2 Automatizar tareas administrativas del sistema mediante la programación de trabajos
+## 107.2 Automatizar tareas administrativas del sistema mediante la programación de trabajos
 
-#### CRON
+### CRON
 
 Lo utilizamos para programar tareas que van a ser ejecutadas en periodos de tiempo que nosotros decidamos.
 
@@ -307,9 +307,221 @@ Si queremos borrar el de un usuario:
 
 Podemos bloquear a un usuario para que no pueda crear cron añadiendolo al fichero `/etc/cron.denny`
 
+### At
+
+Se utiliza para ejecutar una tarea en un determinado momento, al contrario de cron que sirve para programar de una forma repetitiva.
+
+>Por defecto no suele venir instalada en las distribuciones Linux
 
 
-#### At
+Programamos una tarea para que se ejecute dentro de 5 minutos para que cre un fichero llamado notes.txt con el contenido pasado con echo:
+
+`atq` - sirve para ver las tareas programadas.
+
+```
+at now + 5 minutes
+warning: commands will be executed using /bin/sh
+at> echo "Notas para luego:" > /home/sergio/notes.txt
+at> <EOT>
+job 1 at Sat Jun  8 16:16:00 2019
+ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  atq
+1	Sat Jun  8 16:16:00 2019 a sergio
+```
+
+`atrm` - sirve para eliminar una tarea programada, indicando el numero.
+
+Programar una tarea que ejecute un script en un determinado momento.
+
+```
+at -f /root/program.sh 10:15 PM Jul 8
+```
+
+Es posible configurar que usuarios pueden utilizar la herramienta `at`, añadiendolos al fichero `at.allow` o denegandolos en `at.deny`.
 
 
-#### Systemd Timer Unit Files
+
+### Systemd Timer Unit Files
+
+Es un timer controlado por systemd, utilizado en los nuevos sistemas para controlar las tareas repetitivas.
+
+Cada fichero **.timer** tiene que tiener un fichero **.service**, por ejemplo si tienes un fichero foo.timer tienes que tener un fichero foo.service.
+
+Hay dos tipos de timer:
+- Monotonic - OnBootSex=, OnActiveSec=
+- Realtime - OnCalendar
+
+Se utiliza mas por que la sintaxis es mas sencilla.
+
+Timer unit file:
+ - [Unit] 
+ - [Timer]
+ - [Install]
+
+Manuales:
+
+- man 5 systemd.timer
+- man 7 systemd.timer
+
+Para ver los timers que tenemos configurado en el sistema y los servicios que tiene asociales:
+
+`systemctl list-timers --all`
+
+```console
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  systemctl list-timers --all
+NEXT                          LEFT          LAST                          PASSED     UNIT                         ACTIVATES
+Sat 2019-06-08 17:01:21 CEST  13min left    Sat 2019-06-08 16:02:27 CEST  45min ago  anacron.timer                anacron.service
+Sat 2019-06-08 17:09:00 CEST  21min left    Sat 2019-06-08 16:39:09 CEST  8min ago   phpsessionclean.timer        phpsessionclean.service
+Sat 2019-06-08 20:29:41 CEST  3h 42min left Sat 2019-06-08 09:32:35 CEST  7h ago     apt-daily.timer              apt-daily.service
+Sun 2019-06-09 01:30:57 CEST  8h left       Fri 2019-06-07 19:42:44 CEST  21h ago    motd-news.timer              motd-news.service
+Sun 2019-06-09 06:50:37 CEST  14h left      Sat 2019-06-08 09:32:35 CEST  7h ago     apt-daily-upgrade.timer      apt-daily-upgrade.service
+Sun 2019-06-09 12:29:09 CEST  19h left      Fri 2019-06-07 19:27:44 CEST  21h ago    systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+Mon 2019-06-10 00:00:00 CEST  1 day 7h left Mon 2019-06-03 00:27:52 CEST  5 days ago fstrim.timer                 fstrim.service
+n/a                           n/a           n/a                           n/a        snapd.snap-repair.timer      snapd.snap-repair.service
+n/a                           n/a           Fri 2019-06-07 19:13:37 CEST  21h ago    ureadahead-stop.timer        ureadahead-stop.service
+```
+
+`systemctl cat anacron.timer`
+
+Podemos ver la descripción, el momento de ejecución y el apartado install.
+
+```console
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  systemctl cat anacron.timer
+# /lib/systemd/system/anacron.timer
+[Unit]
+Description=Trigger anacron every hour
+
+[Timer]
+OnCalendar=hourly
+RandomizedDelaySec=5m
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+`system-ctl cat anacron.service`
+
+
+También podemos crear un timer que no requere un fichero `.service` ejecutado:
+
+`systemd-run --on-active=1m /bin/touch /home/sergio/hello`
+
+
+## 107.3 Localización e internacionalización
+
+### Trabajando con la localizacion del sistema
+
+`locale` - comando para mostrar la información de configuracion del lenguaje del sistema.
+
+`localectl` - comando para configurar el idioma por defecto y el lenguaje del sistema.
+
+Podemos mostrar la lista de idiomas con:
+
+`localectl list-locales`
+
+`iconv` - utilidad usada para convertir ficheros de un tipo de codificación a otro.
+
+>UTF-8 es el sistema de caracetes codificados más utilizado.
+
+Para cambiar el idioma, podemos cambiar la variable entorno `LANG`
+
+`LANG=pl_PL.utf8`
+
+`LANG=C`  
+
+### Hora y fecha en los sitemas Linux
+
+`date` - muestra información sobre la fecha actual. Podemos utilizar valores para formatear la salida por pantalla en diferentes formatos. Es intereante conocer formatear la salida de la fecha a la hora de utilizar scripts.
+
+```console
+ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  date +%m/%d/%Y
+06/08/2019
+```
+
+`timedatectl` - muestra la hora actual del sistema y la del hardware (RTC clock).
+
+Mostramos la lista de horarios disponibles y cabiamos a "Antartica/davis".
+
+```
+timedatectl list-timezones
+timedatectl set-timezone "Antartica/Davis"
+```
+
+`tzselect` - comando para seleccionar por menu la zona horaria que queremos.
+
+`/etc/localtime` - fichero para distribuciones REDHAT.
+`/etc/timezone` - fichero para distribuciones DEBIAN.
+`/usr/share/zoneinfo` -  directorio que contiene todas las zonas dispoibles que el equipo puede configurar.
+
+
+# Tema 108: Servicios esenciales del sistema
+
+## 108.1 Mantener la hora del sistema
+
+Tenemos que saber como configurar nuestro equipo para recibir la hora de un servidor de NTP.
+
+### Trabajando con servidores remotos de tiempo(NTP)
+
+
+**NTP** - Network Time Protocol 
+
+:Capas del protocolo
+  Stratum 0  
+  Stratum 1
+  Stratum 2
+
+`ntpd` - es el demonio(servicio) que comprueba contra el servidor de ntp para comprobar si la hora es correcta.
+
+`ntpdate` - comando para recibir la hora de un servidor de ntp especifico, es necesario que el servicio no este corriendo.
+
+`/etc/ntp.conf/` - fichero de configuracion para el demonio de ntpd.
+
+`ntpq` - comando para realizar una query al demonio **ntpd**.
+
+`timedatectl` - comando para comprobar la configuración del servidor ntp
+
+`chronyd` - es el demonio moderno que los equipos que utilizan **systemd**.
+
+`/etc/chrony/chrony.conf` - fichero de configuración al igual que el antiguo fichero `ntp.conf`.
+
+`chronyc` - comando para consultar la información del demonio **chronyd**.
+
+## 108.2 Registros del sistema
+
+## Sistemas de Logs antiguaos
+
+`/var/log/dmesg` - logs relacionadios con el hardware, consultar en caso de tener problemas con los dispositivos conectados. Se crea cada vez que el sistema arranca.(Linux kernel boot messages).
+
+`/var/log/messages` - log que recoje los problemas con los servicios.
+
+`/var/log/secure` - contiene información de los accesos de los usuarios. 
+
+`/var/log/maillog` - contiene información del servidor de correo.
+
+Todos estos logs son gestionados por el antiguo demonio **rsyslog**. (En los sistemas que no utilizan **systemd**).
+
+**Niveles de prioridad de Logs**
+
+![Log Priority](img/loggin_priority.png)
+
+**Niveles de logs Facilities**
+
+![Loggin Facilities](img/log_facilities.png)
+
+Podemos ver esta información con el comando:
+
+`dmesg -x`
+
+
+`logger` - comando que puede ser utilizado para enviar informacion al fichero **/etc/log/messages**.
+
+
+
+### Rsyslog
+
+`rsyslog` - 
+
+
+
+
+
