@@ -519,9 +519,155 @@ Podemos ver esta información con el comando:
 
 ### Rsyslog
 
-`rsyslog` - 
+Utilizado en distribuciones anteriores a Centos 7.
+
+`rsyslog` - la configuracion del demonio la podemos encontrar en **/etc/rsyslog.conf**.
+
+Los ficheros de ayuda esta escritos en html y necesitamos lynx:
+
+>yum -y install lynx
 
 
+Es posibble configurar rsyslog para enviar los log a un servidor remoto.
+
+`/etc/logrotate.conf` -  es el fichero de configuración del demonio lograte, encargado de manejar el tamaño y la rotación de los ficheros de log.
+
+`/etc/logrotate.d/` - Configuración avanzanda para que otros demonios puedan 
+
+`logrotate` - comando para rotar los ficheros de configuración.
 
 
+### Introduccion al diario de systemd
 
+Recoge los log de :
+- Logs del Kernel
+- Logs del sistema
+- Servicios del sistem que envian salidas de (standar ouput y standard error)
+
+
+La ruta por defecto esta en `/run/log/journal` esta informacion se pierde despues de cada reinicio.
+
+Para hacerla permanente teemos que hacer:
+
+```console
+mkdir -p /var/log/journal
+systemd-tmpfiles --create --prefix /var/log/journal
+```
+
+Podemos encontrar mas informacion sobre la condiguración en:
+
+>man 5 journald.conf
+
+El fichero de configuracion se encuentra en `/etc/systemd/journald.conf`
+
+
+### journalctl
+
+Los sistemas que usan systemd utilizan el comando journalctl(Journal control) para obtener informacion del demonio de logs systemd journal(systemd-journald.service). 
+
+`journalctl -n 20` - muestra las entradas mas recientes y limita la salida a 20.
+
+`journalctl -f -u httpd.service` - nos muestra los log de un servicio en particular.
+
+`journalctl -o verbose` - para mostrar todos los log de una forma ordenada.
+
+`journalctl -o json-pretty` - para ver los log en formato json, la salida puede ser tratada para mostrarla en una web por ejemplo. Muy util para analizar los datos.
+
+`systemd-cat` - para enviar una salida de texto al diario de logs.
+
+#### **Demo:**
+
+Tenemos un problema con el servidor web de apache.
+
+Nos logamos como root
+
+`sudo su -`
+
+Comprobamos el estado del servicio:
+
+`systemctl status httpd.service`
+
+Intentamos arrancar el servidor web
+
+`systemctl start httpd.service`
+
+Tras comprobar que no arranca, buscamos en el log.
+
+`journalctl -u httpd.service`
+
+Vemos que nos indica que no puede encontrar el fichero de configuración.
+
+```console
+journalctl -u httpd.service
+-- Logs begin at Sun 2019-06-09 04:33:02 EDT, end at Sun 2019-06-09 04:46:20 EDT. --
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: Starting The Apache HTTP Server...
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal httpd[13571]: httpd: Could not open configuration file /etc/httpd/conf/httpd.conf: No such file 
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: httpd.service: main process exited, code=exited, status=1/FAILURE
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal kill[13572]: kill: cannot find process ""
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: httpd.service: control process exited, code=exited status=1
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: Failed to start The Apache HTTP Server.
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: Unit httpd.service entered failed state.
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: httpd.service failed.
+```
+
+Comprobamos si el directorio de configuracion contiene el fichero.
+
+`ls /etc/httpd/conf`
+
+Restauramos el fichero de configuracion
+
+`mv /etc/httpd/conf/httpd.conf.bkup /etc/httpd/conf/httpd.conf`
+
+Reiniciamos el servicio
+
+`systemctl restart httpd.service`
+
+Comprobamos que el servicio esta corriendo correctamente
+
+`systemctl status httpd.service`
+
+utilizamos elinks para comprar que el sitio funciona correctamte
+
+`elinks http://localhost`
+
+
+#### Demo 2
+
+Queremos programar un backup de una pagina web. Tenemos escrito el scrip que realiza la tarea llamadao `web-backup.sh` y queremos que se ejecute diariamente.
+
+1. Creamos es el scrip
+2. Creamos el fichero web-backup.service (especifica que va hacer)
+3. Creamos el fichero web-backup.timer (indica cuando se va a ejecutar y por quien)
+
+4. Copiamos el contenido del script a `usr/local/sbin/`
+
+`cp web-backup.sh /usr/local/sbin/`
+
+Y damos permisos de ejecucion sobre el script
+
+`chmod +x /usr/local/sbin/web-backup.sh`
+
+5. Copiamos los ficheros de servicio y timer a `/etc/systemd/system`
+
+`cp web-backup.{service,timer} /etc/systemd/system/
+
+6. Reiniciamos el demonio de systemd
+
+`systemctl daemon-reload`
+
+7. Habilitamos el servicio para que se ejecute al arrancar el sistema.
+
+`systemctl enable web-backup.timer web-backup.service`
+
+>Esto creara los enlaces simbolicos necesarios.
+
+8. Arrancamos los servicios.
+
+`systemctl start web-backup.timer web-backup.service`
+
+9. Comprobamos los servicios
+
+```
+systemctl status web-backup.timer
+systemctl status web-backup.service
+```

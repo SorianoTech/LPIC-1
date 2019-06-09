@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup the web site, every day, or the boss will be mad
+
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/web-backup.sh
+
+[Install]
+WantedBy=multi-user.target
