@@ -119,3 +119,11 @@ Phone:
 [Openwebminars LPIC-1 ](https://openwebinars.net/carreras/certificacion-lpic-1/)
 
 [Linux Academy](https://linuxacademy.com/cp/modules/view/id/214)
+
+### Mas información
+
+[Free Software Fundation](https://www.fsf.org/)
+
+Distribuciones
+
+[ArchLinux](https://wiki.archlinux.org/index.php/Main_page_(Espa%C3%B1ol))

@@ -643,7 +643,7 @@ Queremos programar un backup de una pagina web. Tenemos escrito el scrip que rea
 
 `cp web-backup.sh /usr/local/sbin/`
 
-Y damos permisos de ejecucion sobre el script
+  Y damos permisos de ejecucion sobre el script
 
 `chmod +x /usr/local/sbin/web-backup.sh`
 
@@ -671,3 +671,47 @@ Y damos permisos de ejecucion sobre el script
 systemctl status web-backup.timer
 systemctl status web-backup.service
 ```
+
+
+## 108.3 Mail Transfer Agent (MTA) Fundamentos
+
+MTA -> MDA (Port 25 TCP) -> MUA
+
+- **MTA**: Mail Transfer Agent
+- **MDA**: Mail delivery Agent
+- **MUA**: Mail user agent
+
+
+Conocer el sistema de MTA es el importante para el examen.
+
+Sistemas de MTA más comunes:
+
+`Sendmail` - es el sistema de mta mas antiguo, es difil de configurar y suele venir instalado por defecto en la mayoria de distribuciones de linux.
+`Postfix` - es el MTA moderno encontrado en muchas de las distribuciones de linux, es fácil de configurar y tiene una buena segurida.
+`Exim` - es el sistema de MTA por defecto en las distribuciones Deabian, tiene una buena seguridad y es mas sencillo de configurar que Sendmail.
+
+`Send Emulation Layer` - los administradores pueden utilizar los comandos de 'sendmail' en otras MTA (Postfix, Exim,etc) como si estuvieran utilizando la instalacion de Sendmail.
+
+
+
+### Renvio de Email y Alias
+
+Los alias se utilizan para que utilizando otro nombre se envie a la cuenta que queramos, por ejemplo si tenemos un buzon que se llama sergio@localhost podemos crear un alias para que los correos que se envien a **yo@localhost`** se reciban en el buzón de sergio@localhost 
+
+`/etc/aliases` - es el fichero de configuracion que se utiliza para realizar el renvio de correos entre usuarios.
+
+`newaliases` - comando que es necesario lanzar despues de modificar el fichero anterior para que se enere el fichero `/etc/aliases.db` fichero que el MTA usa para entregar los correos.
+
+Para enviar un correo desde la terminal con postfix
+
+`mail -s "Este es un mensaje" sergio@localhost`
+
+Comprobamos la mandeja de entrada:
+
+`mail` - comando para enviar los correos o para ver los correos de un usuario.
+
+`mailq` - comando para ver los correos que estan encolados, esperando a ser enviados a su destino. En sendmail se usaba `sendmail -bp`.
+
+`~/.forward` - un fichero de configuracion que puede ser colocado en el home del usuario para reenviar correos que sean enviados a el y quieran ser enviados a otro usuario o email externo. (solo tenemos que especificar el usuario o el correo en este fichero). [Ejemplo](https://www.ccsf.edu/Pub/UNIXhelp/mail/file_forward.html)
+
+
