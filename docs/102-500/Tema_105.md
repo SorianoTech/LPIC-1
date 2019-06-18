@@ -12,16 +12,15 @@
 
 ### Basic Shell Scripts
 
- ---
- 
+---
+
 ### Adding Logic to Your Shell Scripts
- 
- ----
+
+---
 
 ### Bash Loops and Sequences
 
 `for` -
-
 
 `while` -
 
@@ -34,16 +33,17 @@
 `exit` - para especificar el retorno de salida, normalmente seria 0, pero se puede cambiar a otro numero, por ejemplo para salir en un bucle.
 
 `exec` - se puede utilizar para re-direccionar la salida de una shell a un fichero. `exec > out .log`
-  ---
 
+---
 
 ## 106: Interfaces de usuario y escritorios
 
 ### 106.1 Instalar y configurar X11
 
 #### 106.1.1 The Basics of X11
+
 X11 lo llevan los antiguos sistemas (CentOS 5)
-Wayland - remplaza al sistema de ventas X. 
+Wayland - remplaza al sistema de ventas X.
 
 #### 106.1.2 Instalando X11
 
@@ -53,7 +53,7 @@ Wayland - remplaza al sistema de ventas X.
 
 x.org se encarga de llevar el proyecto.
 
-Podemos encontrar el fichero de configuración en `/etc/init` y veremos que apunta a `/etc/X11/prefdm` 
+Podemos encontrar el fichero de configuración en `/etc/init` y veremos que apunta a `/etc/X11/prefdm`
 
 #### 106.1.3 Configuraciones de X11
 
@@ -61,14 +61,14 @@ Podemos encontrar el fichero de configuración en `/etc/init` y veremos que apun
 
 man `xorg,conf` - para ver toda la documentación sobre la configuración del entorno de ventanas.
 
-`xdpyinfo` - muestra información sobre la sesión de ventanas. 
+`xdpyinfo` - muestra información sobre la sesión de ventanas.
 
 #### 106.1.4 Conexiones gráficas remotas
 
-`xhost` - no usar para entornos de producción. (Se usaba antes) con este comando podemos habilitar o deshabilitar el acceso remoto. 
+`xhost` - no usar para entornos de producción. (Se usaba antes) con este comando podemos habilitar o deshabilitar el acceso remoto.
 
 ```console
-sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  xhost             
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  xhost
 access control enabled, only authorized clients can connect
 SI:localuser:sergio
  sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  xhost -
@@ -95,31 +95,30 @@ Instalar el servidor de VNV:
 
 Ahora podemos utilizar la ip local para conectarnos por VNC al escritorio remoto
 
-
 `SPICE` - Protocolo de conexión seguro encriptado con TLS, permite conexiones con sistemas Windows, linux y android.
 
-----
+---
 
 ### 106.2 Escritorios Gráficos
 
 GTK+ : desarrolladas en C
+
 - GNOME
 - XFCE
 
 QT : desarrolladas en C++
- - KDE
 
+- KDE
 
 ### 106.3 Accesibilidad
 
-Configuración especifica de accesibildad, como zoom, punteros, lectura de ventanas por voz, etc. 
+Configuración especifica de accesibildad, como zoom, punteros, lectura de ventanas por voz, etc.
 Orca permite la configuración de accesibilidad, centrándonos en la configuración de screen reader.
-
 
 # 107: Tareas Administrativas
 
 ## 107.1 Administrar cuentas de usuario y de grupo y los archivos de sistema relacionados con ellas
- 
+
 ### Añadir y eliminar usuarios
 
 `useradd`
@@ -153,8 +152,10 @@ Elimina el usuario y borra las carpetas de home.
 
 ```
 userdel -r juanjo
-``` 
+```
+
 ---
+
 ### Añadir y eliminar grupos
 
 `groups` - comando para conocer los grupos primarios y secundarios de los que forma parte el usuario.
@@ -168,8 +169,7 @@ sudo groupadd legal
 sudo useradd -G legal -m -c "Mario Gonzalez" \ mgonzalez
 ```
 
-`groupdel` - comando para borrar un grupo.
----
+## `groupdel` - comando para borrar un grupo.
 
 ### Usuarios y configuración de ficheros de grupo
 
@@ -181,9 +181,9 @@ Las columnas se separan por el carácter `:` y cada una de las columnas signific
 2. X password encriptado
 3. User id (las cuentas por encima de un id 1000 son cuentas de usuario "normales")
 4. Primary Group id
-5 .User id info
-6. Directorio del home de usuario
-7. bash que utiliza el usuario (si no ha iniciado sesion aparecera nologin)
+   5 .User id info
+5. Directorio del home de usuario
+6. bash que utiliza el usuario (si no ha iniciado sesion aparecera nologin)
 
 `/etc/shadow` - fichero que contiene las password encriptadas de los usuarios. Justo después del nombre de usuario aparece el tipo de cifrado que utiliza la contraseña.
 
@@ -193,19 +193,19 @@ $2a$,$2y$ = Blowfish
 $5$ = SHA-256
 $6$ = SHA-512
 ```
+
 Las columnas que podemos encontrar en el fichero `/etc/shadow` son las siguientes:
 
-  1. Nombre usuario
-  2. Algoritmo de cifrado, y hash.
-  3. Tiempo desde 1 enero de 1970.
-  4. Los días que han pasado desde que el usuario a cambiado el password.
-  5. El tiempo de días que es valido el password.
-  6. Los días que sera avisado antes de que expire el password. 
-  7. empty
-  8. empty.
+1. Nombre usuario
+2. Algoritmo de cifrado, y hash.
+3. Tiempo desde 1 enero de 1970.
+4. Los días que han pasado desde que el usuario a cambiado el password.
+5. El tiempo de días que es valido el password.
+6. Los días que sera avisado antes de que expire el password.
+7. empty
+8. empty.
 
-
-Si una cuenta tiene en la segunda columna  los caracteres de `!!` significa que esta bloqueada.
+Si una cuenta tiene en la segunda columna los caracteres de `!!` significa que esta bloqueada.
 
 `/etc/group` - fichero que contiene información sobre los grupos de usuarios.
 
@@ -226,7 +226,8 @@ Si una cuenta tiene en la segunda columna  los caracteres de `!!` significa que 
 
 `getent passwd sergio` - muestra información de las bases de datos del sistema. [Enlace](https://www.unixtutorial.org/commands/getent)
 
-----
+---
+
 #### Ejercicios
 
 Añadir un usuario a un grupo ya creado.
@@ -240,9 +241,9 @@ Bloquear una cuenta
 Creamos una cuenta y la bloqueamos, podemos ver como al pricipio de la ultima linea, aparece un simbolo de exclamación al consultar el fichero shadow indicandonos que la cuenta ha sido bloqueada.
 
 ```console
-sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  sudo getent shadow test  
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  sudo getent shadow test
 test:$6$HPi6/BE7$a22bOjrx8EbVgiEdl8IMHZwSeabQX568ydN88oD3pc301BkfFgqIDClkWPS2ihjVOdL8rm./pH5M4XkYXSLik.:18055:0:99999:7:::
- sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  usermod -L test 
+ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  usermod -L test
 usermod: Permission denied.
 usermod: cannot lock /etc/passwd; try again later.
  ✘ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  sudo usermod -L test
@@ -262,13 +263,13 @@ usermod -s /sbin/nologin
 userdmod -d /opt/projectx projectx
 ```
 
- En la ultima linea indicamos la nueva ruta del home y el usuario que queremos modificar.
+En la ultima linea indicamos la nueva ruta del home y el usuario que queremos modificar.
 
- Por último, asignamos como propietario a la carpeta:
+Por último, asignamos como propietario a la carpeta:
 
- ```console
- sudo chmod projext:projectx /opt/projectx
- ```
+```console
+sudo chmod projext:projectx /opt/projectx
+```
 
 ## 107.2 Automatizar tareas administrativas del sistema mediante la programación de trabajos
 
@@ -284,18 +285,17 @@ Lo utilizamos para programar tareas que van a ser ejecutadas en periodos de tiem
 
 1. Minutos
 2. Horas
-3. Dia del mes (podemos usar * para indicar que no importa el dia que sea)
-4. Mes (* si no nos importa el mes).
+3. Dia del mes (podemos usar \* para indicar que no importa el dia que sea)
+4. Mes (\* si no nos importa el mes).
 5. Dia de la semana(sat, para que se ejecute los sábados).
 6. Username(el usuario que ejecuta la tarea).
 7. La tarea que queremos que ejecute.
 
 [Ejemplos](http://researchhubs.com/post/computing/linux-cmd/awesome-crontab-job-examples.html)
 
-
 Los ficheros de las configuracion de cada uno de los usuarios son creados en:
 
-`sudo cat  /var/spool/cron/crontabs/sergio`
+`sudo cat /var/spool/cron/crontabs/sergio`
 
 Podemos utilizar `crontab -l` para ver las tareas programadas del usuario.
 
@@ -311,8 +311,7 @@ Podemos bloquear a un usuario para que no pueda crear cron añadiendolo al fiche
 
 Se utiliza para ejecutar una tarea en un determinado momento, al contrario de cron que sirve para programar de una forma repetitiva.
 
->Por defecto no suele venir instalada en las distribuciones Linux
-
+> Por defecto no suele venir instalada en las distribuciones Linux
 
 Programamos una tarea para que se ejecute dentro de 5 minutos para que cre un fichero llamado notes.txt con el contenido pasado con echo:
 
@@ -338,8 +337,6 @@ at -f /root/program.sh 10:15 PM Jul 8
 
 Es posible configurar que usuarios pueden utilizar la herramienta `at`, añadiendolos al fichero `at.allow` o denegandolos en `at.deny`.
 
-
-
 ### Systemd Timer Unit Files
 
 Es un timer controlado por systemd, utilizado en los nuevos sistemas para controlar las tareas repetitivas.
@@ -347,15 +344,17 @@ Es un timer controlado por systemd, utilizado en los nuevos sistemas para contro
 Cada fichero **.timer** tiene que tiener un fichero **.service**, por ejemplo si tienes un fichero foo.timer tienes que tener un fichero foo.service.
 
 Hay dos tipos de timer:
+
 - Monotonic - OnBootSex=, OnActiveSec=
 - Realtime - OnCalendar
 
 Se utiliza mas por que la sintaxis es mas sencilla.
 
 Timer unit file:
- - [Unit] 
- - [Timer]
- - [Install]
+
+- [Unit]
+- [Timer]
+- [Install]
 
 Manuales:
 
@@ -401,11 +400,9 @@ WantedBy=timers.target
 
 `system-ctl cat anacron.service`
 
-
 También podemos crear un timer que no requere un fichero `.service` ejecutado:
 
 `systemd-run --on-active=1m /bin/touch /home/sergio/hello`
-
 
 ## 107.3 Localización e internacionalización
 
@@ -421,13 +418,13 @@ Podemos mostrar la lista de idiomas con:
 
 `iconv` - utilidad usada para convertir ficheros de un tipo de codificación a otro.
 
->UTF-8 es el sistema de caracetes codificados más utilizado.
+> UTF-8 es el sistema de caracetes codificados más utilizado.
 
 Para cambiar el idioma, podemos cambiar la variable entorno `LANG`
 
 `LANG=pl_PL.utf8`
 
-`LANG=C`  
+`LANG=C`
 
 ### Hora y fecha en los sitemas Linux
 
@@ -451,8 +448,7 @@ timedatectl set-timezone "Antartica/Davis"
 
 `/etc/localtime` - fichero para distribuciones REDHAT.
 `/etc/timezone` - fichero para distribuciones DEBIAN.
-`/usr/share/zoneinfo` -  directorio que contiene todas las zonas dispoibles que el equipo puede configurar.
-
+`/usr/share/zoneinfo` - directorio que contiene todas las zonas dispoibles que el equipo puede configurar.
 
 # Tema 108: Servicios esenciales del sistema
 
@@ -462,13 +458,12 @@ Tenemos que saber como configurar nuestro equipo para recibir la hora de un serv
 
 ### Trabajando con servidores remotos de tiempo(NTP)
 
-
-**NTP** - Network Time Protocol 
+**NTP** - Network Time Protocol
 
 :Capas del protocolo
-  Stratum 0  
-  Stratum 1
-  Stratum 2
+Stratum 0  
+ Stratum 1
+Stratum 2
 
 `ntpd` - es el demonio(servicio) que comprueba contra el servidor de ntp para comprobar si la hora es correcta.
 
@@ -494,7 +489,7 @@ Tenemos que saber como configurar nuestro equipo para recibir la hora de un serv
 
 `/var/log/messages` - log que recoje los problemas con los servicios.
 
-`/var/log/secure` - contiene información de los accesos de los usuarios. 
+`/var/log/secure` - contiene información de los accesos de los usuarios.
 
 `/var/log/maillog` - contiene información del servidor de correo.
 
@@ -512,10 +507,7 @@ Podemos ver esta información con el comando:
 
 `dmesg -x`
 
-
 `logger` - comando que puede ser utilizado para enviar informacion al fichero **/etc/log/messages**.
-
-
 
 ### Rsyslog
 
@@ -525,25 +517,23 @@ Utilizado en distribuciones anteriores a Centos 7.
 
 Los ficheros de ayuda esta escritos en html y necesitamos lynx:
 
->yum -y install lynx
-
+> yum -y install lynx
 
 Es posibble configurar rsyslog para enviar los log a un servidor remoto.
 
-`/etc/logrotate.conf` -  es el fichero de configuración del demonio lograte, encargado de manejar el tamaño y la rotación de los ficheros de log.
+`/etc/logrotate.conf` - es el fichero de configuración del demonio lograte, encargado de manejar el tamaño y la rotación de los ficheros de log.
 
-`/etc/logrotate.d/` - Configuración avanzanda para que otros demonios puedan 
+`/etc/logrotate.d/` - Configuración avanzanda para que otros demonios puedan
 
 `logrotate` - comando para rotar los ficheros de configuración.
-
 
 ### Introduccion al diario de systemd
 
 Recoge los log de :
+
 - Logs del Kernel
 - Logs del sistema
 - Servicios del sistem que envian salidas de (standar ouput y standard error)
-
 
 La ruta por defecto esta en `/run/log/journal` esta informacion se pierde despues de cada reinicio.
 
@@ -556,14 +546,13 @@ systemd-tmpfiles --create --prefix /var/log/journal
 
 Podemos encontrar mas informacion sobre la condiguración en:
 
->man 5 journald.conf
+> man 5 journald.conf
 
 El fichero de configuracion se encuentra en `/etc/systemd/journald.conf`
 
-
 ### journalctl
 
-Los sistemas que usan systemd utilizan el comando journalctl(Journal control) para obtener informacion del demonio de logs systemd journal(systemd-journald.service). 
+Los sistemas que usan systemd utilizan el comando journalctl(Journal control) para obtener informacion del demonio de logs systemd journal(systemd-journald.service).
 
 `journalctl -n 20` - muestra las entradas mas recientes y limita la salida a 20.
 
@@ -601,7 +590,7 @@ Vemos que nos indica que no puede encontrar el fichero de configuración.
 journalctl -u httpd.service
 -- Logs begin at Sun 2019-06-09 04:33:02 EDT, end at Sun 2019-06-09 04:46:20 EDT. --
 Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: Starting The Apache HTTP Server...
-Jun 09 04:45:18 ip-10-0-1-160.ec2.internal httpd[13571]: httpd: Could not open configuration file /etc/httpd/conf/httpd.conf: No such file 
+Jun 09 04:45:18 ip-10-0-1-160.ec2.internal httpd[13571]: httpd: Could not open configuration file /etc/httpd/conf/httpd.conf: No such file
 Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: httpd.service: main process exited, code=exited, status=1/FAILURE
 Jun 09 04:45:18 ip-10-0-1-160.ec2.internal kill[13572]: kill: cannot find process ""
 Jun 09 04:45:18 ip-10-0-1-160.ec2.internal systemd[1]: httpd.service: control process exited, code=exited status=1
@@ -630,7 +619,6 @@ utilizamos elinks para comprar que el sitio funciona correctamte
 
 `elinks http://localhost`
 
-
 #### Demo 2
 
 Queremos programar un backup de una pagina web. Tenemos escrito el scrip que realiza la tarea llamadao `web-backup.sh` y queremos que se ejecute diariamente.
@@ -643,7 +631,7 @@ Queremos programar un backup de una pagina web. Tenemos escrito el scrip que rea
 
 `cp web-backup.sh /usr/local/sbin/`
 
-  Y damos permisos de ejecucion sobre el script
+Y damos permisos de ejecucion sobre el script
 
 `chmod +x /usr/local/sbin/web-backup.sh`
 
@@ -659,7 +647,7 @@ Queremos programar un backup de una pagina web. Tenemos escrito el scrip que rea
 
 `systemctl enable web-backup.timer web-backup.service`
 
->Esto creara los enlaces simbolicos necesarios.
+> Esto creara los enlaces simbolicos necesarios.
 
 8. Arrancamos los servicios.
 
@@ -672,7 +660,6 @@ systemctl status web-backup.timer
 systemctl status web-backup.service
 ```
 
-
 ## 108.3 Mail Transfer Agent (MTA) Fundamentos
 
 MTA -> MDA (Port 25 TCP) -> MUA
@@ -680,7 +667,6 @@ MTA -> MDA (Port 25 TCP) -> MUA
 - **MTA**: Mail Transfer Agent
 - **MDA**: Mail delivery Agent
 - **MUA**: Mail user agent
-
 
 Conocer el sistema de MTA es el importante para el examen.
 
@@ -692,11 +678,9 @@ Sistemas de MTA más comunes:
 
 `Send Emulation Layer` - los administradores pueden utilizar los comandos de 'sendmail' en otras MTA (Postfix, Exim,etc) como si estuvieran utilizando la instalacion de Sendmail.
 
-
-
 ### Renvio de Email y Alias
 
-Los alias se utilizan para que utilizando otro nombre se envie a la cuenta que queramos, por ejemplo si tenemos un buzon que se llama sergio@localhost podemos crear un alias para que los correos que se envien a **yo@localhost`** se reciban en el buzón de sergio@localhost 
+Los alias se utilizan para que utilizando otro nombre se envie a la cuenta que queramos, por ejemplo si tenemos un buzon que se llama sergio@localhost podemos crear un alias para que los correos que se envien a **yo@localhost`** se reciban en el buzón de sergio@localhost
 
 `/etc/aliases` - es el fichero de configuracion que se utiliza para realizar el renvio de correos entre usuarios.
 
@@ -714,4 +698,240 @@ Comprobamos la mandeja de entrada:
 
 `~/.forward` - un fichero de configuracion que puede ser colocado en el home del usuario para reenviar correos que sean enviados a el y quieran ser enviados a otro usuario o email externo. (solo tenemos que especificar el usuario o el correo en este fichero). [Ejemplo](https://www.ccsf.edu/Pub/UNIXhelp/mail/file_forward.html)
 
+Log del email
 
+`/var/log/maillog/`
+
+#### DEMO:
+
+Configurar el servidor de correo para que reenvie todos los correos que llevan a root al usuario cloud_user.
+
+1. Nos logamos con el usuario root
+
+`sudo su -`
+
+2. Añadimos el alias en el fichero `/etc/aliases`.
+
+`echo "root: cloud_user" >> /etc/aliases`
+
+3. Regeneramos la base de datos de los alias
+
+`newaliases`
+
+4. Enviamos un mensaje de prueba
+
+`mail -s "Probando" -a "/etc/services" root@localhost < /dev/null`
+
+5. Salimos de la sesion de root
+
+`exit`
+
+6. Comprobaoms la badejande entrada
+
+`mail`
+
+```console
+[cloud_user@ip-10-0-1-208 ~]$ mail
+Heirloom Mail version 12.5 7/5/10.  Type ? for help.
+"/var/spool/mail/cloud_user": 6 messages 6 new
+>N  1 root                  Fri Jun 14 03:06 11204/671277 "Probando"
+ N  2 Mail Delivery System  Fri Jun 14 03:14  73/2622  "Undelivered Mail Returned to Sender"
+ N  3 root                  Fri Jun 14 03:20 11204/671259 "Probando"
+ N  4 root                  Fri Jun 14 03:22 11204/671259 "Probando"
+ N  5 root                  Fri Jun 14 03:24 11204/671259 "Probando"
+ N  6 root                  Fri Jun 14 03:25 11204/671259 "Probando"
+& 1
+Message  1:
+```
+
+```
+Jun 14 03:25:51 ip-10-0-1-208 postfix/local[4784]: 32C0D43D376: to=<cloud_user@ip-10-0-1-208.ec2.internal>, orig_to=<root@localhost>, relay=local, delay=0.05, delays=0.03/0/0/0.02, dsn=2.0.0, status=sent (delivered to mailbox)
+Jun 14 03:25:51 ip-10-0-1-208 postfix/qmgr[4144]: 32C0D43D376: removed
+```
+
+## 108.4 Gestión de la impresión y de las impresoras
+
+### The Common Unix Printing System (CUPS)
+
+Instalamos el CUPS driver y el servidor de impresion en ubuntu. Esto nos facilita el manejo mediante un frontal web para administrar las impresoras.
+
+`sudo apt-get install cups printer-driver-cups-pdf`
+
+1. Eliminamos la impresora que viene por defecto(Imprime en PDF), haciendo click en Administración -> Manage Printer -> PDF , seleccionamos en el desplegable de Administration -> Delete.
+
+2. Al terminar de configurarla tenemos que seleccionar que sea la impresora por defecto.
+
+`/etc/cups` - directorio que contiene los ficheros de configuracion del servidor de CUPS.
+
+`/etc/cups/printers.conf` - fichero de configuración de las impresoras, no se debe cambiar cuando el servidor CUPS esta arrancado.
+
+Cargamos la web de administracion de impresión:
+
+`http://localhost:631`
+
+### The Line Print Daemon
+
+Es el domonio de impresión antiguo(legacy)
+
+> El puerto socket para las impresoras es el **9100**
+
+`lpd` - Line Print Daemon
+
+`lpstat` Muestra el estado del servidor de CUPS, las impresoras configuradas y las colas de impresión.
+
+`lpadmin` - herramienta para añadir, modificar y eliminar impresoras.
+
+`lpinfo` - este comando muestra las impresoras disponibles y los drivers que pueden usar.
+
+`lpc` - antiguo comando para mostrar informacion sobre las impresoras.
+
+`lpr` - este comando envia a imprimir el fichero que se indique a la impresora por defecto.
+
+Imprime el fichero de usuarios:
+
+```
+lpr /etc/passwd/
+```
+
+`lpq` - este comando muestr las colas de impresion del servidor CUPS. Con la opción -a vemos todas las colas de impresion.
+
+`lprm` - sirve para eliminar un trabajo que exista en la cola de impresión indicando el PID:
+
+# 109: Fundamentos de redes
+
+## 109.1 Fundamentos de los protocolos de Internet
+
+### Fundamentos de red
+
+- **TCP** Transmission Control Protocol
+- **UDP** User Datagram Protocol
+- **ICMP** Internet Control Message Protocol, se utiliza para enviar mensajes entre dispositivos(switches, firewall, etc).
+
+Los rangos de IP se describen en el [RFC1918](https://tools.ietf.org/html/rfc1918).
+
+- Clase A: Ragngo 1 -126
+- Clase B: Rango 128 - 191
+- Clase C Rango 192 -223
+
+Mascaras de red:
+
+- Clase A: 255.0.0.0/8
+- Clase B: 255.255.0/16
+- Clase C: 255.255.255.0/24
+
+**Gateway**
+**Broadcast Address**
+
+---
+
+### Common Networking Services
+
+Es necesario memoriazar el puerto, el protocolo y el servicio.
+
+![Port](img/port.png)
+
+## 109.2 Configuración de red persistente
+
+### Network manager
+
+`nmcli` - comando para ver los interfaces de red.
+`nmcli dev show` - muestra toda la informacion de los interfaces de red.
+
+Nombres de los dispositivos de red
+
+Nomenclatura principal:
+
+- **en** = ethernet
+- **wl** = wireless
+
+- eo1 = onboar devices, indexado por la bios o el firmware.
+- ens1 = dispositvos en PCI Express hotplug slot, indexado por la BIOS o firmware.
+- enp2s0 - dispositivios físicos. (p=bus, s=slot)
+- eht0 - antiguo.
+
+`nmcli con show` - para ver las conexiones que tenemos establecidas.
+
+Tirar abajo un dispositivo de red:
+
+```
+nmcli con down "NAME"
+```
+
+`nmcli device status` - para ver el estado de los interfaces.
+
+Añadir una nueva conexión y añadir el dns.
+
+```
+nmcli con add con-name "backup" type ethernet ip4 192.168.0.202/24 gtw 192.168.0.1 iframe ens11 autoconnect
+
+nmcli con mod bakcup ipv4.dns "192.168.122.1"
+```
+
+`iframe` - es el dispositivo que queremos que utilice.
+
+`nmcli con edit` - comando para edir una conexión.
+
+`ip` -conmando para modificar la dirección ip, rutas y informacion de los interfaces. Es un proyecto de [iproute2](https://es.wikipedia.org/wiki/Iproute2).
+
+`hostnamectl` - comando para hacer persistente el cambio de hostname
+
+```
+hostnamectl -set-hostname "centos07"
+```
+
+---
+
+### Herramietas de red antiguas(legact)
+
+net-tools
+
+`ifconfig` - antigua utilidad para las configuraciones de red.
+
+`ifup` - levantar un interface.
+
+`ifdown` - tirar un interface.
+
+`route` - cambiar la routa de acceso de los interfaces.
+
+## 109.3 Resolución de problemas básicos de red
+
+### Pruebas de conexion
+
+`ping` - envia paquetes ICMP pra comprobar la conexión cono otra máquina.
+
+`ping6` - la misma funcionalidad que ping pero para redes IPv6.
+
+`traceroute` - muestra ala lista de saltos que el paquete tiene que atravesar para llegar a su destino. Envia paquetes ICMP, algunos firewall bloquean este tipo de paquetes.
+
+Enviamos paquetes TCP
+
+```
+traceroute -T 8.8.8.8
+```
+
+`netstat` - antigua herramienta para ver las conexiones que tenemos establecidas
+
+Mostrar conexiones activas y escuchando por el protocolo TCP
+
+```
+netstat -tl
+```
+
+Mostrar las conexiones activas y escuchando por el protocolo UDP
+
+```
+netstat -ul
+```
+
+Ver los procesos a sociados a las conexiones que estan escuchando.
+
+```
+netstat -tulp
+```
+
+
+`tracepath` - la misma funcionalidad de que traceroute pero para redes IPv6.
+
+`ss` - es el equivalente moderno a netstat, podemos utilizar los mismos parámetros para ver la informacion.
+
+## 109.4 Configuración DNS en el lado del cliente

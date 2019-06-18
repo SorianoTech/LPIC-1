@@ -100,6 +100,8 @@ Phone:
 
 [Blog de contenido Linux](http://www.linuxlinks.com)
 
+[Systemadmin.es](http://systemadmin.es/)
+
 ### Videos
 
 [Lista de reproducción de youtube LPIC-1](https://www.youtube.com/watch?v=Fov9nM-AbSw&list=PLD_mb6U5Xp95cX_CDO3Cg-p8370lPwRR2)
