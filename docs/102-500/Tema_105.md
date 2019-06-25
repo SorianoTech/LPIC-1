@@ -133,7 +133,7 @@ En algunas distribuciones no es necesario utilizar -m, ya que crean automáticam
 Creamos un usuario que utilice una shell diferente.
 
 ```console
-sudo useradd -m -c "Juanjo Garcia" -s /bin/tcsh \ juanjo
+sudo  useradd -m -c "Juanjo Garcia" -s /bin/tcsh \ juanjo
 ```
 
 Podemos comprobar la shell con `echo $SHELL` que nos devolverá el valor de la shell que el usuario esta utilizando.
@@ -929,7 +929,6 @@ Ver los procesos a sociados a las conexiones que estan escuchando.
 netstat -tulp
 ```
 
-
 `tracepath` - la misma funcionalidad de que traceroute pero para redes IPv6.
 
 `ss` - es el equivalente moderno a netstat, podemos utilizar los mismos parámetros para ver la informacion.
@@ -947,7 +946,6 @@ netstat -tulp
 `/etc/nsswitch.conf` - este fichero es usado para determinar el orden de como se resuelven los nombres.
 
 `hosts` - resuleve la ip dandole un nombre, tambien podemos ver los servidores de correo. Los numeros equivialen a la prioridad de entrega.
-
 
 ```s
 host sergiosoriano.es
@@ -992,7 +990,6 @@ sergiosoriano.es.	158	IN	A	104.24.101.12
 
 Con **-t** seguido del tipo de registro (MX) consultamos los registros concretos del dominio en cuestión.
 
-
 ```s
 dig -t MX sergiosoriano.es
 
@@ -1031,7 +1028,7 @@ alt1.aspmx.l.google.com. 229	IN	AAAA	2a00:1450:4010:c0f::1b
 Podemos consultar los registros, utilizando otro DNS con la arroba
 
 ```s
-dig @8.8.8.8 -t A google.es       
+dig @8.8.8.8 -t A google.es
 
 ; <<>> DiG 9.11.3-1ubuntu1.7-Ubuntu <<>> @8.8.8.8 -t A google.es
 ; (1 server found)
@@ -1056,5 +1053,99 @@ google.es.		299	IN	A	172.217.17.3
 
 Puedes encontrar mas ejemplos [aquí](https://elbauldelprogramador.com/dig-chuleta-basica-de-comandos/)
 
-
 `getent` - realiza una query al fichero `/etc/nsswitch.conf` y responde la información de la base de datos a la que corresponda. Mas info [aquí](http://man7.org/linux/man-pages/man1/getent.1.html). Se puede utilizar para consultar los grupos, protocolos, etc.
+
+# 110: Seguridad
+
+## 110.1 Tareas de administración de seguridad
+
+### Determinar el estado actual de seguridad del sistema
+
+`who` - lista los usuarios que estan actualente logados en el sistema.
+
+`w` - igual que el anterior, pero además muestra el proceso que estan ejecutando.
+
+```s
+03:26:36 up 1 day,  9:21,  1 user,  load average: 1,29, 1,31, 1,15
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+sergio   :0       :0               dom18   ?xdm?   5:32   0.00s /usr/lib/gdm3/g
+```
+
+`last` - este comando muestra el historico de los usuarios logados en el sistema.
+
+Mostrar los usuarios que se han logado en el sistema pero que no estan actualmente logados, para conocer que usuarios ha realizado intentos fallos de acceso.
+
+```s
+last -f /var/log/btmp
+```
+
+`lsof` - este comando se puede utilizar para encontrar que ficheros hay abiertos. Como los puertos de red también son considerados ficheros en Linux, podemos encontrar los puertos que estan abiertos.
+
+Nos muestra las siguientes columnas:
+
+- COMMAND
+- PID
+- TIP
+- USER
+- FD
+- TYPE
+- DEVICE
+- SIZE
+
+Buscar los ficheros que tienen activado el permito especial SUID
+
+```s
+find / -perm -u+s
+```
+
+`ulimit` - este comando sirve para poner límites a la cantidad de recursos del sistema que usuario puede utilizar. Si cabiamos la configuración se pierde después de reinciar el sistema.
+
+```s
+ulimit -a
+-t: cpu time (seconds)              unlimited
+-f: file size (blocks)              unlimited
+-d: data seg size (kbytes)          unlimited
+-s: stack size (kbytes)             8192
+-c: core file size (blocks)         0
+-m: resident set size (kbytes)      unlimited
+-u: processes                       30385
+-n: file descriptors                1024
+-l: locked-in-memory size (kbytes)  16384
+-v: address space (kbytes)          unlimited
+-x: file locks                      unlimited
+-i: pending signals                 30385
+-q: bytes in POSIX msg queues       819200
+-e: max nice                        0
+-r: max rt priority                 0
+-N 15:                              unlimited
+```
+
+Para que sea permanente tenemos que modificar el fichero **/etc/security/limits.conf**. El fichero esta documentado con ejemplos,
+
+Ejemplos [aquí](https://blog.carreralinux.com.ar/2016/07/uso-de-recursos-del-sistema-en-linux/)
+
+Limitar que un usuario solo pueda utilizar 2GB de RAM.
+
+```
+sergio hard memlock 2048
+```
+
+Limitar que un usuario no pueda consumir más CPU.
+
+```
+sergio  soft  cpu 150
+sergio  hard  cpu 200
+```
+
+`/etc/sudoers` - fichero de configuración donde se guardan los usuarios que tienen acceso de sudo. Se puede modificar con el comando `visudo`.
+
+
+El comando **sudo** se utiliza para prevenir que los usuario pueda cometer errores accidentales al ejecutar una orden. Permite a los usuarios ejecutar un comando con permisos de root.
+
+La barra (-) se utiliza 
+
+`su` - substitute user, para logarnos con un usuario en concreto, por defecto si no especificamos usuario, utilizara root.
+
+```s
+su - sergio
+```
