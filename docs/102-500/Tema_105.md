@@ -1092,7 +1092,7 @@ Nos muestra las siguientes columnas:
 - DEVICE
 - SIZE
 
-Buscar los ficheros que tienen activado el permito especial SUID
+Buscar los ficheros que tienen activado el permiso especial SUID
 
 ```s
 find / -perm -u+s
@@ -1139,13 +1139,120 @@ sergio  hard  cpu 200
 
 `/etc/sudoers` - fichero de configuración donde se guardan los usuarios que tienen acceso de sudo. Se puede modificar con el comando `visudo`.
 
-
 El comando **sudo** se utiliza para prevenir que los usuario pueda cometer errores accidentales al ejecutar una orden. Permite a los usuarios ejecutar un comando con permisos de root.
 
-La barra (-) se utiliza 
+La barra (-) se utiliza
 
 `su` - substitute user, para logarnos con un usuario en concreto, por defecto si no especificamos usuario, utilizara root.
 
 ```s
 su - sergio
+```
+
+### Comprobar la segurida de la red local
+
+`lsof -i` - utilizando el parámetro **-i** podemos ver los puertos que estan abierto, ya que estos ficheros estan siendo utilizados por el sistema.
+
+En el siguiente código podemos ver como dropbox tiene conexiones establecidad y en escucha.
+
+```s
+COMMAND     PID   USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+dropbox    1048 sergio   76u  IPv6  40146      0t0  TCP *:db-lsp (LISTEN)
+dropbox    1048 sergio   78u  IPv4  40147      0t0  TCP *:db-lsp (LISTEN)
+dropbox    1048 sergio   79u  IPv4  36159      0t0  UDP *:17500
+dropbox    1048 sergio   80u  IPv4  37565      0t0  TCP lenovo-ideapad-710s-plus-13ikb.home:55316->162.125.68.3:https (CLOSE_WAIT)
+dropbox    1048 sergio  103u  IPv4  38259      0t0  TCP localhost:17600 (LISTEN)
+dropbox    1048 sergio  107u  IPv4  38262      0t0  TCP localhost:17603 (LISTEN)
+dropbox    1048 sergio  113u  IPv4 492743      0t0  TCP lenovo-ideapad-710s-plus-13ikb.home:41000->162.125.18.133:https (ESTABLISHED)
+dropbox    1048 sergio  115u  IPv4 497842      0t0  TCP lenovo-ideapad-710s-plus-13ikb.home:41222->162.125.18.133:https (ESTABLISHED)
+dropbox    1048 sergio  120u  IPv4  40148      0t0  UDP *:17500
+dropbox    1048 sergio  121u  IPv4 423558      0t0  TCP 192.168.1.78:48700->162.125.68.7:https (CLOSE_WAIT)
+dropbox    1048 sergio  145u  IPv4 422843      0t0  TCP 192.168.1.78:52438->ec2-52-20-90-39.compute-1.amazonaws.com:https (CLOSE_WAIT)
+dropbox    1048 sergio  149u  IPv4 509467      0t0  TCP lenovo-ideapad-710s-plus-13ikb.home:33326->162.125.68.3:https (CLOSE_WAIT)
+dropbox    1048 sergio  150u  IPv4 508921      0t0  TCP lenovo-ideapad-710s-plus-13ikb.home:57450->162.125.33.7:https (CLOSE_WAIT)
+code       1318 sergio   43u  IPv4 509251      0t0  TCP localhost:43350 (LISTEN)
+chrome    10736 sergio   88u  IPv4 480503      0t0  UDP 224.0.0.251:mdns
+```
+
+Los estados de las conexiones puede ser:
+
+- Establish
+- Close_wait
+- Listen
+
+`fuser 22/tcp` - para conecer que PID estan utilizando un proceso concreto.
+
+`ss` - como vimos anteriormente para visualizar las conexines activa(TUNA):
+-t: conexiones tcp
+-u: conexiones udp
+-n: muestra la ip envez del hostname
+-a: muestra los puertos en estucha y los sockets que no estan en escucha.
+
+`nmap` - nos muestra los puertos que esta abierto de una direccion dada. Tiene muchas mas funcionalidades utilizadas en el mundo del hacking pero a nivel del LPCI solo es necesario conocer esta.
+
+```s
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/GITHUB/LPIC-1   master ●  nmap localhost
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2019-06-26 14:45 CEST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00013s latency).
+Not shown: 994 closed ports
+PORT     STATE SERVICE
+80/tcp   open  http
+111/tcp  open  rpcbind
+631/tcp  open  ipp
+3306/tcp open  mysql
+8001/tcp open  vcom-tunnel
+8080/tcp open  http-proxy
+
+```
+
+**Ejercicio**
+
+Crear dos usuarios y añadir a uno de ellos al grupo wheel, despues permitir a ese grupo ejecutar como sudo. EL otro usuario debe de tener permisos para reiniciar el servicio web.
+
+```s
+sudo useradd -m ssoriano
+sudo useradd -G wheel -m jlopez
+sudo visudo
+```
+
+Vemos en la última linea como al grupo wheel permititos todo (ALL)
+
+```s
+## Allow root to run any commands anywhere
+root    ALL=(ALL)       ALL
+
+## Allows members of the 'sys' group to run networking, software,
+## service management apps and more.
+# %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE, DRIVERS
+
+## Allows people in group wheel to run all commands
+%wheel  ALL=(ALL)       ALL
+```
+
+Configurar los permisos del administrador de web.
+
+1 Creamos un nuevo fichero de sudoers `/etc/sudoers.d`. Usamos `-f` para crear el fichero.
+
+```s
+sudo visudo -f /etc/sudoers.d/web_admin
+```
+
+2. Añaidmos la siguiente linea para crear un alias(aliasc command group) que permite ejecutar las ordenes necesarias para reiniciar el servicio de https.
+
+```s
+Cmnd_Alias WEB =  /bin/systemctl restart httpd.service, /bin/systemctl reload httpd.service
+```
+
+3. Añadimos al fichero la linea `ssoriano ALL=WEB` para permitir que el usuario tenga permiso .
+
+```s
+sudo vim /etc/sudoers.d/web_admin
+```
+
+Ahora el usuario podra ejecutar reiniciar el servidor web sin embargo no tendra permiso a eso ficheros.
+
+```s
+ sudo systemctl restart httpd.service
 ```
