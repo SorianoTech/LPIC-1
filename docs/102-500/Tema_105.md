@@ -1256,3 +1256,180 @@ Ahora el usuario podra ejecutar reiniciar el servidor web sin embargo no tendra 
 ```s
  sudo systemctl restart httpd.service
 ```
+
+
+## 110.2 Configuración de la seguridad del sistema
+
+### Securizando intentos accesos locales
+
+Bloquear una cuenta de usuario
+
+```
+usermod -L test
+```
+
+Cambiamos la fecha de expiracion a 1
+
+```
+usermod -e 1 test
+```
+
+Comprobamos si esta bloqueada. Al aparecer la exclamación nos indica que la cuenta esta bloqueada.
+
+```
+getent shadow test
+test:!$6$0cQCrrSa$PdNPFMJB/TtbRVjKErFUpEXBznJMmRXcG9gmON/u1DzmXiVEz5ti1tIn4NopDYbEjat0KcIAfRZoUSAgl6fgx0:18055:0:99999:7:::
+```
+
+
+Comprobamos si tiene acceso a al bash
+```
+getent passwd test
+test:x:1001:1001::/home/test:/bin/sh
+```
+
+Modificamos el acceso 
+```
+usermod -s /sbin/nologin test
+```
+
+Deshabilitamos la cuenta
+
+```
+usermod -U -e "" test
+```
+
+Modificamos el fichero de nologin para que cuando un usuario intente entrar se muestre un mensaje
+
+```
+vim /etc/nologin
+```
+
+
+### Securizando servicios de red
+
+
+Vemos los servicios de red que tenemos en escucha
+
+```
+losf -i 
+```
+
+```s
+COMMAND   PID   USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+dropbox  1066 sergio   74u  IPv4  48147      0t0  TCP *:db-lsp (LISTEN)
+dropbox  1066 sergio   75u  IPv4  31910      0t0  UDP *:17500 
+```
+
+**COMMAND** - no indica el nombre del servicio
+**NAME** - aquí podemos ver desde donde va a permitir las conexiones el puerto que esa en modo escucha, en caso de tener un `*` nos indica que puede recibir conexiones desdes cualquier dirección.
+
+```
+service dropbox stop
+```
+
+Super-server:
+`xinetd` (eXtended InterNET Daemon) ahora conocido como `systemd.socket` , controlan el acceso a los servicios de red.
+
+
+
+`TCP Wrappers` - esta funcionalidad utiliza los ficheros **hosts.allow** y/o **hosts.deny** para configurar el acceso a los servicios de red.
+
+
+`systemd.socket` - es utilizado para activar servicios de red bajo demanda. En vez de utilizar el servicio(por ejemplo ssh.server) utilizara sshd.socket. De esta manera el servicio solo se arranca bajo demanda, en vez de estar a la escucha en todo momento. Las unidades de Socket solo permiten el acceso al servicios de red cuando una conexion entrante la solicita.
+
+
+### Ejercicio
+
+Para que el servicio de ssh no este siempre a la escucha, deshabilita el servicio y activa el socket.
+
+Comprobamos el estado del servicio
+
+```s
+systemctl status sshd.service
+```
+
+Activamos en el arranque el socket y deshabilitamos el servicio.
+
+```s
+sudo systemctl enable sshd.socket
+sudo systemctl disable sshd.service
+```
+
+
+
+## 110.3 Protección de datos mediante cifrado
+
+### GPG
+
+GPG (GNU Privacity Guard) - Herramienta de cifrado y firmas digitales desarrollada por Werner Koch bajo la licencia GPL. Es el reemplazo de PGP(Pretty Good Privacity)
+
+GPG utiliza el estándar del IETF denominado [OpenPGP](https://www.openpgp.org/about/standard/)
+
+
+
+`~/.gnupg` - directorio donde podemos encontrar las claves de anillo y la configuracion de las claves gpg de cada usuario.
+
+
+`gpg --gen-key` - para generar la calve
+
+Exportamos la clave pública:
+
+Nos tenemos que ubicar en el directorio donde estan guardadas las claves.
+
+```
+cd ~/.gnupg
+gpg -o demopublic --export C7D4EF00D70FBCC7D25170BA7950F49D0650C39D
+```
+
+Es importante generar la clave de revocación para cancelar el certificado en caso de que nuestra clave se vea comprometida.
+
+Para publicar publicar la clave publica en los servidores de pgp
+
+```
+gpg --keyserver pgp.mit.edu --send-keys C7D4EF00D70FBCC7D25170BA7950F49D0650C39D
+```
+
+
+## SSH
+
+Podemos ver los ficheros de configuración en `/etc/ssh`.
+
+`sshd_config` - fichero de configuración para las conexiones ssh.
+
+Todos los usuarios tienen un fichero de configuración individual en ~/.ssh.
+
+Cuando nos conectamos por primera vez a un servidor se crea un fichero llamado `known_hosts` que contiene la claves públicas de los servidores conocidos.
+
+
+Podemos crear un par de claves asimetricas para conectarnos sin contraseña. De esta forma solo podra conectarse los propietarios de estas claves.
+
+
+1. Creamos el par de claves
+  
+```s
+ssh-keygen
+```
+
+Nos creara 2 claves 1 pública y una privada. Tenemos que copiar la clave publica en el equipo **remoto**. Con el comando `ssh-cooy-id` copiaremos la clave publica en el equipo remoto.Mas info [aquí](https://www.ssh.com/ssh/copy-id#sec-Copy-the-key-to-a-server).
+
+```s
+ssh-copy-id -i miclave sergio@107.174.218.90
+```
+
+`ssh-agent bash` - un agente que sirve para automatizar el acceso sin necesidad de introducir la passphrase.
+
+`ssh-add claveprivada` para añadir la passphrase de nuestra clave privada.
+
+
+
+`ssh -x` - Deshabilitar las conexiones por ssh para entornos X11
+
+`ssh -X` - Habilitar las conexiones por ssh para entornos X11
+
+
+Para conectarnos con la opcion de mostrar las ventanas remotas en nuestro equipo.
+
+```s
+ssh -Y sergio@192.168.0.202
+```
