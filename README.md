@@ -32,7 +32,7 @@ Se divide en dos exámenes: :+1:
 Al obtener esta certificación se obtiene los conocimientos necesarios para:
 
 - Comprender la arquitectura de un sistema Linux.
-- Instalar y mantener una estación de trabajo Linux, incluyendo X11 y  su configuración como un cliente de red.
+- Instalar y mantener una estación de trabajo Linux, incluyendo X11 y su configuración como un cliente de red.
 - Trabajar en la línea de comandos de Linux, incluidos los comandos comunes de GNU y Unix.
 - Manejar archivos y permisos de acceso, así como la seguridad del sistema.
 - Realizar tareas de mantenimiento: ayudar a los usuarios, agregar usuarios a un sistema más grande, realizar copias de seguridad y restaurar, apagar y reiniciar.
@@ -55,8 +55,11 @@ Se dispone de 90 minutos
 **¿Qué nota tengo que sacar para superar cada examen?**  
 Cada examen tiene un peso de 800 puntos. Deberás obtener al menos 500 en cada examen.
 
+**¿Qué significa eso del peso de las preguntas**
+El peso de las preguntas en cada una de las partes del examen, significa que si un apartado tiene un peso de 4, en el examen habrá 4 preguntas de ese tema.
+
 **¿Cuánto cuesta el examen?**  
-170€ aprox.
+170€ aprox. cada examen. Tienes que hacer los dos para obtener la certificación.
 
 **¿Durante qué tiempo es válida la certificación?**  
 Tu certificación LPIC-1 será válida durante 5 años.
@@ -70,13 +73,20 @@ El centro mas cercano en madrid esta en:
 AZPE Centro de Estudios
 c/ Gran Via 40, 1ª (Metro Callao)
 28013 Madrid
-Spain 
+Spain
 Phone:
 0034915323659
 ```
+
+**¿Qué debo hacer si quiero presentarme al examen?**
+
+1. Debes estar registrado en la Linux Professional Institute para obtener un _LPI ID_. Pues registrarte [aquí](https://cs.lpi.org/caf/Xamman/register). Tardan 24 h en generarte el ID.
+2. Registrarte en PearsonVue utilizando el _LPI ID_ [aquí](https://home.pearsonvue.com/lpi).
+3. Buscar un centro mas cercano de PearsonVue.
+
 ## Enlaces
 
-[Wiki con los objetivos de la version 5.0](https://wiki.lpi.org/wiki/LPIC-1_Objectives_V5.0(ES))
+[Wiki con los objetivos de la version 5.0](<https://wiki.lpi.org/wiki/LPIC-1_Objectives_V5.0(ES)>)
 
 [Wiki del contenido en github](https://github.com/appijumbo/Linux-LPIC-1/wiki)
 
@@ -86,13 +96,15 @@ Phone:
 
 [Cursos oficiales PUE](https://www.pue.es/cursos/lpi)
 
+[FAQ LPIC](mbRadvvMT51IjsN8gsTz)
+
 ### Documentación oficial Linux
 
 [The Linux Document Project](http://www.tldp.org/)
 
 [GNU Project](http://www.gnu.org/doc/)
 
-[Man pages](https://linux.die.net/man/) 
+[Man pages](https://linux.die.net/man/)
 
 [Free Software Directory](https://directory.fsf.org/wiki/Main_Page)
 
@@ -128,4 +140,4 @@ Phone:
 
 Distribuciones
 
-[ArchLinux](https://wiki.archlinux.org/index.php/Main_page_(Espa%C3%B1ol))
+[ArchLinux](<https://wiki.archlinux.org/index.php/Main_page_(Espa%C3%B1ol)>)

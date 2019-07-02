@@ -1,12 +1,65 @@
 # Tema 105: Shells y scripts
 
+[BASH (Bourne-again shell](https://es.wikipedia.org/wiki/Bash)) - es un programa escrito en C que interpreta las ordenes escritas por consola para interactuar con el sistema. [Manual](https://www.gnu.org/software/bash/manual/)
+
 ## 105.1 Personalizar y usar el entorno de shell
 
 ### Setting Up the Shell Environment
 
----
+Tenemos que tener en cuenta que hay varios tipos de consolas:
+
+- **Consolas interactivas de acceso**. (Interactives Login Shell).
+
+  - Es la consola que se crea cuando te logas en una ventana de terminal sin escritorio.
+  - Consola que se crea cuando nos logamos por SSH.
+
+- **Consola interactiva sin acceso**. (Non-login terminal)
+- Es una consola creada por otra aplicación, por ejemplo la terminal que abrimos desde un entorno de escritorio en GNOME.
+
+> Si hacemos un echo \$0 sobre la terminal podemos saber que tipo de consola es
+
+Login Shell: `bash`
+Non-Login Shell: `-bash`
+
+> La diferencia esta en el carácter "-"
+
+**Archivos**
+
+`/etc/profile` - es el primero fichero que se lee cuando se accede a una nueva sesión. Configura las variables de entorno que serán usadas por esta consola, como valore de umask, historial de bash, etc.
+
+`/etc/profile.d/` - directorio que contiene scripts de configuración extra para bash.
+
+`/etc/bashrc` - fichero de configuración de funciones y alias.
+
+`/etc/skel` - es el directorio que contiene la plantillas que se aplican cuando se crea un usuario nuevo.
+
+Para modificar los alias y las funciones de un usuario tendremos que modificar el fichero `~/.bashrc`.
 
 ### Customizing the Shell Environment
+
+`env` - nos muestra todas las variables de entorno configuradas para la shell actual.
+
+`export` - comando para exportar una variable de entorno para la bash actual y las bash que se creen por debajo de ella.
+
+`set` - nos muestra la configuración de todas las consolas bash, variables y funciones. Puede ser utilizado para habilitar y deshabilitar configuraciones de la bash.
+
+Por ejemplo si queremos deshabilitar el file globing `set -f` . Para volver habilitar usamos `set +f`.
+
+`unset` - se utiliza para borrar una variable de entorno.
+
+`Alias` - los alias son acceso directos a comandos y se añaden en el fichero bashrc.
+
+`function` - las funciones son una serie de ordenes que se ejecutan cuando la función es llamada. Es útil para tareas repetitivas.
+
+
+En caso de que cambiemos o añadamos algún **alias** el fichero de **bashrc**, tenemos que pararle la opcion `source` para que se actualice.
+
+```s
+source ~/.bashrc
+```
+
+`PATH` - es la variable de entorno que contiene los directorios que la bash utilizara para poder ejectuar un programa sin tener que especificar la ruta completa. Es una variable muy importate.
+
 
 ## 105.2 Personalización y escritura de scripts sencillos
 
@@ -164,12 +217,12 @@ userdel -r juanjo
 
 Creamos un grupo legal y creamos un usuario y lo añadimos a ese grupo.
 
-```
+```s
 sudo groupadd legal
 sudo useradd -G legal -m -c "Mario Gonzalez" \ mgonzalez
 ```
 
-## `groupdel` - comando para borrar un grupo.
+`groupdel` - comando para borrar un grupo.
 
 ### Usuarios y configuración de ficheros de grupo
 
@@ -1257,7 +1310,6 @@ Ahora el usuario podra ejecutar reiniciar el servidor web sin embargo no tendra 
  sudo systemctl restart httpd.service
 ```
 
-
 ## 110.2 Configuración de la seguridad del sistema
 
 ### Securizando intentos accesos locales
@@ -1281,14 +1333,15 @@ getent shadow test
 test:!$6$0cQCrrSa$PdNPFMJB/TtbRVjKErFUpEXBznJMmRXcG9gmON/u1DzmXiVEz5ti1tIn4NopDYbEjat0KcIAfRZoUSAgl6fgx0:18055:0:99999:7:::
 ```
 
-
 Comprobamos si tiene acceso a al bash
+
 ```
 getent passwd test
 test:x:1001:1001::/home/test:/bin/sh
 ```
 
-Modificamos el acceso 
+Modificamos el acceso
+
 ```
 usermod -s /sbin/nologin test
 ```
@@ -1305,20 +1358,18 @@ Modificamos el fichero de nologin para que cuando un usuario intente entrar se m
 vim /etc/nologin
 ```
 
-
 ### Securizando servicios de red
-
 
 Vemos los servicios de red que tenemos en escucha
 
 ```
-losf -i 
+losf -i
 ```
 
 ```s
 COMMAND   PID   USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
 dropbox  1066 sergio   74u  IPv4  48147      0t0  TCP *:db-lsp (LISTEN)
-dropbox  1066 sergio   75u  IPv4  31910      0t0  UDP *:17500 
+dropbox  1066 sergio   75u  IPv4  31910      0t0  UDP *:17500
 ```
 
 **COMMAND** - no indica el nombre del servicio
@@ -1331,13 +1382,9 @@ service dropbox stop
 Super-server:
 `xinetd` (eXtended InterNET Daemon) ahora conocido como `systemd.socket` , controlan el acceso a los servicios de red.
 
-
-
 `TCP Wrappers` - esta funcionalidad utiliza los ficheros **hosts.allow** y/o **hosts.deny** para configurar el acceso a los servicios de red.
 
-
 `systemd.socket` - es utilizado para activar servicios de red bajo demanda. En vez de utilizar el servicio(por ejemplo ssh.server) utilizara sshd.socket. De esta manera el servicio solo se arranca bajo demanda, en vez de estar a la escucha en todo momento. Las unidades de Socket solo permiten el acceso al servicios de red cuando una conexion entrante la solicita.
-
 
 ### Ejercicio
 
@@ -1356,8 +1403,6 @@ sudo systemctl enable sshd.socket
 sudo systemctl disable sshd.service
 ```
 
-
-
 ## 110.3 Protección de datos mediante cifrado
 
 ### GPG
@@ -1366,18 +1411,17 @@ GPG (GNU Privacity Guard) - Herramienta de cifrado y firmas digitales desarrolla
 
 GPG utiliza el estándar del IETF denominado [OpenPGP](https://www.openpgp.org/about/standard/)
 
-
+[Firma digital](https://www.gnupg.org/gph/es/manual/x154.html)
 
 `~/.gnupg` - directorio donde podemos encontrar las claves de anillo y la configuracion de las claves gpg de cada usuario.
-
 
 `gpg --gen-key` - para generar la calve
 
 Exportamos la clave pública:
 
-Nos tenemos que ubicar en el directorio donde estan guardadas las claves.
+Nos tenemos que ubicar en el directorio donde están guardadas las claves.
 
-```
+```s
 cd ~/.gnupg
 gpg -o demopublic --export C7D4EF00D70FBCC7D25170BA7950F49D0650C39D
 ```
@@ -1386,10 +1430,15 @@ Es importante generar la clave de revocación para cancelar el certificado en ca
 
 Para publicar publicar la clave publica en los servidores de pgp
 
-```
+```s
 gpg --keyserver pgp.mit.edu --send-keys C7D4EF00D70FBCC7D25170BA7950F49D0650C39D
 ```
 
+<hr>
+Cosas a tener en cuenta:
+
+- Si queremos enviar un mensaje encriptado a otra persona, necesitamos su clave pública, se _encriptan_ con la clave pública del destinatario para que solo el lo pueda _desencriptar_ con su clave privada.
+- Si queremos firmar un documento o archivo para demostrar que es nuestro, lo debemos firmamos con nuestra clave privada. Cualquier persona puede comprobar que ha sido firmado por mi utilizando mi clave pública y demostrar que no ha sido modificado.
 
 ## SSH
 
@@ -1397,21 +1446,23 @@ Podemos ver los ficheros de configuración en `/etc/ssh`.
 
 `sshd_config` - fichero de configuración para las conexiones ssh.
 
+`sh-keygen` - comando para generar un par de claves asimetricas.
+
 Todos los usuarios tienen un fichero de configuración individual en ~/.ssh.
 
 Cuando nos conectamos por primera vez a un servidor se crea un fichero llamado `known_hosts` que contiene la claves públicas de los servidores conocidos.
 
-
 Podemos crear un par de claves asimetricas para conectarnos sin contraseña. De esta forma solo podra conectarse los propietarios de estas claves.
 
-
 1. Creamos el par de claves
-  
+
 ```s
 ssh-keygen
 ```
 
-Nos creara 2 claves 1 pública y una privada. Tenemos que copiar la clave publica en el equipo **remoto**. Con el comando `ssh-cooy-id` copiaremos la clave publica en el equipo remoto.Mas info [aquí](https://www.ssh.com/ssh/copy-id#sec-Copy-the-key-to-a-server).
+Nos creará 2 claves 1 pública y una privada. Tenemos que copiar la clave publica en el equipo **remoto**. Con el comando `ssh-cooy-id` copiaremos la clave publica en el equipo remoto.Mas info [aquí](https://www.ssh.com/ssh/copy-id#sec-Copy-the-key-to-a-server).
+
+Este comando copiará la clave pública en el fichero `~/.ssh/authorized_keys` que contrendrá las claves publicas que puede aceptar para que un usuario remote se conecte al servidor.
 
 ```s
 ssh-copy-id -i miclave sergio@107.174.218.90
@@ -1421,14 +1472,11 @@ ssh-copy-id -i miclave sergio@107.174.218.90
 
 `ssh-add claveprivada` para añadir la passphrase de nuestra clave privada.
 
-
-
 `ssh -x` - Deshabilitar las conexiones por ssh para entornos X11
 
 `ssh -X` - Habilitar las conexiones por ssh para entornos X11
 
-
-Para conectarnos con la opcion de mostrar las ventanas remotas en nuestro equipo.
+Para conectarnos con la opción de mostrar las ventanas remotas en nuestro equipo.
 
 ```s
 ssh -Y sergio@192.168.0.202

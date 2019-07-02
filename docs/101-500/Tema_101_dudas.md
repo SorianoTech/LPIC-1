@@ -28,7 +28,6 @@ sticky bitsticky bit
 
 ¿Para que sirve el digito stykibit?
 
-
 ¿Cuáles son las capas de particionado en los sistemas LVM?
 
 ¿Para que sirve el comando set -o noclobber?
