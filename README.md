@@ -15,19 +15,19 @@ Se divide en dos exámenes: :+1:
 
 ## Objetivos del examen 101
 
-- [ ] [Tema 101: Arquitectura del Sistema](docs/101-500/Tema_101.md)
-- [ ] [Tema 102: Instalación de Linux y gestión de paquetes](docs/101-500/Tema_102.md)
-- [ ] [Tema 103: Comandos GNU y Unix](docs/101-500/Tema_103.md)
-- [ ] [Tema 104: Dispositivos, sistemas de archivos Linux y el estándar de jerarquía de archivos](docs/101-500/Tema_104.md)
+- [ ] [Tema 101: Arquitectura del Sistema](docs/101-500/101:Arquitectura-del-Sistema.md)
+- [ ] [Tema 102: Instalación de Linux y gestión de paquetes](docs/101-500/102:Instalacion-de-Linux-y-gestion-de-paquetes.md)
+- [ ] [Tema 103: Comandos GNU y Unix](docs/101-500/103:Comandos-GNU-y-Unix.md)
+- [ ] [Tema 104: Dispositivos, sistemas de archivos Linux y el estándar de jerarquía de archivos](docs/101-500/104:Dispositivos-sistemas-de-archivos-Linux-y-el-estandar-de-jerarquia-de-archivos.md)
 
 ## Objetivos del examen 102
 
-- [ ] [Tema 105: Shells y scripts](docs/102-500/Tema_105.md)
-- [ ] [Tema 106: Interfaces de usuario y escritorios](docs/102-500/Tema_106.md)
-- [ ] [Tema 107: Tareas administrativas](docs/102-500/Tema_106.md)
-- [ ] [Tema 108: Servicios esenciales del sistema](docs/102-500/Tema_107.md)
-- [ ] [Tema 109: Fundamentos de redes](docs/102-500/Tema_108.md)
-- [ ] [Tema 110: Seguridad](docs/102-500/Tema_109.md)
+- [ ] [Tema 105: Shells y scripts](docs/102-500/105:Shells-y-scripts.md)
+- [ ] [Tema 106: Interfaces de usuario y escritorios](docs/102-500/106:Interfaces-de-usuario.y-escritorios.md)
+- [ ] [Tema 107: Tareas administrativas](docs/102-500/107:Tareas-administrativas.md)
+- [ ] [Tema 108: Servicios esenciales del sistema](docs/102-500/108:Servicios-esenciales-del-sistema.md)
+- [ ] [Tema 109: Fundamentos de redes](docs/102-500/109:Fundamentos-de-redes.md)
+- [ ] [Tema 110: Seguridad](docs/102-500/110:Seguridad.md)
 
 Al obtener esta certificación se obtiene los conocimientos necesarios para:
 
