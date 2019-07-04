@@ -1,26 +1,26 @@
-- [Tema 103: Comandos GNU y Unix](#tema-103-comandos-gnu-y-unix)
-  - [103.1 Trabajar desde la linea de comandos](#1031-trabajar-desde-la-linea-de-comandos)
+- [Tema 103: Comandos GNU y Unix](#Tema-103-Comandos-GNU-y-Unix)
+  - [103.1 Trabajar desde la linea de comandos](#1031-Trabajar-desde-la-linea-de-comandos)
     - [ls](#ls)
     - [cp](#cp)
     - [rm](#rm)
     - [file](#file)
-  - [Trabajando con directorios](#trabajando-con-directorios)
+  - [Trabajando con directorios](#Trabajando-con-directorios)
     - [mkdir](#mkdir)
-    - [$PATH](#path)
-  - [103.2 Procesar secuencias de texto usando filtros](#1032-procesar-secuencias-de-texto-usando-filtros)
-  - [103.3 Administración básica de archivos](#1033-administraci%C3%B3n-b%C3%A1sica-de-archivos)
+    - [\$PATH](#PATH)
+  - [103.2 Procesar secuencias de texto usando filtros](#1032-Procesar-secuencias-de-texto-usando-filtros)
+  - [103.3 Administración básica de archivos](#1033-Administraci%C3%B3n-b%C3%A1sica-de-archivos)
     - [find](#find)
     - [which](#which)
-    - [File Globing](#file-globing)
+    - [File Globing](#File-Globing)
     - [dd](#dd)
-  - [103.4 Uso de secuencias de texto, tuberías y redireccionamientos](#1034-uso-de-secuencias-de-texto-tuber%C3%ADas-y-redireccionamientos)
-  - [103.5 Crear, supervisar y matar procesos](#1035-crear-supervisar-y-matar-procesos)
-    - [Revisar el estado del sistema](#revisar-el-estado-del-sistema)
-    - [Monitorizar procesos](#monitorizar-procesos)
-    - [Mantener un proceso corriendo](#mantener-un-proceso-corriendo)
-  - [103.6 Modificar la prioridad de ejecución de los procesos](#1036-modificar-la-prioridad-de-ejecuci%C3%B3n-de-los-procesos)
-  - [103.7 Realizar búsquedas en archivos de texto usando expresiones regulares](#1037-realizar-b%C3%BAsquedas-en-archivos-de-texto-usando-expresiones-regulares)
-  - [103.8 Edición básica de archivos](#1038-edici%C3%B3n-b%C3%A1sica-de-archivos)
+  - [103.4 Uso de secuencias de texto, tuberías y redireccionamientos](#1034-Uso-de-secuencias-de-texto-tuber%C3%ADas-y-redireccionamientos)
+  - [103.5 Crear, supervisar y matar procesos](#1035-Crear-supervisar-y-matar-procesos)
+    - [Revisar el estado del sistema](#Revisar-el-estado-del-sistema)
+    - [Monitorizar procesos](#Monitorizar-procesos)
+    - [Mantener un proceso corriendo](#Mantener-un-proceso-corriendo)
+  - [103.6 Modificar la prioridad de ejecución de los procesos](#1036-Modificar-la-prioridad-de-ejecuci%C3%B3n-de-los-procesos)
+  - [103.7 Realizar búsquedas en archivos de texto usando expresiones regulares](#1037-Realizar-b%C3%BAsquedas-en-archivos-de-texto-usando-expresiones-regulares)
+  - [103.8 Edición básica de archivos](#1038-Edici%C3%B3n-b%C3%A1sica-de-archivos)
 
 # Tema 103: Comandos GNU y Unix
 
@@ -73,7 +73,7 @@ sergio@ubuntu:~$ file .gitconfig
 `$PATH` - variable de entorno que describe el directorio donde los usuarios pueden ejecutar una aplicacion sin especificar la ruta completa.
 
 `cd -` volvemos al ultimo directorio en el que hemos estado.
-echo $OLDPWD - nos devuleve el utimo directorio
+echo \$OLDPWD - nos devuleve el utimo directorio
 
 ```console
 sergio@ubuntu:~$ cd NAS/
@@ -98,9 +98,9 @@ Para crear un directorio anidado dentro de otro utilizamos el parámetro `-p`
 mkdir -p Documents/notes
 ```
 
-### $PATH
+### \$PATH
 
-Todos los comandos que estén en la variable $PATH, podrán ser ejecutados desde cualquier ruta del sistema.
+Todos los comandos que estén en la variable \$PATH, podrán ser ejecutados desde cualquier ruta del sistema.
 
 ```console
 sergio@ubuntu:~$ echo $PATH
@@ -108,7 +108,6 @@ sergio@ubuntu:~$ echo $PATH
 ```
 
 ## 103.2 Procesar secuencias de texto usando filtros
-
 
 `less` - sirve para mostrar el texto de un fichero linea por linea
 
@@ -134,12 +133,11 @@ Archivos y compresión de carpetas
 
 `unxz` - descomprime ficheros formato xz.
 
-
 Los diferentes tipos de ficheros que podemos encontrar en linux son:
 
-- **Archivos regulares**(-) 
+- **Archivos regulares**(-)
 
-- **Directory files(d)** 
+- **Directory files(d)**
 
 - **Archivos especiales**:
   - Archivo bloqueado(b)
@@ -150,19 +148,19 @@ Los diferentes tipos de ficheros que podemos encontrar en linux son:
 
 Buscar ficheros
 
-### find 
+### find
 
 `find`
 
- *-name*: para buscar por nombre de fichero.
+_-name_: para buscar por nombre de fichero.
 
- *-ctime*: encuentra ficheros basados en el momento que fueron modificados.
+_-ctime_: encuentra ficheros basados en el momento que fueron modificados.
 
- *-atime*: encuentra ficheros basados en el momento que se accedió a ellos.
+_-atime_: encuentra ficheros basados en el momento que se accedió a ellos.
 
- *-empty*: -exec[command]{}\; ejecutamos un comando después de realizar una búsqueda, útil por ejemplo para eliminar todos los ficheros que encontremos vacios
+_-empty_: -exec[command]{}\; ejecutamos un comando después de realizar una búsqueda, útil por ejemplo para eliminar todos los ficheros que encontremos vacios
 
->El comando find busca recursivamente en la carpetas que esten jerarquicamente por debajo.
+> El comando find busca recursivamente en la carpetas que esten jerarquicamente por debajo.
 
 ```console
 sergio@ubuntu:~$ sudo find / -name passwd
@@ -220,12 +218,11 @@ find ~ -name "*.tar.*" -exec cp -v {} /home/sergio/test \;
 /usr/sbin/nginx
 ```
 
-
 ### File Globing
 
 `*`: localiza cero o mas caracteres
 
-`?`: localiza cualquier caracter exacto. 
+`?`: localiza cualquier caracter exacto.
 
 `[abc]`: localiza cualquier de los caracteres de la lista, es sensible a mayusculas.
 
@@ -234,6 +231,7 @@ find ~ -name "*.tar.*" -exec cp -v {} /home/sergio/test \;
 `[0-9]`: licaliza un rango de numeros.
 
 muestra los ficheros que empiezan por B o b y tienen extension js.
+
 ```console
 sergio@ubuntu:~/blockchain/curso-bitcoin-blockchain-piloto$ ls [Bb]*.js
 BasicCoin.js  BasicPoWCoin.js
@@ -253,7 +251,6 @@ Ver el contenido de un archivo comprimido
 ```console
 catxz archivo.xz
 ```
-
 
 mostrar la columna 6 del archivo de usuarios passwd
 
@@ -283,9 +280,10 @@ sergio@ubuntu:~$ ls /tmp/
 
 Es necesario un **origen**(if) y un **destino** (of)
 
-la opcion `bs=512` sirve para indicar que tanto en la lectura como en la escritura se hagan bloques de  512 BYTES
+la opcion `bs=512` sirve para indicar que tanto en la lectura como en la escritura se hagan bloques de 512 BYTES
 
 Para copiar el MBR:
+
 ```console
 sudo dd if=/dev/hda |pv|dd of=mbr count=1 bs=512
 ```
@@ -313,14 +311,13 @@ standar error -> 'stdeer'
 find / -iname "*.sh" | tee result.txt
 ```
 
-`xargs` : toma la entrada (el resultado de otro comando) normalmente `find`  y lo pasa a otro comando
+`xargs` : toma la entrada (el resultado de otro comando) normalmente `find` y lo pasa a otro comando
 
 Listar todas las carpetas de librerías disponibles, pasar a un fichero y ordenar en otro fichero
 
 ```console
-sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  ls -d /usr/share/doc/lib[Xx]* | tee lib.docs.txt | sort -r | tee lib-docs-rev.txt 
+sergio@Lenovo-ideapad-710S-Plus-13IKB  ~  ls -d /usr/share/doc/lib[Xx]* | tee lib.docs.txt | sort -r | tee lib-docs-rev.txt
 ```
-
 
 Buscar todos los fichero con la extension sh e imprimir los resultados con el comando ls en un fichero.
 
@@ -342,8 +339,10 @@ sudo locate whatever | xargs rm -f
 
 ## 103.5 Crear, supervisar y matar procesos
 
+En este tema aprenderemos a ejecutar trabajos en primer y segundo plano, enviar señales a los programas para que se ejecuten despues de cerrar una sesión, supervisar procesos activos, ordenar los procesos para visualizarlos y enviar señales a los procesos.
 
-`man proc` - manual del del pseudo directorio del sistema de ficheros
+`man proc` - manual del del pseudo directorio del sistema de ficheros.
+
 `man 7 signal` - manual del los diferentes estados de las señales de procesos.
 
 ### Revisar el estado del sistema
@@ -354,14 +353,13 @@ sudo locate whatever | xargs rm -f
 
 `ps`: nos muestra los procesos
 
->ps -a muestra todos los procesos.
+> ps -a muestra todos los procesos.
 
->ps -eH | less - muestra todos los procesos ordenados por jerarquia.
+> ps -eH | less - muestra todos los procesos ordenados por jerarquia.
 
->ps -u username - muestro los procesos de un usuario
+> ps -u username - muestro los procesos de un usuario
 
->ps -e --forest - muestra todos los procesos en arbol
-
+> ps -e --forest - muestra todos los procesos en arbol
 
 `top`: sirve para ver los proceso que hay activos
 
@@ -376,7 +374,7 @@ Si pulsamos la tecla `k` y escribimos el PID del procesos lo matamos.
  21:48:41 up  2:06,  1 user,  load average: 0,00, 0,01, 0,05
 ```
 
-`free`: sirve para conocer la memoria ram y de la partición de swap. 
+`free`: sirve para conocer la memoria ram y de la partición de swap.
 
 ```console
 sergio@Lenovo:~/GITHUB/LPIC-1$ free -h
@@ -388,7 +386,7 @@ Swap:          2,0G        111M        1,9G
 
 `pgrep`: nos devuelve el PID del proceso basado en el nombre.
 
->Con pgrep -a nginx nos muestra el proceso con la ruta completa.
+> Con pgrep -a nginx nos muestra el proceso con la ruta completa.
 
 ```console
 [root@hostingsoriano sergio]# pgrep nginx
@@ -402,18 +400,33 @@ Swap:          2,0G        111M        1,9G
 13667
 ```
 
-`kill`: mata el proceso con PID introducido, en caso de que el proceso tenga otros elementos depentiendes de el tambien matarar los procesos hijos. Envia una señal  (normalmente SIGTERM) a un proceso basado en su PID
+`kill`: mata el proceso con PID introducido, en caso de que el proceso tenga otros elementos depentiendes de el tambien matarar los procesos hijos. Envia una señal (normalmente SIGTERM) a un proceso basado en su PID
 
-`pstree` -
+`pstree` - nos muestra un arbol de los procesos.
 
 `pkill` - envía una señal (normalmente SIGTERM) a un proceso basado en su nombre(mata el proceso indicando el nombre).
 
 La diferencia entre SIGTERM y SIGKILL, es que el kill mata todos los procesos hijos, y SIGTERM solo el proceso en cuestión.
 
->Se recomienda utilizar SIGTERM(15) antes de utilizar SIGKILL(9).
+> Se recomienda utilizar SIGTERM(15) antes de utilizar SIGKILL(9).
 
 ---
-### Mantener  un proceso corriendo
+
+### Mantener un proceso corriendo
+
+Las tareas son procesos que son gestionados por con consola(shell). A cada tarea se asigna un ID se forma secuencial. Y puesto que cada tarea es un proceso tambien lleva asociado un PID.
+
+Tenemos que entender la diferencia que existe entre tareas que se ejecuta en primer plano(_foreground_) y en segundo plano(_background_).
+
+**Foreground**: una teare se ejecuta en primer plano cuando esta ha sido lanzada desde una terminal, la terminal se queda ocupada hasta que no ha temirnado de ejecutar la tarea.
+
+**Background**: cuando escribes una ampersand `&` al final de la ejecución que pasas por la linea de comandos. De esta manera el proceso se ejecuta en segundo plano.
+
+Una tarea o trabajo que ejecutemos puede tener diferentes estados:
+
+- **Runnung**: cuando se ejecuta en consola o segundo plano.
+- **Suspended**: pasa a suspendida cuando una vez lanzada pulsamos `control + z`
+- **Stopped**: la tarea se para cuando si es lanzada por consola presionamos `control + c`
 
 `killall` - mata todos los procesos basados en el nombre
 
@@ -427,17 +440,19 @@ watch -n 5 df
 
 `screen` - permite ejecutar una consola en una nueva sesión, por ejemplo si nos conectamos a un servidor y queremos que se nos mantenga la consola abierta en caso de que perdamos la conexón.
 
->Ejecutamos screen -r para volver a la sesion que habiamos dejado abierta
- 
- >Para dejar en segundo plano tenemos que pulsar Control+a y Control+d
+> Ejecutamos screen -r para volver a la sesion que habiamos dejado abierta
+
+> Para dejar en segundo plano tenemos que pulsar Control+a y Control+d
 
 `tmux` - es como screen pero con mas funciones.
+
+Ejemplos [aquí](http://www.sromero.org/wiki/linux/aplicaciones/tmux)
 
 Por ejemplo para conectarnos a un servidor
 
 1. tmux - nos abre una nueva terminal bajo tmux.
 2. Nos conectamos a un servidor remote (SSH).
-3. Presionamos Control+b+d para volver a nuestro equipo(dejando la sesion abierta).
+3. Presionamos `Control+b+d` para volver a nuestro equipo(dejando la sesion abierta).
 
 `tmux ls` - para ver las sesioes abiertas.
 
@@ -450,36 +465,40 @@ tmux attach-session -t 0
 `nohup` - un comando que lanzemos escribiendo previeamente nohup, se seguira ejecutando hasta que no se cierre la sesion con la que nos hemos logado. Nos crea un fichero **nohup.out** que podemos consultar con tail.
 
 ```console
-
 sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/GITHUB/LPIC-1   master ●✚  nohup ping www.sergiosoriano.es &
 [1] 21518
-
-nohup: ignoring input and appending output to 'nohup.out'                                                            
-
+nohup: ignoring input and appending output to 'nohup.out'
  ⚙ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/GITHUB/LPIC-1   master ●✚  jobs
 [1]  + running    nohup ping www.sergiosoriano.es
 ```
 
 `tail -f nohup.out`
 
-Para conocer el PID del proceso ejecutamos
+Para conocer el PID del proceso ejecutamos.
 
 ```console
-
 ⚙ sergio@Lenovo-ideapad-710S-Plus-13IKB  ~/GITHUB/LPIC-1   master ●✚  jobs -l
-
 [1]  + 21518 running    nohup ping www.sergiosoriano.es
 ```
 
-`fg` - 
+`fg` - sirve para traer un tareas de segundo plano al primer plano. `fg %1` donde `%1` es el número de la tarea que podemos ver con la orden `jobs`.
 
-`bg` -
+`bg` - sirve para ejecutar tareas suspendias en segundo plano. Si hemos lanzado una tarea y la hemos dejado en estado suspendido, podemos relanzarla en segundo plano ejecutando `bg %1`.
+
+[Ejemplos](https://www.thegeekdiary.com/understanding-the-job-control-commands-in-linux-bg-fg-and-ctrlz/)
 
 ## 103.6 Modificar la prioridad de ejecución de los procesos
 
+Manejar la prioridad de los procesos y ejeutar trabajos con diferentes prioridades.
 
+`nice` - sirve para asignar la prioridad de un proceso.
+
+`ps` - muestra los procesos activos. Con `ps -a` vemos todos los procesos.
+
+`renice` - para cambiar la prioridad de un proceso
+
+`top` - nos muestra los procesos activos.
 
 ## 103.7 Realizar búsquedas en archivos de texto usando expresiones regulares
-
 
 ## 103.8 Edición básica de archivos
