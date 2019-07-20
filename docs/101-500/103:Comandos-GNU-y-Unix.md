@@ -495,10 +495,45 @@ Manejar la prioridad de los procesos y ejeutar trabajos con diferentes prioridad
 
 `ps` - muestra los procesos activos. Con `ps -a` vemos todos los procesos.
 
-`renice` - para cambiar la prioridad de un proceso
+`renice` `- pa` -ra cambiar la prioridad de un proceso
 
 `top` - nos muestra los procesos activos.
 
 ## 103.7 Realizar búsquedas en archivos de texto usando expresiones regulares
+
+Buscar una cadena de texto en un fichero
+
+`grep -i 'texto' fichero`
+
+Con el parametro `-i` ignora si el texto esta en mayúsculas o minúsculas.
+
+`grep` - Podemos utilizarlo para buscar cadenas de texto en ficheros, directorios y salidas de otros comandos.
+`egrep` - Igual que el comando grep pero sin necesidad de añadir el parametro `-E` que nos permite extender el comando para utilizar expresiones regulares.
+`fgrep` - Igual que el comando grep opero sin necesidad de añadir el parametro `-F` que nos permite buscar cadenas de texto en **más de un** fichero que le indiquemos como parámetro.
+`sed` - Este comando nos permite modificar el contenido de fichetos de texto.
+`regex(7)` - Expresiones regulares. Mas información [aquí](http://man7.org/linux/man-pages/man7/regex.7.html)
+
+<h3>Ejemplos</h3>
+
+1. Buscar el texto 'apache' recursivamente en el home del usuario
+
+```s
+grep -Ril apache ~/
+```
+
+2.Buscar los usuarios que existen en el fichero de passwd que empiecen por ope y ademas tengan una
+'n' o 'r' en la siguiente letra.
+
+```s
+egrep '^ope(n|r)' /etc/passwd
+```
+
+3. Mostrar todas las cuentas que no tienen habilitado el login
+
+```
+grep "nologin" /etc/passwd
+```
+
+[Generador de expresiones regulares](https://regexr.com/)
 
 ## 103.8 Edición básica de archivos

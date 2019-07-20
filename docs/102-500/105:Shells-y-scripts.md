@@ -51,7 +51,6 @@ Por ejemplo si queremos deshabilitar el file globing `set -f` . Para volver habi
 
 `function` - las funciones son una serie de ordenes que se ejecutan cuando la función es llamada. Es útil para tareas repetitivas.
 
-
 En caso de que cambiemos o añadamos algún **alias** el fichero de **bashrc**, tenemos que pararle la opcion `source` para que se actualice.
 
 ```s
@@ -60,24 +59,45 @@ source ~/.bashrc
 
 `PATH` - es la variable de entorno que contiene los directorios que la bash utilizara para poder ejectuar un programa sin tener que especificar la ruta completa. Es una variable muy importate.
 
-
 ## 105.2 Personalización y escritura de scripts sencillos
+
+Los scripts son una colección de comandos que hacen alguna acción concreta.
+
+Los scripts se identifican por el tipo de consola en la que se ejecutan.
+
+Indicamos que el script lo va a ejecutar la shell de **bash**.
+
+```s
+#!/bin/bash
+```
+
+Se pueden pasar parametos a la ejecución de scripts definiendolos así -> `$1` parametro 1, por ejemplo `./myscript.sh text.txt` lanzará el script tomando como valor `$1` `text.txt`.
 
 ### Basic Shell Scripts
 
----
+```s
+#!/bin/bash
+# Crea un fichero vacio y añade contenido a el
+touch $1
+echo "Esto es un fichero de prueba" > $1
+#Lanzo un clear para limpiar la pantalla y muestro el fichero
+clear
+cat $1
+```
 
-### Adding Logic to Your Shell Scripts
+**¿Dónde están ubicados los script del sistema?**
 
----
+- `/usr/bin` - script del sistema
+- `/usr/local/bin/` - scripts instalados o creados por los usuarios para ser utilizados en el sistema local.
+- `/home/user/bin` - scripts creados por el usuario y solo disponibles para el usuarios.
 
 ### Bash Loops and Sequences
 
-`for` -
+- `for`
+- `while`
+- `until`
 
-`while` -
-
-`until` -
+Ejemplos [aquí](https://es.wikibooks.org/wiki/El_Manual_de_BASH_Scripting_B%C3%A1sico_para_Principiantes)
 
 ---
 
@@ -88,9 +108,3 @@ source ~/.bashrc
 `exec` - se puede utilizar para re-direccionar la salida de una shell a un fichero. `exec > out .log`
 
 ---
-
-
-
-
-
-
