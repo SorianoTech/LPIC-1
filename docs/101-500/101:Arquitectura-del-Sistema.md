@@ -5,7 +5,7 @@
     - [BIOS y UEFI](#bios-y-uefi)
     - [Sys y proc](#sys-y-proc)
     - [/dev y el comando **lsdev**](#dev-y-el-comando-lsdev)
-    - [Módulos del Kernel](#m%C3%B3dulos-del-kernel)
+    - [Módulos del Kernel](#m%c3%b3dulos-del-kernel)
     - [modprobe](#modprobe)
     - [lsmod](#lsmod)
     - [lspci y lsusb](#lspci-y-lsusb)
@@ -13,7 +13,7 @@
     - [Secuencia de arranque](#secuencia-de-arranque)
       - [Cargadores de arranque (boot loader)](#cargadores-de-arranque-boot-loader)
     - [Tipos de arranque](#tipos-de-arranque)
-  - [101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema](#1013-cambiar-los-niveles-de-ejecuci%C3%B3n--objetivos-de-arranque-y-apagar-o-reiniciar-el-sistema)
+  - [101.3 Cambiar los niveles de ejecución / objetivos de arranque y apagar o reiniciar el sistema](#1013-cambiar-los-niveles-de-ejecuci%c3%b3n--objetivos-de-arranque-y-apagar-o-reiniciar-el-sistema)
 
 ## 101.1 Determinar y configurar los ajustes de hardware
 
@@ -144,7 +144,7 @@ En GNU/Linux, el hardware lo administran los drivers del kernel, algunos de los 
 
 El comando **modprobe** sirve para añadir o eliminar modulos del kernel de linux.
 
-Para eliminar manualmente un drive podemos utilizar `modprobe -a` y para eliminar podemos utilizar `modprobe -c`. Con la opcion -v podemos ver lo que se ejecutado y con -n las opciones completadas con exito.
+Para eliminar manualmente un drive podemos utilizar `modprobe -r` y para mostrar la información podemos utilizar `modprobe -c`. Con la opcion -v podemos ver lo que se ejecutado y con -n las opciones completadas con exito.
 
 Añadir un modulo:
 
