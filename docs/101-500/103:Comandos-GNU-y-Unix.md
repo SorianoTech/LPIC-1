@@ -1,26 +1,26 @@
-- [Tema 103: Comandos GNU y Unix](#Tema-103-Comandos-GNU-y-Unix)
-  - [103.1 Trabajar desde la linea de comandos](#1031-Trabajar-desde-la-linea-de-comandos)
+- [Tema 103: Comandos GNU y Unix](#tema-103-comandos-gnu-y-unix)
+  - [103.1 Trabajar desde la linea de comandos](#1031-trabajar-desde-la-linea-de-comandos)
     - [ls](#ls)
     - [cp](#cp)
     - [rm](#rm)
     - [file](#file)
-  - [Trabajando con directorios](#Trabajando-con-directorios)
+  - [Trabajando con directorios](#trabajando-con-directorios)
     - [mkdir](#mkdir)
-    - [\$PATH](#PATH)
-  - [103.2 Procesar secuencias de texto usando filtros](#1032-Procesar-secuencias-de-texto-usando-filtros)
-  - [103.3 Administración básica de archivos](#1033-Administraci%C3%B3n-b%C3%A1sica-de-archivos)
+    - [\$PATH](#path)
+  - [103.2 Procesar secuencias de texto usando filtros](#1032-procesar-secuencias-de-texto-usando-filtros)
+  - [103.3 Administración básica de archivos](#1033-administraci%c3%b3n-b%c3%a1sica-de-archivos)
     - [find](#find)
     - [which](#which)
-    - [File Globing](#File-Globing)
+    - [File Globing](#file-globing)
     - [dd](#dd)
-  - [103.4 Uso de secuencias de texto, tuberías y redireccionamientos](#1034-Uso-de-secuencias-de-texto-tuber%C3%ADas-y-redireccionamientos)
-  - [103.5 Crear, supervisar y matar procesos](#1035-Crear-supervisar-y-matar-procesos)
-    - [Revisar el estado del sistema](#Revisar-el-estado-del-sistema)
-    - [Monitorizar procesos](#Monitorizar-procesos)
-    - [Mantener un proceso corriendo](#Mantener-un-proceso-corriendo)
-  - [103.6 Modificar la prioridad de ejecución de los procesos](#1036-Modificar-la-prioridad-de-ejecuci%C3%B3n-de-los-procesos)
-  - [103.7 Realizar búsquedas en archivos de texto usando expresiones regulares](#1037-Realizar-b%C3%BAsquedas-en-archivos-de-texto-usando-expresiones-regulares)
-  - [103.8 Edición básica de archivos](#1038-Edici%C3%B3n-b%C3%A1sica-de-archivos)
+  - [103.4 Uso de secuencias de texto, tuberías y redireccionamientos](#1034-uso-de-secuencias-de-texto-tuber%c3%adas-y-redireccionamientos)
+  - [103.5 Crear, supervisar y matar procesos](#1035-crear-supervisar-y-matar-procesos)
+    - [Revisar el estado del sistema](#revisar-el-estado-del-sistema)
+    - [Monitorizar procesos](#monitorizar-procesos)
+    - [Mantener un proceso corriendo](#mantener-un-proceso-corriendo)
+  - [103.6 Modificar la prioridad de ejecución de los procesos](#1036-modificar-la-prioridad-de-ejecuci%c3%b3n-de-los-procesos)
+  - [103.7 Realizar búsquedas en archivos de texto usando expresiones regulares](#1037-realizar-b%c3%basquedas-en-archivos-de-texto-usando-expresiones-regulares)
+  - [103.8 Edición básica de archivos](#1038-edici%c3%b3n-b%c3%a1sica-de-archivos)
 
 # Tema 103: Comandos GNU y Unix
 
@@ -495,7 +495,7 @@ Manejar la prioridad de los procesos y ejeutar trabajos con diferentes prioridad
 
 `ps` - muestra los procesos activos. Con `ps -a` vemos todos los procesos.
 
-`renice` `- pa` -ra cambiar la prioridad de un proceso
+`renice` - para cambiar la prioridad de un proceso
 
 `top` - nos muestra los procesos activos.
 
@@ -508,9 +508,13 @@ Buscar una cadena de texto en un fichero
 Con el parametro `-i` ignora si el texto esta en mayúsculas o minúsculas.
 
 `grep` - Podemos utilizarlo para buscar cadenas de texto en ficheros, directorios y salidas de otros comandos.
+
 `egrep` - Igual que el comando grep pero sin necesidad de añadir el parametro `-E` que nos permite extender el comando para utilizar expresiones regulares.
+
 `fgrep` - Igual que el comando grep opero sin necesidad de añadir el parametro `-F` que nos permite buscar cadenas de texto en **más de un** fichero que le indiquemos como parámetro.
+
 `sed` - Este comando nos permite modificar el contenido de fichetos de texto.
+
 `regex(7)` - Expresiones regulares. Mas información [aquí](http://man7.org/linux/man-pages/man7/regex.7.html)
 
 <h3>Ejemplos</h3>
@@ -536,4 +540,52 @@ grep "nologin" /etc/passwd
 
 [Generador de expresiones regulares](https://regexr.com/)
 
+4. Cambia la palabra web por web site del ficher myfile
+
+```s
+sed 's/web/website/' ./myfile
+```
+
+5.  Buscar el shell de bash y reemplazarlo con el shell csh en el archivo /etc./passwd utilizando sed
+
+```s
+sed 's!/bin/bash!/bin/csh!' /etc/passwd
+```
+
+Más ejemplos [aquí](http://www.sromero.org/wiki/linux/aplicaciones/uso_de_sed)
+
 ## 103.8 Edición básica de archivos
+
+Uso de VI
+
+- [] Navegar por un documento usando vi.
+- [] Entender y usar los modos de vi.
+- [] Insertar, editar, borrar, copiar y encontrar texto usando vi.
+- [] Conocimientos de Emacs, nano y vim.
+- [] Configurar el editor estándar.
+
+`/, ?` - buscar una cadena de texto
+
+`h,j,k,l` - la misma funcion que las flechas de movimiento, arriba, abajo, izquierda y derecha entre carćteres y lineas.
+
+`i, o, a` - para insertar caracteres, con `i` a la izquierda, `o` añade una nueva linea y con `a` a la derecha del cursor.
+
+`d, p, y, dd, yy` - `d` para eliminar , `p` para pegar y `y` para copiar.
+
+`dd` - elimna la linea completa sobre la que estas situado
+
+`yy` - copia la linea.
+
+`p` - pega el texto copiado.
+
+`ZZ, :w!, :q!`
+
+`:w!` - guardar.
+
+`:q!` - salir sin guardar.
+
+`ZZ` - guarda el documento y salir.
+
+https://vim.fandom.com/wiki/Vim_Tips_Wiki
+
+Mas información [aquí](https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/)
