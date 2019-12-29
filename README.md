@@ -140,4 +140,6 @@ Phone:
 
 Distribuciones
 
-[ArchLinux](<https://wiki.archlinux.org/index.php/Main_page_(Espa%C3%B1ol)>)
+[ArchLinux](https://wiki.archlinux.org/index.php/Main_page_(Espa%C3%B1ol)
+
+[LinuxFreedom](http://linuxfreedom.com/Distros/)
